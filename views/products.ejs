@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تكنوفيجن - المنتجات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+    
+    :root {
+      --primary: #36c9b4;
+      --primary-light: #5bd5c3;
+      --primary-dark: #2aa897;
+      --accent: #ff6b6b;
+      --dark: #1a3c38;
+      --light: #f8fafc;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f0f9f8);
+      color: #333;
+      line-height: 1.6;
+      direction: rtl;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* شريط التنقل */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+    
+    .logo-icon img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-icon:hover img {
+      transform: scale(1.05);
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      position: relative;
+    }
+    
+    .nav-links li {
+      margin: 0 15px;
+      position: relative;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      background: rgba(54, 201, 180, 0.1);
+    }
+    
+    .nav-links .dropdown {
+      position: relative;
+    }
+    
+    .nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: #fff;
+      min-width: 180px;
+      box-shadow: 0 8px 24px rgba(54,201,180,0.08);
+      border-radius: 12px;
+      z-index: 100;
+      padding: 10px 0;
+      border: 1px solid #e0f4f2;
+      text-align: right;
+    }
+    
+    .dropdown .dropdown-menu {
+  display: none;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+    
+    .nav-links .dropdown-menu li {
+      margin: 0;
+    }
+    
+    .nav-links .dropdown-menu a {
+      display: block;
+      padding: 10px 24px;
+      color: var(--dark);
+      font-size: 1rem;
+      border-radius: 0;
+      background: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    
+    .nav-links .dropdown-menu a:hover {
+      background: rgba(54,201,180,0.08);
+      color: var(--primary);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-left: 20px;
+    }
+    
+    .search-box input {
+      padding: 10px 15px;
+      padding-right: 40px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      width: 250px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #f8fafc;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+    
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    
+    /* محتوى الصفحة الرئيسية */
+    main {
+      margin-top: 100px;
+      padding: 40px 0;
+    }
+    
+    .page-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    
+    .page-header h1 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+    
+    .page-header p {
+      color: #666;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    
+    /* قسم المنتجات مع الفلاتر */
+    .products-section {
+      display: flex;
+      gap: 30px;
+    }
+    
+    /* قسم الفلاتر */
+    .filters-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      height: fit-content;
+    }
+    
+    .filters-sidebar h3 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: var(--dark);
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--primary-light);
+    }
+    
+    .filter-group {
+      margin-bottom: 25px;
+    }
+    
+    .filter-group h4 {
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      color: var(--dark);
+    }
+    
+    .filter-options {
+      list-style: none;
+    }
+    
+    .filter-options li {
+      margin-bottom: 10px;
+    }
+    
+    .filter-options label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      color: #555;
+      transition: all 0.2s;
+    }
+    
+    .filter-options label:hover {
+      color: var(--primary);
+    }
+    
+    .filter-options input {
+      margin-left: 10px;
+      accent-color: var(--primary);
+    }
+    
+    .price-range {
+      width: 100%;
+      margin: 15px 0;
+      accent-color: var(--primary);
+    }
+    
+    .price-values {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .filter-buttons {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+    
+    .filter-btn {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    
+    .apply-filters {
+      background: var(--primary);
+      color: white;
+      flex: 1;
+    }
+    
+    .apply-filters:hover {
+      background: var(--primary-dark);
+    }
+    
+    .reset-filters {
+      background: #f0f0f0;
+      color: #666;
+    }
+    
+    .reset-filters:hover {
+      background: #e0e0e0;
+    }
+    
+    /* شبكة المنتجات */
+    .products-grid {
+      flex: 1;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 25px;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      z-index: 1;
+    }
+    
+    .product-image {
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s;
+    }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
+    .product-info {
+      padding: 20px;
+    }
+    
+    .product-category {
+      color: var(--primary);
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      display: block;
+    }
+    
+    .product-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+      color: var(--dark);
+    }
+    
+    .product-description {
+      color: #666;
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+    
+    .product-price {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+    
+    .price {
+      font-weight: 700;
+      color: var(--primary-dark);
+      font-size: 1.2rem;
+    }
+    
+    .old-price {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+      margin-right: 5px;
+    }
+    
+    .add-to-cart {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-weight: 600;
+    }
+    
+    .add-to-cart:hover {
+      background: var(--primary-dark);
+    }
+    
+    .product-rating {
+      color: #ffc107;
+      margin: 10px 0;
+      font-size: 0.9rem;
+    }
+    
+    /* التذييل */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 70px 0 30px;
+      margin-top: 60px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .contact-info {
+      list-style: none;
+    }
+    
+    .contact-info li {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+      
+      .products-section {
+        flex-direction: column;
+      }
+      
+      .filters-sidebar {
+        width: 100%;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .products-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .page-header h1 {
+        font-size: 2rem;
+      }
+    }
+    /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
+
+    </style>
+</head>
+<body>
+     <!-- شريط التنقل -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t39.30808-6/399410090_122097367028107181_5887244743301273206_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iAQ6zm_R6XQQ7kNvwFpYy29&_nc_oc=Adngp0kQSWE8oorHPUxAMznbD5XF29nOfAG6I6DKvOMjnN3AZAQ5qO8Ro3Fe4HUZ4W0&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=0GfLadiY5cS889QNR2kpIA&oh=00_AfTLYZ6ZEUWqCD74dBBkW2qZ5ZshvpNSxLXMqMQPaL5suA&oe=6871D150" alt="تكنوفيجن">
+        </div>
+        <div class="logo-text">technovision</div>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="/">الرئيسية</a></li>
+        <li class="dropdown">
+          <a href="#" class="active">الفئات <i class="fas fa-chevron-down" style="font-size:0.8em;margin-right:5px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="category-products.html?id=1">الإضاءة الذكية</a></li>
+            <li><a href="category-products.html?id=2">أنظمة الأمان</a></li>
+            <li><a href="category-products.html?id=3">التحكم بالمناخ</a></li>
+            <li><a href="category-products.html?id=4">المقابس الذكية</a></li>
+            <li><a href="category-products.html?id=5">المساعدات الذكية</a></li>
+          </ul>
+        </li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="about.html">من نحن</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن منتج...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- محتوى الصفحة -->
+  <main>
+    <div class="container">
+      <div class="page-header">
+        <h1>منتجاتنا الذكية</h1>
+        <p>استعرض مجموعتنا الواسعة من المنتجات الذكية التي تجعل حياتك أسهل وأكثر راحة.</p>
+      </div>
+      
+      <div class="products-section">
+        <!-- قسم الفلاتر -->
+        <aside class="filters-sidebar">
+          <h3>تصفية المنتجات</h3>
+          
+          <div class="filter-group">
+            <h4>الفئات</h4>
+            <ul class="filter-options">
+              <li>
+                <label>
+                  <input type="checkbox" checked>
+                  جميع الفئات
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  الإضاءة الذكية
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  أنظمة الأمان
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  التحكم بالمناخ
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  المقابس الذكية
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  المساعدات الذكية
+                </label>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- <div class="filter-group">
+            <h4>نطاق السعر</h4>
+            <input type="range" class="price-range" min="0" max="1000" value="500" step="50">
+            <div class="price-values">
+              <span>0 د.ع</span>
+              <span>1000 د.ع</span>
+            </div>
+          </div> -->
+          
+          <div class="filter-group">
+            <h4>العلامة التجارية</h4>
+            <ul class="filter-options">
+              <li>
+                <label>
+                  <input type="checkbox" checked>
+                  جميع الماركات
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  تكنوفيجن
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  سامسونج
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  هواوي
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  شاومي
+                </label>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="filter-group">
+            <h4>التقييم</h4>
+            <ul class="filter-options">
+              <li>
+                <label>
+                  <input type="checkbox">
+                  <span class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </span>
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  <span class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> فأكثر
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox">
+                  <span class="product-rating">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                    <i class="far fa-star"></i>
+                  </span> فأكثر
+                </label>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="filter-buttons">
+            <button class="filter-btn apply-filters">تطبيق الفلاتر</button>
+            <button class="filter-btn reset-filters">إعادة تعيين</button>
+          </div>
+        </aside>
+        
+        <!-- شبكة المنتجات -->
+        <div class="products-grid">
+          <!-- بطاقة منتج 1 -->
+          <div class="product-card">
+            <span class="product-badge">الأكثر مبيعاً</span>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="لمبة ذكية">
+            </div>
+            <div class="product-info">
+              <span class="product-category">الإضاءة الذكية</span>
+              <h3 class="product-title">لمبة ذكية متعددة الألوان</h3>
+              <p class="product-description">لمبة ذكية تعمل بتقنية WiFi مع تطبيق للتحكم عن بعد وتغيير الألوان</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <span>(42)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">45,000 د.ع</span>
+                  
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بطاقة منتج 2 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="كاميرة مراقبة">
+            </div>
+            <div class="product-info">
+              <span class="product-category">أنظمة الأمان</span>
+              <h3 class="product-title">كاميرا مراقبة ذكية 360°</h3>
+              <p class="product-description">كاميرا مراقبة بدقة 1080p مع رؤية ليلية وتتبع حركة تلقائي</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(28)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">120,000 د.ع</span>
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بطاقة منتج 3 -->
+          <div class="product-card">
+            <span class="product-badge">جديد</span>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="منظم حرارة">
+            </div>
+            <div class="product-info">
+              <span class="product-category">التحكم بالمناخ</span>
+              <h3 class="product-title">منظم حرارة ذكي</h3>
+              <p class="product-description">منظم حرارة ذكي يعمل بتقنية WiFi مع جدولة ذكية وتوفير للطاقة</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(15)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">85,000 د.ع</span>
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بطاقة منتج 4 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1598128558393-70ff21433be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="مقبس ذكي">
+            </div>
+            <div class="product-info">
+              <span class="product-category">المقابس الذكية</span>
+              <h3 class="product-title">مقبس ذكي مع USB</h3>
+              <p class="product-description">مقبس ذكي يعمل بتقنية WiFi مع منفذي USB للشحن السريع</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star-half-alt"></i>
+                <i class="far fa-star"></i>
+                <span>(36)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">35,000 د.ع</span>
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بطاقة منتج 5 -->
+          <div class="product-card">
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="مساعد ذكي">
+            </div>
+            <div class="product-info">
+              <span class="product-category">المساعدات الذكية</span>
+              <h3 class="product-title">مساعد ذكي باللغة العربية</h3>
+              <p class="product-description">مساعد ذكي يدعم اللغة العربية للتحكم بالمنزل الذكي عن طريق الأوامر الصوتية</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="far fa-star"></i>
+                <span>(19)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">150,000 د.ع</span>
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- بطاقة منتج 6 -->
+          <div class="product-card">
+            <span class="product-badge">خصم 20%</span>
+            <div class="product-image">
+              <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="حساس باب">
+            </div>
+            <div class="product-info">
+              <span class="product-category">أنظمة الأمان</span>
+              <h3 class="product-title">حساس باب ونافذة ذكي</h3>
+              <p class="product-description">حساس لاسلكي للكشف عن فتح الأبواب والنوافذ مع تنبيه فوري</p>
+              
+              <div class="product-rating">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <span>(24)</span>
+              </div>
+              
+              <div class="product-price">
+                <div>
+                  <span class="price">30,000 د.ع</span>
+                </div>
+                <button class="add-to-cart">إستفسار على واتساب</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+   <!-- التذييل -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>عن SmartHome</h3>
+          <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">المنتجات</a></li>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#">تواصل معنا</a></li>
+            <li><a href="#">الشروط والأحكام</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>فئات المنتجات</h3>
+          <ul class="footer-links">
+            <li><a href="#">أنظمة الأمان</a></li>
+            <li><a href="#">الإضاءة الذكية</a></li>
+            <li><a href="#">المناخ الذكي</a></li>
+            <li><a href="#">التحكم الصوتي</a></li>
+            <li><a href="#">أحدث المنتجات</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>تواصل معنا</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>بغداد، الجادرية</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>07722762286</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@smarthome.iq</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 SmartHome. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+  <script>
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
+  const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
+  const dropdownParent = document.querySelector('.nav-links .dropdown');
+
+  dropdownToggle.addEventListener('click', function(e) {
+    e.preventDefault(); // منع الانتقال للرابط
+    dropdownParent.classList.toggle('open');
+  });
+</script>
+
+</body>
+</html>

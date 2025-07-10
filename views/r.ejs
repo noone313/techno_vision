@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartHome - متجر المنزل الذكي</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+    
+    :root {
+      --primary: #36c9b4;
+      --primary-light: #5bd5c3;
+      --primary-dark: #2aa897;
+      --accent: #ff6b6b;
+      --dark: #1a3c38;
+      --light: #f8fafc;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f0f9f8);
+      color: #333;
+      line-height: 1.6;
+      direction: rtl;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* شريط التنقل */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+    
+    .logo-icon img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .logo-icon:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin: 0 15px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(54, 201, 180, 0.1);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-left: 20px;
+    }
+    
+    .search-box input {
+      padding: 10px 15px;
+      padding-right: 40px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      width: 250px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #f8fafc;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+    
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    
+    /* القسم الرئيسي */
+    .hero {
+      padding: 150px 0 100px;
+      background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(255, 255, 255, 0.8));
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(54, 201, 180, 0.15), transparent);
+      top: -250px;
+      right: -250px;
+      z-index: 0;
+    }
+    
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), transparent);
+      bottom: -150px;
+      left: -150px;
+      z-index: 0;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .hero-text {
+      flex: 1;
+      max-width: 600px;
+    }
+    
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--dark);
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+    
+    .hero-text h1 span {
+      color: var(--primary);
+    }
+    
+    .hero-text p {
+      font-size: 1.3rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .btn {
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 5px 15px rgba(54, 201, 180, 0.4);
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(54, 201, 180, 0.6);
+    }
+    
+    .btn-outline {
+      border: 2px solid var(--primary);
+      color: var(--primary);
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(54, 201, 180, 0.1);
+      transform: translateY(-3px);
+    }
+    
+    .hero-image {
+    margin-left: -70px;
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    
+    .hero-img {
+      max-width: 100%;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transform: perspective(1000px) rotateY(-5deg);
+      transition: transform 0.5s ease;
+    }
+    
+    .hero-image:hover .hero-img {
+      transform: perspective(1000px) rotateY(0deg);
+    }
+    
+    .features {
+      padding: 80px 0;
+      background: white;
+    }
+    
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .section-title p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 20px auto 0;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      background: white;
+      border-radius: 15px;
+      padding: 30px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(54, 201, 180, 0.1);
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(54, 201, 180, 0.15);
+      border-color: rgba(54, 201, 180, 0.3);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(54, 201, 180, 0.05));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      transition: all 0.4s ease;
+    }
+    
+    .feature-card:hover .feature-icon {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    }
+    
+    .feature-icon i {
+      font-size: 2.5rem;
+      color: var(--primary);
+      transition: all 0.4s ease;
+    }
+    
+    .feature-card:hover .feature-icon i {
+      color: white;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+    }
+    
+    .feature-card p {
+      color: #666;
+      font-size: 1.05rem;
+    }
+    
+    /* قسم المنتجات */
+    .products {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f8fafc, #f0f9f8);
+    }
+    
+    .products-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 40px;
+    }
+    
+    .filter-btn {
+      padding: 10px 25px;
+      background: white;
+      border: 2px solid #eee;
+      border-radius: 30px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #555;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      border-color: var(--primary);
+      box-shadow: 0 5px 15px rgba(54, 201, 180, 0.3);
+    }
+    
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 30px;
+    }
+    
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s ease;
+      border: 1px solid rgba(54, 201, 180, 0.1);
+    }
+    
+    .product-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(54, 201, 180, 0.15);
+    }
+    
+    .product-image {
+      height: 220px;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .product-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    
+    .product-card:hover .product-image img {
+      transform: scale(1.05);
+    }
+    
+    .product-badge {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      background: var(--accent);
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+    
+    .product-info {
+      padding: 25px;
+    }
+    
+    .product-info h3 {
+      font-size: 1.4rem;
+      color: var(--dark);
+      margin-bottom: 10px;
+    }
+    
+    .product-info p {
+      color: #666;
+      margin-bottom: 20px;
+      min-height: 60px;
+    }
+    
+    .product-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .product-price {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+    
+    .product-rating {
+      color: #ffc107;
+    }
+    
+    .product-actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    
+    .action-btn {
+      width: 48%;
+      padding: 10px;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+    
+    .action-details {
+      background: rgba(54, 201, 180, 0.1);
+      color: var(--primary);
+    }
+    
+    .action-details:hover {
+      background: rgba(54, 201, 180, 0.2);
+    }
+    
+    .action-cart {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      box-shadow: 0 5px 15px rgba(54, 201, 180, 0.3);
+    }
+    
+    .action-cart:hover {
+      box-shadow: 0 8px 20px rgba(54, 201, 180, 0.4);
+      transform: translateY(-2px);
+    }
+    
+    /* القسم الإخباري */
+    .newsletter {
+      padding: 80px 0;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      text-align: center;
+    }
+    
+    .newsletter h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+    
+    .newsletter p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 30px;
+      opacity: 0.9;
+    }
+    
+    .newsletter-form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      background: white;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    
+    .newsletter-form input {
+      flex: 1;
+      padding: 20px 25px;
+      border: none;
+      font-size: 1.1rem;
+      outline: none;
+    }
+    
+    .newsletter-form button {
+      padding: 0 35px;
+      background: var(--dark);
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .newsletter-form button:hover {
+      background: #152c29;
+    }
+    
+    /* التذييل */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 70px 0 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .contact-info {
+      list-style: none;
+    }
+    
+    .contact-info li {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-text {
+        margin-bottom: 50px;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+       .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+      
+      .newsletter h2 {
+        font-size: 2rem;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+        border-radius: 15px;
+      }
+      
+      .newsletter-form input,
+      .newsletter-form button {
+        width: 100%;
+        border-radius: 0;
+        padding: 15px;
+      }
+      
+      .search-box {
+        display: none;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero-text h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 15px;
+      }
+      
+      .btn {
+        width: 100%;
+        text-align: center;
+      }
+      
+      .section-title h2 {
+        font-size: 1.8rem;
+      }
+    }
+    
+    /* تأثيرات التمرير */
+    .scroll-animation {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    
+    .animate {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+     /* إضافة أنماط قسم الشركاء */
+    .partners {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #ffffff, #f0f9f8);
+    }
+    
+    .partners-slider {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 50px;
+    }
+    
+    .partner-card {
+      flex: 1;
+      min-width: 150px;
+      max-width: 200px;
+      /* إزالة الخلفية والإطار والظل */
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      padding: 0 !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: none !important;
+    }
+    
+    .partner-card:hover {
+      /* إزالة أي تأثير hover */
+      transform: none !important;
+      box-shadow: none !important;
+      background: none !important;
+    }
+    
+    .partner-card img {
+      max-width: 100%;
+      height: auto;
+      filter: none !important;
+      opacity: 1 !important;
+      transition: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      background: none !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: block;
+    }
+
+    .partner-card:hover img {
+      filter: none !important;
+      opacity: 1 !important;
+    }
+    
+    @media (max-width: 768px) {
+      .partners-slider {
+        justify-content: center;
+      }
+      
+      .partner-card {
+        min-width: 120px;
+        padding: 0;
+      }
+    }
+
+    /* أنماط قسم المقالات */
+.articles {
+  padding: 80px 0;
+  background: white;
+}
+
+.article-card {
+  display: flex;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(54, 201, 180, 0.1);
+}
+
+.article-image {
+  flex: 1;
+  min-height: 400px;
+  overflow: hidden;
+}
+
+.article-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.article-card:hover .article-image img {
+  transform: scale(1.05);
+}
+
+.article-content {
+  flex: 1;
+  padding: 40px;
+}
+
+.article-content h3 {
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.article-meta {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.article-meta i {
+  margin-left: 5px;
+  color: var(--primary);
+}
+
+.article-excerpt {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.article-highlights {
+  background: rgba(54, 201, 180, 0.05);
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  border-right: 3px solid var(--primary);
+}
+
+.article-highlights h4 {
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+.article-highlights ul {
+  padding-right: 20px;
+  color: #555;
+}
+
+.article-highlights li {
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.article-highlights li::before {
+  content: '';
+  position: absolute;
+  right: -15px;
+  top: 10px;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+@media (max-width: 992px) {
+  .article-card {
+    flex-direction: column;
+  }
+  
+  .article-image {
+    min-height: 300px;
+  }
+  
+  .article-content {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .article-content h3 {
+    font-size: 1.5rem;
+  }
+  
+  .article-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
+
+.nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: #fff;
+      min-width: 180px;
+      box-shadow: 0 8px 24px rgba(54,201,180,0.08);
+      border-radius: 12px;
+      z-index: 100;
+      padding: 10px 0;
+      border: 1px solid #e0f4f2;
+      text-align: right;
+    }
+    
+   
+     .dropdown .dropdown-menu {
+  display: none;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+    
+    .nav-links .dropdown-menu li {
+      margin: 0;
+    }
+    
+    .nav-links .dropdown-menu a {
+      display: block;
+      padding: 10px 24px;
+      color: var(--dark);
+      font-size: 1rem;
+      border-radius: 0;
+      background: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    
+    .nav-links .dropdown-menu a:hover {
+      background: rgba(54,201,180,0.08);
+      color: var(--primary);
+    }
+    .nav-links .dropdown {
+      position: relative;
+    }
+     /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
+
+.slider{
+    width: 100%;
+    height: var(--height);
+    overflow: hidden;
+    mask-image: linear-gradient(
+        to right,
+        transparent,
+        #000 10% 90%,
+        transparent
+    );
+}
+.slider .list{
+    display: flex;
+    width: 100%;
+    min-width: calc(var(--width) * var(--quantity));
+    position: relative;
+}
+.slider .list .item{
+    width: var(--width);
+    height: var(--height);
+    position: absolute;
+    left: 100%;
+    animation: autoRun 10s linear infinite;
+    transition: filter 0.5s;
+    animation-delay: calc( (10s / var(--quantity)) * (var(--position) - 1) - 10s)!important;
+}
+.slider .list .item img{
+    width: 100%;
+}
+@keyframes autoRun{
+    from{
+        left: 100%;
+    }to{
+        left: calc(var(--width) * -1);
+    }
+}
+.slider:hover .item{
+    animation-play-state: paused!important;
+    filter: grayscale(1);
+}
+.slider .item:hover{
+    filter: grayscale(0);
+}
+.slider[reverse="true"] .item{
+    animation: reversePlay 10s linear infinite;
+}
+@keyframes reversePlay{
+    from{
+        left: calc(var(--width) * -1);
+    }to{
+        left: 100%;
+    }
+}
+  </style>
+</head>
+<body>
+   <!-- شريط التنقل -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t39.30808-6/399410090_122097367028107181_5887244743301273206_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iAQ6zm_R6XQQ7kNvwFpYy29&_nc_oc=Adngp0kQSWE8oorHPUxAMznbD5XF29nOfAG6I6DKvOMjnN3AZAQ5qO8Ro3Fe4HUZ4W0&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=0GfLadiY5cS889QNR2kpIA&oh=00_AfTLYZ6ZEUWqCD74dBBkW2qZ5ZshvpNSxLXMqMQPaL5suA&oe=6871D150" alt="تكنوفيجن">
+        </div>
+        <div class="logo-text">technovision</div>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="/">الرئيسية</a></li>
+        <li class="dropdown">
+          <a href="#" class="active">الفئات <i class="fas fa-chevron-down" style="font-size:0.8em;margin-right:5px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="category-products.html?id=1">الإضاءة الذكية</a></li>
+            <li><a href="category-products.html?id=2">أنظمة الأمان</a></li>
+            <li><a href="category-products.html?id=3">التحكم بالمناخ</a></li>
+            <li><a href="category-products.html?id=4">المقابس الذكية</a></li>
+            <li><a href="category-products.html?id=5">المساعدات الذكية</a></li>
+          </ul>
+        </li>
+        <li><a href="/products">المنتجات</a></li>
+        <li><a href="about.html">من نحن</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن منتج...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- القسم الرئيسي -->
+  <section id="hero" class="hero">
+    <div class="container hero-content">
+      <div class="hero-text scroll-animation">
+        <h1>تحكم بمنزلك <span>بلمسة زر</span></h1>
+        <p>اكتشف أفضل أجهزة المنزل الذكي التي تجعل حياتك أسهل وأكثر راحة. حلول مبتكرة وتصميمات أنيقة بأسعار تنافسية.</p>
+        <div class="hero-buttons">
+          <a href="#products" class="btn btn-primary">تصفح المنتجات</a>
+          <a href="#features" class="btn btn-outline">اكتشف الميزات</a>
+        </div>
+      </div>
+      <div class="hero-image scroll-animation">
+        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t51.75761-15/500619654_17916244257099234_6564288603959990210_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=kt7MFT0uzTEQ7kNvwFZDN7e&_nc_oc=AdmfqG7W2IzDTSvQxBmbUCFBpGZUvUpB2KcTySRrkfscfPha1x2rYCHmFs6vVnwQ_WU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=5C8WgigPXRF00T-1NUS71A&oh=00_AfRL5ahl48Ilkpthktj29ULLT3t2LaRagodE9tzVzU45-A&oe=6871BAF1" alt="المنزل الذكي" class="hero-img" style="max-width: 80%; margin-right: -15%;">
+      </div>
+    </div>
+</section>
+
+   
+
+  <div class="slider" style="
+            --width: 100px;
+            --height: 80px;
+            --quantity: 10;
+        ">
+            <div class="list">
+                <div class="item" style="--position: 1"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 2"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 3"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 4"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 5"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 6"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 7"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 8"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 9"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 10"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+            </div>
+        </div>
+
+        <div class="slider" reverse="true" style="
+            --width: 200px;
+            --height: 200px;
+            --quantity: 9;
+        ">
+            <div class="list">
+                <div class="item" style="--position: 1"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 2"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 3"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 4"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 5"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 6"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 7"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 8"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 9"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+            </div>
+        </div>
+
+
+
+  
+
+
+
+
+
+
+
+  <!-- قسم الميزات -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title scroll-animation">
+        <h2>مميزات المنزل الذكي</h2>
+        <p>اكتشف كيف يمكن لأجهزتنا الذكية تحويل منزلك إلى بيئة عصرية متكاملة</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>الإضاءة الذكية</h3>
+          <p>تحكم في إضاءة منزلك من أي مكان، عيّن جداول تشغيل وإطفاء، وغير الألوان حسب المزاج.</p>
+        </div>
+        
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>الأمان الذكي</h3>
+          <p>أنظمة مراقبة متطورة مع كشف الحركة، التنبيهات الفورية، وإمكانية التحكم عن بعد.</p>
+        </div>
+        
+        
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <h3>التحكم الصوتي</h3>
+          <p>تحكم بجميع أجهزة منزلك باستخدام الأوامر الصوتية عبر المساعدات الذكية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  
+
+
+
+
+
+ <!-- قسم المقالات -->
+<section id="articles" class="articles">
+  <div class="container">
+    <div class="section-title scroll-animation">
+      <h2>المقالات والتقنيات</h2>
+      <p>اكتشف أحدث المقالات حول تقنيات المنزل الذكي</p>
+    </div>
+    
+    <div class="article-card scroll-animation">
+      <div class="article-image">
+        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467657330_17893441284099234_6821839176229402678_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=htjMXTx1YxYQ7kNvwHrvQ4z&_nc_oc=AdkKiwPCMAgP0ukV6_L_Ce7gzGqrof7I53Dg1NIvLQDcLeMXGxWGuVUQz4xxs1Oluao&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=qT4Bk4LI-a_6njx3Mukn6w&oh=00_AfTbs4QzwnzBO5kMQ-GC4wpOmEVicz5EqFPOgovf3hLsUg&oe=68730958" alt="المنزل الذكي">
+      </div>
+      <div class="article-content">
+        <h3>كيف تحول منزلك إلى منزل ذكي خطوة بخطوة</h3>
+        <div class="article-meta">
+          <span class="date"><i class="far fa-calendar-alt"></i> 15 مايو 2023</span>
+          <span class="author"><i class="far fa-user"></i> فريق تكنوفيجن</span>
+        </div>
+        <p class="article-excerpt">
+          مع التطور التكنولوجي المتسارع، أصبحت المنازل الذكية حقيقة وليست خيالاً. في هذه المقالة سنستعرض كيفية تحويل منزلك التقليدي إلى منزل ذكي متكامل باستخدام أحدث الأجهزة والتقنيات. بدءاً من أنظمة الإضاءة الذكية التي يمكن التحكم بها عن بعد، وصولاً إلى أنظمة الأمان المتطورة التي توفر حماية شاملة لأسرتك وممتلكاتك.
+        </p>
+        <div class="article-highlights">
+          <h4>أهم النقاط:</h4>
+          <ul>
+            <li>مقدمة عن مفهوم المنزل الذكي وفوائده</li>
+            <li>أهم الأجهزة الأساسية لبدء التحول الذكي</li>
+            <li>كيفية اختيار النظام المركزي المناسب</li>
+            <li>نصائح لتحقيق التكامل بين الأجهزة المختلفة</li>
+            <li>توفير الطاقة وكفاءة الاستهلاك</li>
+          </ul>
+        </div>
+        <a href="#" class="btn btn-primary">قراءة المزيد</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+  <!-- قسم المنتجات -->
+  <section id="products" class="products">
+    <div class="container">
+      <div class="section-title scroll-animation">
+        <h2>أحدث منتجاتنا</h2>
+        <p>اكتشف أحدث أجهزة المنزل الذكي التي تجمع بين التصميم الأنيق والأداء المتطور</p>
+      </div>
+      
+      <div class="products-filter scroll-animation">
+        <button class="filter-btn active">الكل</button>
+        <button class="filter-btn">أنظمة الأمان</button>
+        <button class="filter-btn">الإضاءة الذكية</button>
+        <button class="filter-btn">المناخ الذكي</button>
+        <button class="filter-btn">التحكم الصوتي</button>
+      </div>
+      
+      <div class="products-grid">
+        <!-- بطاقة المنتج 1 -->
+        <div class="product-card scroll-animation">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1587202372775-dc835d2cf189?auto=format&fit=crop&w=800&q=80" alt="كاميرا ذكية">
+            <div class="product-badge">جديد</div>
+          </div>
+          <div class="product-info">
+            <h3>كاميرا مراقبة ذكية</h3>
+            <p>رؤية ليلية، تحكم عبر الهاتف، تنبيهات فورية، مقاومة للعوامل الجوية</p>
+            <div class="product-meta">
+              <div class="product-price">120,000 د.ع</div>
+              
+            </div>
+            <div class="product-actions">
+              <button class="action-btn action-details">إستفسار على واتساب</button>
+              <button class="action-btn action-cart">تفاصيل</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- بطاقة المنتج 2 -->
+        <div class="product-card scroll-animation">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1595941069915-4ebc5197c14a?auto=format&fit=crop&w=800&q=80" alt="لمبة ذكية">
+          </div>
+          <div class="product-info">
+            <h3>لمبة إضاءة ذكية</h3>
+            <p>16 مليون لون، تحكم صوتي، توقيت تشغيل، توافق مع المساعدات الذكية</p>
+            <div class="product-meta">
+                            <div class="product-price">120,000 د.ع</div>
+
+            </div>
+            <div class="product-actions">
+               <button class="action-btn action-details">إستفسار على واتساب</button>
+              <button class="action-btn action-cart">تفاصيل</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- بطاقة المنتج 3 -->
+        <div class="product-card scroll-animation">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=800&q=80" alt="منظم حرارة">
+            <div class="product-badge">الأكثر مبيعاً</div>
+          </div>
+          <div class="product-info">
+            <h3>منظم حرارة ذكي</h3>
+            <p>توفير الطاقة، جدولة، تحكم عن بعد، توافق مع أنظمة التدفئة والتبريد</p>
+            <div class="product-meta">
+              <div class="product-price">180,000 د.ع</div>
+              
+            </div>
+            <div class="product-actions">
+               <button class="action-btn action-details">إستفسار على واتساب</button>
+              <button class="action-btn action-cart">تفاصيل</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- بطاقة المنتج 4 -->
+        <div class="product-card scroll-animation">
+          <div class="product-image">
+            <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?auto=format&fit=crop&w=800&q=80" alt="مقبس ذكي">
+            <div class="product-badge">خصم 20%</div>
+          </div>
+          <div class="product-info">
+            <h3>مقبس كهربائي ذكي</h3>
+            <p>تحكم عن بعد، جدولة، مراقبة استهلاك الطاقة، توافق مع جميع الأجهزة</p>
+            <div class="product-meta">
+              <div class="product-price">65,000 د.ع</div>
+            
+            </div>
+            <div class="product-actions">
+               <button class="action-btn action-details">إستفسار على واتساب</button>
+              <button class="action-btn action-cart">تفاصيل</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- عن الشركة -->
+ <section id="articles" class="articles">
+  <div class="container">
+    <div class="section-title scroll-animation">
+      <h2>عن الشركة</h2>
+      <p></p>
+    </div>
+    
+    <div class="article-card scroll-animation">
+      <div class="article-image">
+        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="المنزل الذكي">
+      </div>
+      <div class="article-content">
+        <h3>TECHNOVISON || تكنو فيشن</h3>
+        <div class="article-meta">
+          <span class="author"><i class="far fa-user"></i> فريق تكنوفيجن</span>
+        </div>
+        <p class="article-excerpt">
+         تكنوفيجن هي شركة متخصصة في تقديم أحدث حلول المنازل الذكية، وأنظمة الصوت، وكشف الحرائق، والحساسات الذكية، بالإضافة إلى كل ما يتعلق بتقنيات إنترنت الأشياء (IoT). نوفر لعملائنا منتجات عالية الجودة وتجارب متكاملة للتحكم الذكي والآمن في منازلهم ومؤسساتهم.
+
+
+        </p>
+        <div class="article-highlights">
+          <h4>أهم النقاط:</h4>
+          <ul>
+            <li>نوفر حلولًا متكاملة للتحكم الذكي بالإضاءة، الأبواب، الستائر، ودرجات الحرارة، بضغطة زر ومن خلال الهاتف.</li>
+            <li>نوفر حساسات الحركة، أنظمة كشف الحريق، الإنذارات الذكية، والكاميرات لراحة بالك وأمان منزلك.</li>
+            <li>نقدم منظومات صوت داخلية وخارجية عالية الجودة، بتقنيات بلوتوث وWi-Fi، لأسلوب حياة فاخر.</li>
+            <li>ندمج التكنولوجيا في تفاصيل حياتك اليومية، من خلال ربط الأجهزة والتحكم بها عن بُعد.</li>
+            <li>نعمل داخل العراق لتقديم أفضل المنتجات والخدمات الذكية، مع دعم فني موثوق وخدمة تركيب احترافية.</li>
+          </ul>
+        </div>
+        <a href="#" class="btn btn-primary">قراءة المزيد</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+  <!-- التذييل -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>عن SmartHome</h3>
+          <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">المنتجات</a></li>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#">تواصل معنا</a></li>
+            <li><a href="#">الشروط والأحكام</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>فئات المنتجات</h3>
+          <ul class="footer-links">
+            <li><a href="#">أنظمة الأمان</a></li>
+            <li><a href="#">الإضاءة الذكية</a></li>
+            <li><a href="#">المناخ الذكي</a></li>
+            <li><a href="#">التحكم الصوتي</a></li>
+            <li><a href="#">أحدث المنتجات</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>تواصل معنا</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>بغداد، الجادرية</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>07722762286</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@smarthome.iq</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 SmartHome. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // كود لتفعيل تأثيرات التمرير
+    document.addEventListener('DOMContentLoaded', function() {
+      const scrollElements = document.querySelectorAll('.scroll-animation');
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+      
+      scrollElements.forEach(el => {
+        observer.observe(el);
+      });
+      
+      // كود لفلترة المنتجات
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const productCards = document.querySelectorAll('.product-card');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // إزالة النشاط من جميع الأزرار
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          
+          // إضافة النشاط للزر المحدد
+          button.classList.add('active');
+          
+          // فلترة المنتجات (في تطبيق حقيقي، سيكون هذا أكثر تعقيداً)
+          // هنا فقط للعرض التوضيحي
+          productCards.forEach(card => {
+            card.style.display = 'block';
+          });
+        });
+      });
+    });
+  </script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const scroller = document.querySelector('.categories-scroller');
+  const prevBtn = document.querySelector('.prev-btn');
+  const nextBtn = document.querySelector('.next-btn');
+  
+  // التمرير إلى اليسار (الفئات التالية)
+  nextBtn.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: 300,
+      behavior: 'smooth'
+    });
+  });
+  
+  // التمرير إلى اليمين (الفئات السابقة)
+  prevBtn.addEventListener('click', () => {
+    scroller.scrollBy({
+      left: -300,
+      behavior: 'smooth'
+    });
+  });
+  
+  // إخفاء الأزرار عند الوصول للنهايات
+  scroller.addEventListener('scroll', () => {
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    
+    if (scroller.scrollLeft <= 10) {
+      prevBtn.style.opacity = '0.5';
+      prevBtn.style.cursor = 'not-allowed';
+    } else {
+      prevBtn.style.opacity = '1';
+      prevBtn.style.cursor = 'pointer';
+    }
+    
+    if (scroller.scrollLeft >= maxScroll - 10) {
+      nextBtn.style.opacity = '0.5';
+      nextBtn.style.cursor = 'not-allowed';
+    } else {
+      nextBtn.style.opacity = '1';
+      nextBtn.style.cursor = 'pointer';
+    }
+  });
+});
+</script>
+<script>
+  const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
+  const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
+  const dropdownParent = document.querySelector('.nav-links .dropdown');
+
+  dropdownToggle.addEventListener('click', function(e) {
+    e.preventDefault(); // منع الانتقال للرابط
+    dropdownParent.classList.toggle('open');
+  });
+</script>
+</body>
+</html>
