@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SmartHome - متجر المنزل الذكي</title>
+  <title>NOOR AL-SAFANA - نور السفانا</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
     
     :root {
+      overflow-x: hidden;
       --primary: #36c9b4;
       --primary-light: #5bd5c3;
       --primary-dark: #2aa897;
@@ -62,30 +63,39 @@
     }
     
     /* شريط التنقل */
-    header {
-      background: rgba(255, 255, 255, 0.95);
-      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-      position: fixed;
-      width: 100%;
-      top: 0;
-      z-index: 1000;
-      padding: 15px 0;
-    }
+header {
+  background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  padding: 7px 0;
+  transition: background 0.3s ease;
+}
+
     
     .nav-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0 20px;
+}
+
     
     .logo {
       display: flex;
       align-items: center;
+      white-space: nowrap;
     }
     
     .logo-icon {
-      width: 70px;
-      height: 70px;
+      width: 50px;
+      height: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -102,15 +112,15 @@
       opacity: 1;
     }
     
-    .logo-text {
-      width: 200px;
-      font-size: 1.8rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
+    
+
+.logo-text {
+  width: auto; /* لا حاجة لتثبيته بـ 250px */
+  font-size: 1.3rem; /* أصغر قليلًا */
+  font-weight: 700;
+  margin-right: 10px;
+  color:rgb(37, 29, 0);
+}
     
     .nav-links {
       display: flex;
@@ -123,7 +133,7 @@
     
     .nav-links a {
       text-decoration: none;
-      color: var(--dark);
+      color:black;
       font-weight: 500;
       font-size: 1.1rem;
       transition: all 0.3s ease;
@@ -154,7 +164,7 @@
       width: 250px;
       font-size: 1rem;
       transition: all 0.3s;
-      background: #f8fafc;
+      background:#f8fafc;
     }
     
     .search-box input:focus {
@@ -180,10 +190,15 @@
     
     /* القسم الرئيسي */
     .hero {
-      padding: 150px 0 100px;
-      background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(255, 255, 255, 0.8));
-      position: relative;
-      overflow: hidden;
+       padding: 150px 0 100px;
+  background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(255, 255, 255, 0.8));
+  position: relative;
+  overflow: hidden;
+  width: 100vw;
+  min-height: 100vh; /* يجعل القسم يغطي الشاشة بالكامل */
+  display: flex;
+  align-items: center;
+  justify-content: center;
     }
     
     .hero::before {
@@ -211,11 +226,15 @@
     }
     
     .hero-content {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+       position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column; /* ترتيب عمودي */
+  align-items: center;     /* توسيط أفقي */
+  justify-content: center; /* توسيط عمودي */
+  height: 100%;            /* يأخذ كل ارتفاع القسم */
+  text-align: center;
+  padding: 0 20px;   
     }
     
     .hero-text {
@@ -244,6 +263,9 @@
     .hero-buttons {
       display: flex;
       gap: 20px;
+       flex-direction: column; /* ترتيب عمودي */
+  align-items: center;     /* توسيط أفقي */
+  justify-content: center; /* توسيط عمودي */
     }
     
     .btn {
@@ -717,12 +739,7 @@
       .mobile-toggle {
         display: block;
       }
-       .nav-links .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        min-width: 100%;
-      }
+       
     }
     
     @media (max-width: 768px) {
@@ -855,175 +872,120 @@
       }
     }
 
-    /* أنماط قسم المقالات */
-.articles {
-  padding: 80px 0;
-  background: white;
-}
+ 
 
-.article-card {
-  display: flex;
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(54, 201, 180, 0.1);
-}
-
-.article-image {
-  flex: 1;
-  min-height: 400px;
-  overflow: hidden;
-}
-
-.article-image img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.article-card:hover .article-image img {
-  transform: scale(1.05);
-}
-
-.article-content {
-  flex: 1;
-  padding: 40px;
-}
-
-.article-content h3 {
-  font-size: 1.8rem;
-  color: var(--dark);
-  margin-bottom: 20px;
-  line-height: 1.4;
-}
-
-.article-meta {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 20px;
-  color: #666;
-  font-size: 0.9rem;
-}
-
-.article-meta i {
-  margin-left: 5px;
-  color: var(--primary);
-}
-
-.article-excerpt {
-  color: #555;
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 30px;
-}
-
-.article-highlights {
-  background: rgba(54, 201, 180, 0.05);
-  padding: 20px;
-  border-radius: 10px;
-  margin-bottom: 30px;
-  border-right: 3px solid var(--primary);
-}
-
-.article-highlights h4 {
-  color: var(--dark);
-  margin-bottom: 15px;
-}
-
-.article-highlights ul {
-  padding-right: 20px;
-  color: #555;
-}
-
-.article-highlights li {
-  margin-bottom: 10px;
-  position: relative;
-}
-
-.article-highlights li::before {
-  content: '';
-  position: absolute;
-  right: -15px;
-  top: 10px;
-  width: 8px;
-  height: 8px;
-  background: var(--primary);
-  border-radius: 50%;
-}
-
-@media (max-width: 992px) {
-  .article-card {
-    flex-direction: column;
-  }
-  
-  .article-image {
-    min-height: 300px;
-  }
-  
-  .article-content {
-    padding: 30px;
-  }
-}
-
-@media (max-width: 768px) {
-  .article-content h3 {
-    font-size: 1.5rem;
-  }
-  
-  .article-meta {
-    flex-direction: column;
-    gap: 10px;
-  }
-}
-
+/* تصميم القائمة المنسدلة كاملة الشاشة */
 .nav-links .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 110%;
-      right: 0;
-      background: #fff;
-      min-width: 180px;
-      box-shadow: 0 8px 24px rgba(54,201,180,0.08);
-      border-radius: 12px;
-      z-index: 100;
-      padding: 10px 0;
-      border: 1px solid #e0f4f2;
-      text-align: right;
-    }
-    
-   
-     .dropdown .dropdown-menu {
+  display: none;
+  position: fixed; /* تغيير من absolute إلى fixed */
+  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: #fff;
+  width: 100vw; /* عرض كامل للشاشة */
+  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 30px;
+  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
+  border-top: 1px solid #e0f4f2;
+  text-align: right;
+  animation: fadeIn 0.3s ease-out;
+  padding: 50px;
+}
+
+/* إزالة السهم العلوي */
+.nav-links .dropdown-menu::before {
   display: none;
 }
 
+/* تصميم عناصر القائمة */
+.nav-links .dropdown-menu li {
+  margin: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.nav-links .dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.nav-links .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: var(--dark);
+  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-links .dropdown-menu a i {
+  margin-left: 15px;
+  font-size: 1.4rem;
+  color: var(--primary);
+  width: 30px;
+  text-align: center;
+}
+
+.nav-links .dropdown-menu a:hover {
+  background: rgba(54, 201, 180, 0.1);
+  color: var(--primary);
+  transform: translateX(-10px);
+}
+
+/* تأثيرات الفتح */
 .dropdown.open .dropdown-menu {
   display: block;
 }
 
-    
-    .nav-links .dropdown-menu li {
-      margin: 0;
-    }
-    
-    .nav-links .dropdown-menu a {
-      display: block;
-      padding: 10px 24px;
-      color: var(--dark);
-      font-size: 1rem;
-      border-radius: 0;
-      background: none;
-      transition: background 0.2s, color 0.2s;
-    }
-    
-    .nav-links .dropdown-menu a:hover {
-      background: rgba(54,201,180,0.08);
-      color: var(--primary);
-    }
-    .nav-links .dropdown {
-      position: relative;
-    }
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* زر الإغلاق */
+.close-dropdown {
+  padding: 0px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 1.5rem;
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-dropdown:hover {
+  color: var(--primary);
+  transform: rotate(90deg);
+}
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .nav-links .dropdown-menu {
+    padding: 20px 15px;
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+  
+  .nav-links .dropdown-menu a {
+    font-size: 1.1rem;
+    padding: 12px 15px;
+  }
+  
+  .close-dropdown {
+    left: 20px;
+    top: 20px;
+  }
+}
      /* القائمة في الجوال */
 .nav-links.show-mobile-menu {
   display: flex !important;
@@ -1103,68 +1065,123 @@
     }
 }
 
-/* الفئات */
+
+/* السلايدر الرئيسي */
 .container2 {
-	padding: 2rem;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .slider2-wrapper {
-	position:relative;
-	max-width: 80rem;
-  height: 700px;
-	margin: 0 auto;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
+  max-width: 100%;
 }
 
 .slider2 {
-  /* aspect-ratio: 16 / 9; */
-	display: flex;
-	width: 100%;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
   height: 100%;
-	overflow-x: auto;
-	scroll-snap-type: x mandatory;
-	scroll-behavior: smooth;
-	border-radius: 0.5rem;
-	-ms-overflow-style: none;
-  box-shadow: 0 1.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
-	scrollbar-width: none;
-
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  max-width: 100%;
+  touch-action: pan-y; /* تحسين التحكم باللمس */
 }
 
 .slider2::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
 
 .slider2 img {
-	flex: 0 0 100%;
-	width: 100%;
-	height: 100%;
-	scroll-snap-align: start;
-	object-fit: contain; /* ✅ لا تقص الصورة */
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  scroll-snap-align: center;
+  display: block;
+  pointer-events: none; /* منع التفاعلات مع الصورة لتحسين التمرير */
 }
 
+/* نقاط التنقل */
 .slider-nav {
-	display: flex;
-	column-gap: 1rem;
-	position: absolute;
-	bottom: 1.25rem;
-	left: 50%;
-	transform: translateX(-50%);
-	z-index: 1;
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+  z-index: 10;
 }
 
 .slider-nav a {
-	width: 0.5rem;
-	height: 0.5rem;
-	border-radius: 50%;
-	background-color: #fff;
-	opacity: 0.75;
-	transition: opacity ease 250ms;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  transition: background 0.3s;
 }
 
-.slider-nav a:hover {
-	opacity: 1;
+.slider-nav a:hover,
+.slider-nav a:focus {
+  background: white;
 }
+
+/* هواتف أفقية وأجهزة لوحية صغيرة */
+@media (max-width: 1024px) {
+  .container2 {
+    height: 60vh;
+  }
+}
+
+/* الهواتف العمودية */
+@media (max-width: 768px) {
+  .container2 {
+    height: 50vh;
+  }
+  
+  .slider2 {
+    scroll-snap-type: x mandatory;
+  }
+  
+  .slider-nav a {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+/* هواتف صغيرة جدًا */
+@media (max-width: 480px) {
+  .container2 {
+    height: 45vh;
+  }
+  
+  .slider-nav {
+    bottom: 15px;
+  }
+  
+  .slider-nav a {
+    width: 8px;
+    height: 8px;
+    gap: 6px;
+  }
+}
+
+/* هواتف ذات شاشات قصيرة جدًا */
+@media (max-height: 600px) and (max-width: 480px) {
+  .container2 {
+    height: 55vh;
+  }
+}
+
 
 /* قسم أعمال الشركة */
 .portfolio {
@@ -1668,6 +1685,9 @@
     gap: 30px;
   }
 }
+
+
+
   </style>
 </head>
 <body>
@@ -1676,26 +1696,29 @@
     <div class="container nav-container">
       <div class="logo">
         <div class="logo-icon">
-          <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t39.30808-6/399410090_122097367028107181_5887244743301273206_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iAQ6zm_R6XQQ7kNvwFpYy29&_nc_oc=Adngp0kQSWE8oorHPUxAMznbD5XF29nOfAG6I6DKvOMjnN3AZAQ5qO8Ro3Fe4HUZ4W0&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=0GfLadiY5cS889QNR2kpIA&oh=00_AfTLYZ6ZEUWqCD74dBBkW2qZ5ZshvpNSxLXMqMQPaL5suA&oe=6871D150" alt="تكنوفيجن">
+          <!-- <img src="../uploads/logonooralsafana.jpg" alt="تكنوفيجن"> -->
         </div>
-        <div class="logo-text">NOOR <br> AL-SAFANA</div>
+        <div class="logo-text">NOOR AL-SAFANA</div>
       </div>
       
       <ul class="nav-links">
         <li><a href="/">الرئيسية</a></li>
-        <li class="dropdown">
-          <a href="#" class="active">منتجاتنا <i class="fas fa-chevron-down" style="font-size:0.8em;margin-right:5px;"></i></a>
-          <ul class="dropdown-menu">
-            <li><a href="category-products.html?id=1">الإضاءة الذكية</a></li>
-            <li><a href="category-products.html?id=2">أنظمة الأمان</a></li>
-            <li><a href="category-products.html?id=3">التحكم بالمناخ</a></li>
-            <li><a href="category-products.html?id=4">المقابس الذكية</a></li>
-            <li><a href="category-products.html?id=5">المساعدات الذكية</a></li>
+         <li class="dropdown">
+    <a href="/products" class="active">الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
+    <ul class="dropdown-menu">
+      <li><a href="category-products.html?id=1"><i class="fas fa-lightbulb"></i>Smart Home Zigbee</a></li>
+      <li><a href="category-products.html?id=2"><i class="fas fa-shield-alt"></i>Smart Home KNX </a></li>
+      <li><a href="category-products.html?id=3"><i class="fas fa-thermometer-half"></i>Lighiting</a></li>
+      <li><a href="category-products.html?id=4"><i class="fas fa-plug"></i>Video Intercame</a></li>
+      <li><a href="category-products.html?id=5"><i class="fas fa-robot"></i>Sound System</a></li>
+      <li><a href="category-products.html?id=5"><i class="fas fa-robot"></i>Curten System</a></li>
+      <li><a href="category-products.html?id=5"><i class="fas fa-robot"></i>Security System</a></li>
+
           </ul>
         </li>
-        <li><a href="/products">الحلول</a></li>
-        <li><a href="about.html">من نحن</a></li>
-        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="/products">منتجاتنا</a></li>
+        <li><a href="/about-us">من نحن</a></li>
+        <li><a href="/contact-us">تواصل معنا</a></li>
       </ul>
       
       <div class="nav-buttons">
@@ -1712,6 +1735,27 @@
     
   </header>
 
+  
+  <!-- الفئات -->
+<section class="container2">
+	<div class="slider2-wrapper" id="slider2-wrapper">
+		<div class="slider2">
+      <img id="slide-3" src="../uploads/Banner.jpg" alt="3D rendering of an imaginary blue planet in space" />
+			<img id="slide-1" src="../uploads/Banner(1).jpg" alt="3D rendering of an imaginary orange planet in space" />
+			<img id="slide-2" src="../uploads/A_VIVA_header3.jpg" alt="3D rendering of an imaginary green planet in space" />
+			
+		</div>
+		<div class="slider-nav">
+			<a href="#slide-1"></a>
+			<a href="#slide-2"></a>
+			<a href="#slide-3"></a>
+		</div>
+	</div>
+
+	</div>
+</section>
+
+
   <!-- القسم الرئيسي -->
   <section id="hero" class="hero">
     <div class="container hero-content">
@@ -1723,121 +1767,17 @@
           <a href="#features" class="btn btn-outline">اكتشف الميزات</a>
         </div>
       </div>
-      <div class="hero-image scroll-animation">
-        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t51.75761-15/500619654_17916244257099234_6564288603959990210_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=kt7MFT0uzTEQ7kNvwFZDN7e&_nc_oc=AdmfqG7W2IzDTSvQxBmbUCFBpGZUvUpB2KcTySRrkfscfPha1x2rYCHmFs6vVnwQ_WU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=5C8WgigPXRF00T-1NUS71A&oh=00_AfRL5ahl48Ilkpthktj29ULLT3t2LaRagodE9tzVzU45-A&oe=6871BAF1" alt="المنزل الذكي" class="hero-img" style="max-width: 80%; margin-right: -15%;">
-      </div>
     </div>
 </section>
 
    
 
-  <div class="slider" style="
-            --width: 100px;
-            --height: 80px;
-            --quantity: 10;
-        ">
-            <div class="list">
-                <div class="item" style="--position: 1"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 2"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 3"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 4"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 5"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 6"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 7"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 8"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 9"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-                <div class="item" style="--position: 10"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
-            </div>
-        </div>
-
-        <div class="slider" reverse="true" style="
-            --width: 200px;
-            --height: 200px;
-            --quantity: 9;
-        ">
-            <div class="list">
-                <div class="item" style="--position: 1"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 2"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 3"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 4"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 5"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 6"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 7"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 8"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-                <div class="item" style="--position: 9"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
-            </div>
-        </div>
-
-
-
- <!-- قسم الميزات -->
-  <section id="features" class="features">
-    <div class="container">
-      <div class="section-title scroll-animation">
-        <h2>مميزات المنزل الذكي</h2>
-        <p>اكتشف كيف يمكن لأجهزتنا الذكية تحويل منزلك إلى بيئة عصرية متكاملة</p>
-      </div>
-      
-      <div class="features-grid">
-        <div class="feature-card scroll-animation">
-          <div class="feature-icon">
-            <i class="fas fa-lightbulb"></i>
-          </div>
-          <h3>الإضاءة الذكية</h3>
-          <p>تحكم في إضاءة منزلك من أي مكان، عيّن جداول تشغيل وإطفاء، وغير الألوان حسب المزاج.</p>
-        </div>
-        
-        <div class="feature-card scroll-animation">
-          <div class="feature-icon">
-            <i class="fas fa-shield-alt"></i>
-          </div>
-          <h3>الأمان الذكي</h3>
-          <p>أنظمة مراقبة متطورة مع كشف الحركة، التنبيهات الفورية، وإمكانية التحكم عن بعد.</p>
-        </div>
-        
-        
-        <div class="feature-card scroll-animation">
-          <div class="feature-icon">
-            <i class="fas fa-microphone"></i>
-          </div>
-          <h3>التحكم الصوتي</h3>
-          <p>تحكم بجميع أجهزة منزلك باستخدام الأوامر الصوتية عبر المساعدات الذكية.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-
-  <!-- الفئات -->
-<section class="container2">
-	<div class="slider2-wrapper" id="slider2-wrapper">
-		<div class="slider2">
-			<img id="slide-1" src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t51.75761-15/465622082_17892172041099234_5573126400974761310_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sKYD3odwyJ4Q7kNvwEdC5sd&_nc_oc=AdmdmVS2W1Q0oDpC2f9DMjdyK-sx2XjaaYmYQm-Odcd5s7qcrwLFgHny8goIxPhAkfA&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=rpMMYiY8r36odBpy-AVEYA&oh=00_AfRv9bx6qiQbJBrv3QrILV7FU5nH_oJFns0EGzQkJ6Cd3Q&oe=68755746" alt="3D rendering of an imaginary orange planet in space" />
-			<img id="slide-2" src="https://scontent.fbgw41-1.fna.fbcdn.net/v/t39.30808-6/467723603_17893444233099234_2946418254138882121_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=OT7l5U4uUxwQ7kNvwFmo0D-&_nc_oc=AdkL-S3652zmIapj9R-4d0Q8X2XYg9l5KYxb0XEqDNIByFkRSRkadCYgqDqANk8uYKw&_nc_zt=23&_nc_ht=scontent.fbgw41-1.fna&_nc_gid=UdbxmXayBFojYrVSs_SoYg&oh=00_AfRSwGydtTf0gdnE-b0kq7xPLQULOZYBT4hy_ZO39cbpDw&oe=68755305" alt="3D rendering of an imaginary green planet in space" />
-			<img id="slide-3" src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467693295_17893440132099234_3512899173936999098_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=DVTcFy_t4A4Q7kNvwEm8ddh&_nc_oc=AdmsttCWMF7v7zQD1qY3lopmDVOMjuoxeAc-yuZG84j_9N4d4Xw7woUw0dFnauTnJX4&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=Ml4THQtJHYJtkdfreFrsQA&oh=00_AfRcymEi0InLU22NXduhQO69G5KYekUIP6483lkfK1lihA&oe=68756023" alt="3D rendering of an imaginary blue planet in space" />
-		</div>
-		<div class="slider-nav">
-			<a href="#slide-1"></a>
-			<a href="#slide-2"></a>
-			<a href="#slide-3"></a>
-		</div>
-	</div>
-	</div>
-</section>
 
 
 
 
 
-
- 
-
-  
-
-
-
-  <!-- قسم أعمال الشركة -->
+        <!-- قسم أعمال الشركة -->
 <section id="portfolio" class="portfolio">
   <div class="container">
     <div class="section-title scroll-animation">
@@ -1927,6 +1867,92 @@
   </div>
 </section>
 
+
+
+
+
+
+
+ <!-- قسم الميزات -->
+  <section id="features" class="features">
+    <div class="container">
+      <div class="section-title scroll-animation">
+        <h2>مميزات المنزل الذكي</h2>
+        <p>اكتشف كيف يمكن لأجهزتنا الذكية تحويل منزلك إلى بيئة عصرية متكاملة</p>
+      </div>
+      
+      <div class="features-grid">
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-lightbulb"></i>
+          </div>
+          <h3>الإضاءة الذكية</h3>
+          <p>تحكم في إضاءة منزلك من أي مكان، عيّن جداول تشغيل وإطفاء، وغير الألوان حسب المزاج.</p>
+        </div>
+        
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h3>الأمان الذكي</h3>
+          <p>أنظمة مراقبة متطورة مع كشف الحركة، التنبيهات الفورية، وإمكانية التحكم عن بعد.</p>
+        </div>
+        
+        
+        <div class="feature-card scroll-animation">
+          <div class="feature-icon">
+            <i class="fas fa-microphone"></i>
+          </div>
+          <h3>التحكم الصوتي</h3>
+          <p>تحكم بجميع أجهزة منزلك باستخدام الأوامر الصوتية عبر المساعدات الذكية.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<div class="section-title scroll-animation">
+      <h2>الشركاء</h2>
+      <p>نحن نعمل مع أفضل الشركات لتقديم حلول مبتكرة</p>
+    </div>
+  <div class="slider" style="
+            --width: 100px;
+            --height: 80px;
+            --quantity: 10;
+        ">
+        
+            <div class="list">
+              
+                <div class="item" style="--position: 1"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 2"><img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/303411821_449688453843551_1362459691077449664_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=aOzDhDZ7kScQ7kNvwFMhf3j&_nc_oc=AdlXtSA_HybBcKHnjxUQRiYlI42FTGbpi-2NxLxPVfiH5-Vqegs0IHrQkAO_mfcypek&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=q0Woxe89GR2PHVXRCOtSLA&oh=00_AfRAKJP4sREDidhjNs38S3RmirCNL3Hs2m24u0Q04j78Iw&oe=6876E4A3" alt=""></div>
+                <div class="item" style="--position: 3"><img src="https://th.bing.com/th/id/OIP.BQMEFHzYrlS43a-7FbisEAHaHa?w=175&h=180&c=7&r=0&o=5&dpr=1.3&pid=1.7" alt=""></div>
+                <div class="item" style="--position: 4"><img src="https://tse2.mm.bing.net/th/id/OIP.v2JapspBtOzV1_OO9CpINgHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 5"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 6"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 7"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 8"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 9"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+                <div class="item" style="--position: 10"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
+            </div>
+        </div>
+
+        <div class="slider" reverse="true" style="
+            --width: 200px;
+            --height: 200px;
+            --quantity: 9;
+        ">
+            <div class="list">
+                <div class="item" style="--position: 1"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 2"><img src="https://tse1.mm.bing.net/th/id/OIP.ThEz7grsn7Z4bhite3i_GAHaHa?w=1024&h=1024&rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 3"><img src="https://tse1.mm.bing.net/th/id/OIP.K9QAcy5Ors76Fe2EuRsGNAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 4"><img src="https://tse1.mm.bing.net/th/id/OIP.K9QAcy5Ors76Fe2EuRsGNAAAAA?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 5"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 6"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 7"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 8"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+                <div class="item" style="--position: 9"><img src="https://tse4.mm.bing.net/th/id/OIP.HeIhAgQtldCItS8yy0KCTAHaHa?rs=1&pid=ImgDetMain&o=7&rm=3" alt=""></div>
+            </div>
+        </div>
 
 
 
@@ -2096,47 +2122,6 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-
-
- <!-- قسم المقالات -->
-<section id="articles" class="articles">
-  <div class="container">
-    <div class="section-title scroll-animation">
-      <h2>المقالات والتقنيات</h2>
-      <p>اكتشف أحدث المقالات حول تقنيات المنزل الذكي</p>
-    </div>
-    
-    <div class="article-card scroll-animation">
-      <div class="article-image">
-        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467657330_17893441284099234_6821839176229402678_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=htjMXTx1YxYQ7kNvwHrvQ4z&_nc_oc=AdkKiwPCMAgP0ukV6_L_Ce7gzGqrof7I53Dg1NIvLQDcLeMXGxWGuVUQz4xxs1Oluao&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=qT4Bk4LI-a_6njx3Mukn6w&oh=00_AfTbs4QzwnzBO5kMQ-GC4wpOmEVicz5EqFPOgovf3hLsUg&oe=68730958" alt="المنزل الذكي">
-      </div>
-      <div class="article-content">
-        <h3>كيف تحول منزلك إلى منزل ذكي خطوة بخطوة</h3>
-        <div class="article-meta">
-          <span class="date"><i class="far fa-calendar-alt"></i> 15 مايو 2023</span>
-          <span class="author"><i class="far fa-user"></i> فريق تكنوفيجن</span>
-        </div>
-        <p class="article-excerpt">
-          مع التطور التكنولوجي المتسارع، أصبحت المنازل الذكية حقيقة وليست خيالاً. في هذه المقالة سنستعرض كيفية تحويل منزلك التقليدي إلى منزل ذكي متكامل باستخدام أحدث الأجهزة والتقنيات. بدءاً من أنظمة الإضاءة الذكية التي يمكن التحكم بها عن بعد، وصولاً إلى أنظمة الأمان المتطورة التي توفر حماية شاملة لأسرتك وممتلكاتك.
-        </p>
-        <div class="article-highlights">
-          <h4>أهم النقاط:</h4>
-          <ul>
-            <li>مقدمة عن مفهوم المنزل الذكي وفوائده</li>
-            <li>أهم الأجهزة الأساسية لبدء التحول الذكي</li>
-            <li>كيفية اختيار النظام المركزي المناسب</li>
-            <li>نصائح لتحقيق التكامل بين الأجهزة المختلفة</li>
-            <li>توفير الطاقة وكفاءة الاستهلاك</li>
-          </ul>
-        </div>
-        <a href="#" class="btn btn-primary">قراءة المزيد</a>
       </div>
     </div>
   </div>
@@ -2393,13 +2378,7 @@ document.addEventListener('DOMContentLoaded', function() {
   toggleBtn.addEventListener('click', () => {
     navLinks.classList.toggle('show-mobile-menu');
   });
-  const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
-  const dropdownParent = document.querySelector('.nav-links .dropdown');
-
-  dropdownToggle.addEventListener('click', function(e) {
-    e.preventDefault(); // منع الانتقال للرابط
-    dropdownParent.classList.toggle('open');
-  });
+ 
 
    const slider = document.querySelector('.slider2');
   const slides = document.querySelectorAll('.slider2 img');
@@ -2468,6 +2447,75 @@ document.addEventListener('DOMContentLoaded', function() {
   
   document.querySelectorAll('.milestone').forEach(milestone => {
     observer.observe(milestone);
+  });
+});
+
+// // سكربت السلايدر الثاني
+//   document.addEventListener('DOMContentLoaded', function () {
+//     const slider = document.querySelector('.slider2');
+//     const images = slider.querySelectorAll('img');
+//     const prevBtn = document.querySelector('.slider-arrow.prev');
+//     const nextBtn = document.querySelector('.slider-arrow.next');
+
+//     let currentIndex = 0;
+
+//     function scrollToSlide(index) {
+//       const slideWidth = slider.offsetWidth;
+//       slider.scrollTo({
+//         left: slideWidth * index,
+//         behavior: 'smooth'
+//       });
+//     }
+
+//     nextBtn.addEventListener('click', () => {
+//       const slideWidth = slider.offsetWidth;
+//       currentIndex = Math.min(images.length - 1, currentIndex + 1);
+//       scrollToSlide(currentIndex);
+//     });
+
+//     prevBtn.addEventListener('click', () => {
+//       const slideWidth = slider.offsetWidth;
+//       currentIndex = Math.max(0, currentIndex - 1);
+//       scrollToSlide(currentIndex);
+//     });
+
+//     // اختياري: تحديث currentIndex عند التمرير اليدوي
+//     slider.addEventListener('scroll', () => {
+//       const slideWidth = slider.offsetWidth;
+//       currentIndex = Math.round(slider.scrollLeft / slideWidth);
+//     });
+//   });
+
+
+ 
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
+  const dropdownParent = document.querySelector('.nav-links .dropdown');
+  
+  // إنشاء زر الإغلاق ديناميكياً
+  const closeButton = document.createElement('span');
+  closeButton.className = 'close-dropdown';
+  closeButton.innerHTML = '<i class="fas fa-times"></i>';
+  document.querySelector('.dropdown-menu').prepend(closeButton);
+
+  dropdownToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdownParent.classList.toggle('open');
+    document.body.style.overflow = dropdownParent.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // إغلاق القائمة عند النقر على زر الإغلاق
+  closeButton.addEventListener('click', function() {
+    dropdownParent.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // إغلاق القائمة عند النقر خارجها
+  document.addEventListener('click', function(e) {
+    if (!dropdownParent.contains(e.target)) {
+      dropdownParent.classList.remove('open');
+      document.body.style.overflow = '';
+    }
   });
 });
 </script>

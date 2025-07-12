@@ -107,3 +107,11 @@ export const getSingleProduct = async (req, res) => {
 
   res.render('singleProduct'); // Render a single product details page
 }
+
+export const aboutUs = async (req, res) => {
+  res.render('aboutUs'); // Render the about us page
+}
+
+export const contactUs = async (req, res) => {
+  res.render('contactUs'); // Render the contact us page
+}

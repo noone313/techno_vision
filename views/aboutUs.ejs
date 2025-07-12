@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOOR AL-SAFANA - نور السفانا</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+    <style>
+         @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+    
+    :root {
+      --primary: #36c9b4;
+      --primary-light: #5bd5c3;
+      --primary-dark: #2aa897;
+      --accent: #ff6b6b;
+      --dark: #1a3c38;
+      --light: #f8fafc;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f0f9f8);
+      color: #333;
+      line-height: 1.6;
+      direction: rtl;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10 20px;
+    }
+    .section-title {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    
+    .section-title h2 {
+      font-size: 2.5rem;
+      color: var(--dark);
+      margin-bottom: 15px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    .section-title h2::after {
+      content: '';
+      position: absolute;
+      width: 80px;
+      height: 4px;
+      background: var(--primary);
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+    
+    .section-title p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 700px;
+      margin: 20px auto 0;
+    }
+    
+    
+    /* شريط التنقل */
+    header {
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      padding: 15px 0;
+    }
+    
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo-icon {
+      width: 70px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+    
+    .logo-icon img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-icon:hover img {
+      transform: scale(1.05);
+    }
+    
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      position: relative;
+    }
+    
+    .nav-links li {
+      margin: 0 15px;
+      position: relative;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--primary);
+      background: rgba(54, 201, 180, 0.1);
+    }
+    
+    .nav-links .dropdown {
+      position: relative;
+    }
+    
+    .nav-links .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 110%;
+      right: 0;
+      background: #fff;
+      min-width: 180px;
+      box-shadow: 0 8px 24px rgba(54,201,180,0.08);
+      border-radius: 12px;
+      z-index: 100;
+      padding: 10px 0;
+      border: 1px solid #e0f4f2;
+      text-align: right;
+    }
+    
+    .nav-links .dropdown:hover .dropdown-menu,
+    .nav-links .dropdown:focus-within .dropdown-menu {
+      display: block;
+    }
+    
+    .nav-links .dropdown-menu li {
+      margin: 0;
+    }
+    
+    .nav-links .dropdown-menu a {
+      display: block;
+      padding: 10px 24px;
+      color: var(--dark);
+      font-size: 1rem;
+      border-radius: 0;
+      background: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    
+    .nav-links .dropdown-menu a:hover {
+      background: rgba(54,201,180,0.08);
+      color: var(--primary);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-left: 20px;
+    }
+    
+    .search-box input {
+      padding: 10px 15px;
+      padding-right: 40px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      width: 250px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background: #f8fafc;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+    
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+     /* التذييل */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 70px 0 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .contact-info {
+      list-style: none;
+    }
+    
+    .contact-info li {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+     /* التذييل */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 70px 0 30px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .contact-info {
+      list-style: none;
+    }
+    
+    .contact-info li {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+
+    /* قسم حول الشركة */
+.about-section {
+  padding: 200px 0;
+  background: linear-gradient(135deg, #ffffff, #f0f9f8);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-section::before {
+  content: '';
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), transparent);
+  top: -200px;
+  right: -200px;
+  z-index: 0;
+}
+
+.about-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.about-card {
+  background: white;
+  border-radius: 15px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  z-index: 1;
+}
+
+.about-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(54, 201, 180, 0.15);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(54, 201, 180, 0.05));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 25px;
+  font-size: 2rem;
+  color: var(--primary);
+}
+
+.about-card h3 {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 20px;
+}
+
+.about-card p {
+  color: #666;
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+.about-card ul {
+  list-style: none;
+  text-align: right;
+  padding-right: 20px;
+}
+
+.about-card ul li {
+  margin-bottom: 10px;
+  position: relative;
+  color: #555;
+}
+
+.about-card ul li::before {
+  content: '';
+  position: absolute;
+  right: -15px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  background: var(--primary);
+  border-radius: 50%;
+}
+
+.wave-shape {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%2336c9b4" opacity=".1"/></svg>');
+  background-size: cover;
+  z-index: -1;
+}
+
+/* تاريخ الشركة */
+.company-history {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 80px;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.history-image {
+  flex: 1;
+  min-height: 400px;
+}
+
+.history-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.history-text {
+  flex: 1;
+  padding: 40px;
+}
+
+.history-text h3 {
+  font-size: 1.8rem;
+  color: var(--dark);
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.history-text h3::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  background: var(--primary);
+  bottom: 0;
+  right: 0;
+}
+
+.history-text p {
+  color: #555;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+.milestones {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.milestone {
+  text-align: center;
+}
+
+.milestone .number {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  margin-bottom: 10px;
+}
+
+.milestone span {
+  color: #666;
+  font-size: 1rem;
+}
+
+
+
+@media (max-width: 992px) {
+  .company-history {
+    flex-direction: column;
+  }
+  
+  .history-image {
+    min-height: 300px;
+    width: 100%;
+  }
+  
+  .history-text {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .milestones {
+    flex-direction: column;
+    gap: 30px;
+  }
+}
+
+    </style>
+</head>
+<body>
+     <!-- شريط التنقل -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+          <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t39.30808-6/399410090_122097367028107181_5887244743301273206_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=iAQ6zm_R6XQQ7kNvwFpYy29&_nc_oc=Adngp0kQSWE8oorHPUxAMznbD5XF29nOfAG6I6DKvOMjnN3AZAQ5qO8Ro3Fe4HUZ4W0&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=0GfLadiY5cS889QNR2kpIA&oh=00_AfTLYZ6ZEUWqCD74dBBkW2qZ5ZshvpNSxLXMqMQPaL5suA&oe=6871D150" alt="تكنوفيجن">
+        </div>
+        <div class="logo-text">technovision</div>
+      </div>
+      
+      <ul class="nav-links">
+        <li><a href="/">الرئيسية</a></li>
+        <li class="dropdown">
+          <a href="#" class="active">الفئات <i class="fas fa-chevron-down" style="font-size:0.8em;margin-right:5px;"></i></a>
+          <ul class="dropdown-menu">
+            <li><a href="category-products.html?id=1">الإضاءة الذكية</a></li>
+            <li><a href="category-products.html?id=2">أنظمة الأمان</a></li>
+            <li><a href="category-products.html?id=3">التحكم بالمناخ</a></li>
+            <li><a href="category-products.html?id=4">المقابس الذكية</a></li>
+            <li><a href="category-products.html?id=5">المساعدات الذكية</a></li>
+          </ul>
+        </li>
+        <li><a href="products.html">المنتجات</a></li>
+        <li><a href="/about-us">من نحن</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+      </ul>
+      
+      <div class="nav-buttons">
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن منتج...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+
+
+
+   <!-- قسم حول الشركة -->
+<section id="about" class="about-section">
+  <div class="container">
+    <div class="section-title scroll-animation">
+      <h2><span class="lang-ar">من نحن</span></h2>
+      <p>
+        <span class="lang-ar">قصة نجاحنا ورؤيتنا للمستقبل</span>
+      </p>
+    </div>
+
+    <div class="about-content">
+      <!-- بطاقة الرؤية -->
+      <div class="about-card vision-card scroll-animation">
+        <div class="card-icon">
+          <i class="fas fa-binoculars"></i>
+        </div>
+        <h3><span class="lang-ar">رؤيتنا</span></h3>
+        <p>
+          <span class="lang-ar">أن نكون الرواد في تقديم حلول المنازل الذكية في المنطقة</span>
+        </p>
+        <div class="wave-shape"></div>
+      </div>
+
+      <!-- بطاقة الرسالة -->
+      <div class="about-card mission-card scroll-animation">
+        <div class="card-icon">
+          <i class="fas fa-bullseye"></i>
+        </div>
+        <h3><span class="lang-ar">رسالتنا</span></h3>
+        <p>
+          <span class="lang-ar">تقديم تجربة ذكية استثنائية تعزز جودة الحياة</span>
+        </p>
+        <div class="wave-shape"></div>
+      </div>
+
+      <!-- بطاقة القيم -->
+      <div class="about-card values-card scroll-animation">
+        <div class="card-icon">
+          <i class="fas fa-heart"></i>
+        </div>
+        <h3><span class="lang-ar">قيمنا</span></h3>
+        <ul>
+          <li><span class="lang-ar">الابتكار</span></li>
+          <li><span class="lang-ar">الجودة</span></li>
+          <li><span class="lang-ar">رضا العملاء</span></li>
+          <li><span class="lang-ar">الموثوقية</span></li>
+        </ul>
+        <div class="wave-shape"></div>
+      </div>
+    </div>
+
+    <!-- تاريخ الشركة -->
+    <div class="company-history scroll-animation">
+      <div class="history-image">
+        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="Company History">
+      </div>
+      <div class="history-text">
+        <h3><span class="lang-ar">تاريخنا</span></h3>
+        <p>
+          <span class="lang-ar">
+            تأسست شركة تكنوفيجن في عام 2015 بفريق صغير من المتحمسين للتكنولوجيا.
+            على مر السنين، كبرنا لنصبح أحد أبرز مزودي حلول المنازل الذكية في العراق،
+            حيث قمنا بتنفيذ أكثر من 500 مشروع ناجح.
+          </span>
+         
+        </p>
+        <div class="milestones">
+          <div class="milestone">
+            <div class="number" data-count="500">200+</div>
+            <span class="lang-ar">مشروع مكتمل</span>
+          </div>
+          <div class="milestone">
+            <div class="number" data-count="50">50+</div>
+            <span class="lang-ar">موظف محترف</span>
+          </div>
+          <div class="milestone">
+            <div class="number" data-count="8">10+</div>
+            <span class="lang-ar">سنوات من الخبرة</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+ 
+</section>
+
+
+  
+
+
+   <!-- التذييل -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>عن NOOR AL-SAFANA</h3>
+          <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="#">الرئيسية</a></li>
+            <li><a href="#">منتجاتنا</a></li>
+            <li><a href="#">الحلول</a></li>
+            <li><a href="#">من نحن</a></li>
+            <li><a href="#">تواصل معنا</a></li>
+            
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>فئات المنتجات</h3>
+          <ul class="footer-links">
+            <li><a href="#">أنظمة الأمان</a></li>
+            <li><a href="#">الإضاءة الذكية</a></li>
+            <li><a href="#">المناخ الذكي</a></li>
+            <li><a href="#">التحكم الصوتي</a></li>
+            <li><a href="#">أحدث المنتجات</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>تواصل معنا</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>بغداد، الجادرية</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>07722762286</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@smarthome.iq</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 NOOR AL-SAFANA. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+
+</body>
+</html>

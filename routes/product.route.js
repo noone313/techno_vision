@@ -1,10 +1,15 @@
 import express from 'express';
 import { uploadSingle } from '../middlewares/multer.js';
-import { getAllProducts,getProductById,getProductsByCategory,createProduct,getSingleProduct } from '../controllers/product.controller.js';
+import { getAllProducts,getProductById,getProductsByCategory,createProduct,getSingleProduct,aboutUs,contactUs } from '../controllers/product.controller.js';
 
 const productRouter = express.Router();
 
 
+
+// Contact Us page
+productRouter.get('/contact-us', contactUs);
+// About Us page
+productRouter.get('/about-us', aboutUs);
 // Get single product for details page
 productRouter.get('/products/single', getSingleProduct);
 // Get all products
