@@ -115,3 +115,8 @@ export const aboutUs = async (req, res) => {
 export const contactUs = async (req, res) => {
   res.render('contactUs'); // Render the contact us page
 }
+
+export const sol = async (req,res)=>{
+res.render('slou');
+
+}
