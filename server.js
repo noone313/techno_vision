@@ -41,6 +41,9 @@ app.use('/',productRouter); // استخدام مسار المنتجات
 
 // تشغيل الخادم وقاعدة البيانات
 startServer();
-app.listen(3000, () => {
-  console.log('Server running on http://localhost:3000');
+const PORT = process.env.PORT || 8000;
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
+
