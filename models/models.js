@@ -85,18 +85,22 @@ Product.belongsTo(Category, {
 
 
 
-const startServer = async () => {
-    try {
-      await sequelize.authenticate();
-      console.log("✅ تم الاتصال بقاعدة البيانات");
-  
-      await sequelize.sync({ alter: true });
-      console.log("🔄 تم تحديث الجداول تلقائيًا");
-    } catch (error) {
-      console.error("❌ خطأ فادح:", error);
-      process.exit(1);
-    }
-  };
+async function startServer(app) {
+  try {
+    await sequelize.authenticate();
+    await sequelize.sync();
+    console.log("Database connected ✅");
+
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, () => {
+      console.log(`✅ Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("❌ Failed to connect to database:", err);
+    process.exit(1);
+  }
+}
+
 
 
 

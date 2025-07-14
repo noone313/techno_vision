@@ -40,10 +40,4 @@ app.use('/',productRouter); // استخدام مسار المنتجات
 
 
 // تشغيل الخادم وقاعدة البيانات
-startServer();
-const PORT = process.env.PORT || 8000;
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
+startServer(app);
