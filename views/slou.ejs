@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+
     <style>
          @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
     
@@ -31,6 +33,7 @@
       color: #333;
       line-height: 1.6;
       direction: rtl;
+      
     }
     
     .container {
@@ -505,12 +508,16 @@
         .solution-hero {
             text-align: center;
             padding: 100px ;
-            background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(255, 255, 255, 0.9));
+            background: #fff;
             position: relative;
             overflow: hidden;
             margin-bottom: 50px;
+            
+      will-change: transform, opacity;
         }
         
+
+
         .solution-hero h1 {
             font-size: 2.8rem;
             color: var(--dark);
@@ -552,14 +559,48 @@
         }
         
         .solution-description {
-            background: white;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            margin-bottom: 40px;
-            width: 100%;
-            height: 400px;
-        }
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    margin-bottom: 30px;
+    width: 100%;
+    height: auto; /* تغيير من ارتفاع ثابت إلى تلقائي */
+    overflow: hidden; /* منع النص من الخروج */
+    word-wrap: break-word; /* كسر الكلمات الطويلة */
+    hyphens: auto; /* وضع شرطة عند كسر الكلمات (إذا يدعم المتصفح) */
+}
+
+.solution-description p {
+    color: #555;
+    font-size: 1rem; /* حجم خط مناسب للجوال */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    word-break: break-word; /* التأكد من كسر الكلمات الطويلة */
+    overflow-wrap: break-word; /* معالجة الكلمات الطويلة */
+}
+
+/* تحسينات خاصة للهواتف */
+@media (max-width: 768px) {
+    .solution-description {
+        padding: 25px 20px;
+    }
+    
+    .solution-description p {
+        font-size: 0.95rem; /* تصغير حجم الخط قليلاً للجوال */
+        line-height: 1.7; /* زيادة تباعد الأسطر لتحسين القراءة */
+    }
+}
+
+@media (max-width: 480px) {
+    .solution-description {
+        padding: 20px 15px;
+    }
+    
+    .solution-description p {
+        font-size: 0.9rem;
+    }
+}
         
         .solution-description h2 {
             color: var(--dark);
@@ -579,12 +620,12 @@
             background: var(--primary);
         }
         
-        .solution-description p {
+        /* .solution-description p {
             color: #555;
             font-size: 1.1rem;
             line-height: 1.8;
             margin-bottom: 20px;
-        }
+        } */
         
         /* ميزات الحل */
         .features-grid {
@@ -873,77 +914,186 @@
     opacity: 1;
 }
 
-/* التكيف مع الشاشات الصغيرة */
-@media (max-width: 768px) {
+/* تحسينات عامة للهواتف */
+@media (max-width: 480px) {
+    /* قسم البطل */
+    .solution-hero {
+        padding: 60px 20px;
+    }
+    
+    .solution-hero h1 {
+        font-size: 1.6rem;
+        line-height: 1.3;
+    }
+    
+    .solution-hero p {
+        font-size: 0.95rem;
+    }
+    
+    /* محتوى الحل */
+    .solution-content {
+        flex-direction: column;
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .solution-image {
+        order: -1;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .solution-description {
+        padding: 25px 20px;
+        height: auto;
+        margin-bottom: 30px;
+    }
+    
+    .solution-description h2 {
+        font-size: 1.4rem;
+    }
+    
+    .solution-description p {
+        font-size: 1rem;
+    }
+    
+    /* قسم الميزات */
+    .features-section {
+        padding: 40px 0;
+    }
+    
     .features-heading {
-        font-size: 2rem;
-        margin-bottom: 40px;
+        font-size: 1.6rem;
+        margin-bottom: 30px;
     }
     
     .features-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 15px;
+        padding: 0 15px;
     }
     
     .feature-card {
-        padding: 30px 20px;
+        padding: 25px 20px;
     }
     
     .feature-icon-wrapper {
-        width: 80px;
-        height: 80px;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.2rem;
+    }
+    
+    .feature-card p {
+        font-size: 0.9rem;
+    }
+    
+    /* قسم المنتجات */
+    .products-section {
+        padding: 25px 20px;
+        margin-bottom: 40px;
+    }
+    
+    .products-section h2 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+    }
+    
+    .products-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .product-image {
+        height: 150px;
+    }
+    
+    .product-info {
+        padding: 15px;
+    }
+    
+    .product-info h3 {
+        font-size: 1rem;
+    }
+    
+    .product-info p {
+        font-size: 0.85rem;
     }
 }
 
-        /* التكيف مع الشاشات الصغيرة */
-        @media (max-width: 992px) {
-            .solution-content {
-                flex-direction: column;
-            }
-            
-            .solution-image {
-                order: -1;
-                max-width: 600px;
-                margin: 0 auto;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .solution-hero h1 {
-                font-size: 2.2rem;
-            }
-            
-            .solution-hero p {
-                font-size: 1rem;
-            }
-            
-            .solution-description,
-            .products-section {
-                padding: 30px;
-            }
-            
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .solution-hero {
-                padding: 80px 0 40px;
-            }
-            
-            .solution-hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+/* هواتف صغيرة جدًا (أقل من 360px) */
+@media (max-width: 360px) {
+    .solution-hero h1 {
+        font-size: 1.4rem;
+    }
+    
+    .solution-description h2,
+    .features-heading,
+    .products-section h2 {
+        font-size: 1.3rem;
+    }
+    
+    .feature-card {
+        padding: 20px 15px;
+    }
+    
+    .feature-icon-wrapper {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .feature-card h3 {
+        font-size: 1.1rem;
+    }
+    
+}
+
+
+/* تعديلات للهواتف الأفقية والأجهزة اللوحية الصغيرة */
+@media (min-width: 481px) and (max-width: 767px) {
+    .solution-hero {
+        padding: 80px 30px;
+    }
+    
+    .solution-hero h1 {
+        font-size: 1.8rem;
+    }
+    
+    .solution-description,
+    .products-section {
+        padding: 30px;
+    }
+    
+    .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* تعديلات للهواتف الكبيرة (مثل Galaxy Fold) */
+@media (max-width: 280px) {
+    .solution-hero h1 {
+        font-size: 1.2rem;
+    }
+    
+    .solution-hero p {
+        font-size: 0.85rem;
+    }
+    
+    .feature-card {
+        padding: 15px 10px;
+    }
+    
+    .feature-icon-wrapper {
+        width: 50px;
+        height: 50px;
+    }
+}
 
 
         /* قسم الحلول المشابهة */
@@ -1208,6 +1358,7 @@
             <div class="solution-image">
                 <img src="../uploads/A_VIVA_header3.jpg" alt="نظام Zigbee الذكي">
             </div>
+
                 <!-- وصف الحل -->
                 <section class="solution-description">
                     <h2>نظرة عامة على الحل</h2>
@@ -1216,7 +1367,9 @@
                     <p>تم تصميم هذا الحل ليكون سهل التثبيت والاستخدام، مع الحفاظ على أعلى معايير الجودة والموثوقية.</p>
                 </section>
 
-              
+                
+
+             
                 
                 <!-- ميزات الحل -->
                <section class="features-section">
@@ -1585,6 +1738,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+</script>
+<script>
+    gsap.from(".solution-hero h1", { 
+        duration: 1, 
+        y: 50, 
+        opacity: 0, 
+        ease: "power3.out" 
+    });
+    gsap.from(".solution-hero p", { 
+        duration: 1.5, 
+        y: 30, 
+        opacity: 0, 
+        delay: 0.5, 
+        ease: "elastic.out(1, 0.5)" 
+    });
 </script>
 </body>
 </html>
