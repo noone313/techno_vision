@@ -1,4 +1,4 @@
-import { Slider,Portfolio,System,AboutStat } from "../models/models.js";
+import { Slider,Portfolio,System,AboutStat, Category } from "../models/models.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -39,7 +39,7 @@ export const addimgforslider = async (req, res) => {
       imageUrl,
     });
 
-    res.status(201).json({ message: "تم الحفظ بنجاح" });
+    res.redirect('/dashboard')
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "حدث خطأ أثناء الحفظ" });
@@ -457,4 +457,143 @@ export const deleteAboutStat = async (req, res) => {
           
         });
     }
+}
+
+
+export const category = async (req,res) => {
+
+
+  try {
+     
+    const category = await Category.findAll({ order: [['createdAt', 'DESC']]});
+  
+    res.render('category',{category})
+
+
+    
+  } catch (error) {
+     console.error("Error adding About Stat:", error);
+        res.status(500).json({ 
+        success: false,
+        message: "حدث خطأ في الفئة",
+        error: process.env.NODE_ENV === 'development' ? {
+            message: error.message,
+            stack: error.stack
+        } : undefined
+        }); 
+  }
+
+}
+
+
+export const addCategory = async (req, res) => {
+  try {
+    const { name } = req.body; 
+    
+    if (!name || name.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        message: 'اسم الفئة مطلوب'
+      });
+    }
+
+    const newCategory = await Category.create({ 
+      name: name.trim() 
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'تمت إضافة الفئة بنجاح',
+      category: {
+        id: newCategory.id,
+        name: newCategory.name,
+        createdAt: newCategory.createdAt,
+        updatedAt: newCategory.updatedAt
+      }
+    });
+    
+  } catch (error) {
+    console.error("حدث خطأ أثناء إضافة الفئة:", error);
+    
+    let message = 'حدث خطأ أثناء إضافة الفئة';
+    if (error.name === 'SequelizeValidationError') {
+      message = error.errors.map(err => err.message).join('، ');
+    } 
+    else if (error.name === 'SequelizeUniqueConstraintError') {
+      message = 'هذه الفئة موجودة بالفعل';
+    }
+
+    res.status(500).json({ 
+      success: false,
+      message
+    });
+  }
+}
+
+
+
+export const deleteCategory = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // التحقق من وجود المعرف
+    if (!id || isNaN(id)) {
+      return res.status(400).json({
+        success: false,
+        message: 'معرّف الفئة غير صالح'
+      });
+    }
+
+    // البحث عن الفئة أولاً للتأكد من وجودها
+    const category = await Category.findByPk(id);
+    
+    if (!category) {
+      return res.status(404).json({
+        success: false,
+        message: 'الفئة غير موجودة'
+      });
+    }
+
+    // محاولة الحذف
+    const deletedRows = await Category.destroy({
+      where: { id }
+    });
+
+    if (deletedRows === 0) {
+      return res.status(404).json({
+        success: false,
+        message: 'لم يتم العثور على الفئة للحذف'
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'تم حذف الفئة بنجاح',
+      deletedCategoryId: id
+    });
+
+  } catch (error) {
+    console.error("حدث خطأ أثناء حذف الفئة:", error);
+    
+    let errorMessage = 'حدث خطأ أثناء حذف الفئة';
+    let statusCode = 500;
+
+    // معالجة أنواع الأخطاء المختلفة
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      errorMessage = 'لا يمكن حذف الفئة لأنها مرتبطة بمنتجات أو عناصر أخرى';
+      statusCode = 409; // Conflict
+    } else if (error.name === 'SequelizeDatabaseError') {
+      errorMessage = 'خطأ في قاعدة البيانات';
+    }
+
+    res.status(statusCode).json({ 
+      success: false,
+      message: errorMessage,
+      error: process.env.NODE_ENV === 'development' ? {
+        name: error.name,
+        message: error.message,
+        stack: error.stack
+      } : undefined
+    });
+  }
 }

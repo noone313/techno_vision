@@ -154,22 +154,10 @@ const Category = sequelize.define('Category', {
     type: DataTypes.STRING,
     allowNull: false,
     unique: true
-  },
-  description: {
-    type: DataTypes.TEXT,
-    allowNull: true
-  },
-  imageUrl: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true
   }
 }, {
   timestamps: true,
-  paranoid: true // للحذف اللين
+  paranoid: true 
 });
 
 

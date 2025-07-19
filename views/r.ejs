@@ -1899,7 +1899,7 @@ background: white;
 
 
 
-        <!-- قسم أعمال الشركة -->
+    <!-- قسم أعمال الشركة -->
 <section id="portfolio" class="portfolio">
   <div class="container">
     <div class="section-title scroll-animation">
@@ -1907,22 +1907,32 @@ background: white;
       <p>استكشف بعض مشاريعنا الناجحة في مجال المنازل الذكية</p>
     </div>
     
+    <% 
+    // تصفية العناصر المميزة فقط
+    const featuredPortfolios = portfolios.filter(p => p.isFeatured); 
+    %>
     
-    
-    <div class="portfolio-grid">
-      <% portfolios.forEach(portfolio => { %>
-        <div class="portfolio-item scroll-animation" data-category="residential">
-        <div class="portfolio-image">
-          <img src="<%= portfolio.imageUrl %>" alt="مشروع منزل ذكي">
-          <div class="portfolio-overlay">
-            <h3><%= portfolio.title %></h3>
-            <p><%= portfolio.slug %></p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
+    <% if (featuredPortfolios.length > 0) { %>
+      <div class="portfolio-grid">
+        <% featuredPortfolios.forEach(portfolio => { %>
+          <div class="portfolio-item scroll-animation" data-category="<%= portfolio.category || 'residential' %>">
+            <div class="portfolio-image">
+              <img src="<%= portfolio.imageUrl %>" alt="<%= portfolio.title %>">
+              <div class="portfolio-overlay">
+                <h3><%= portfolio.title %></h3>
+                <p><%= portfolio.shortDescription || portfolio.slug %></p>
+                <a href="/portfolio/<%= portfolio.slug %>" class="btn btn-outline">عرض التفاصيل</a>
+              </div>
+            </div>
           </div>
-        </div>
+        <% }) %>
       </div>
-      <% }) %> 
-    </div>
+    <% } else { %>
+      <div class="no-projects scroll-animation">
+        <p>لا توجد أعمال مميزة لعرضها حالياً</p>
+        <a href="/contact" class="btn btn-primary">تواصل معنا لمعرفة المزيد</a>
+      </div>
+    <% } %>
   </div>
 </section>
 

@@ -1,16 +1,17 @@
 import express from 'express';
-import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat } from '../controllers/dashboard.controller.js';
+import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory } from '../controllers/dashboard.controller.js';
 import { uploadSingle } from '../middlewares/multer.js';
 import { verifyToken } from '../middlewares/auth.js';
 const dashboardRouter = express.Router();
 
 
 
-// dashboard
+// slider
 dashboardRouter.get('/dashboard',verifyToken, dashboard)
 dashboardRouter.post('/dashboard',verifyToken, uploadSingle('image'), addimgforslider);
 // حذف سلايدر
 dashboardRouter.delete('/dashboard/:id',verifyToken, deleteSlider);
+
 // إضافة مسار للصفحة الخاصة بالـ Portfolio
 dashboardRouter.get('/dashboard/portfolio',verifyToken, portfolio);
 dashboardRouter.post('/dashboard/portfolio',verifyToken, uploadSingle('image'), addPortfolio);
@@ -25,5 +26,12 @@ dashboardRouter.delete('/dashboard/systems/:id',verifyToken, deleteSystem);
 dashboardRouter.get('/dashboard/aboutStat',verifyToken, aboutStat);
 dashboardRouter.post('/dashboard/aboutStat',verifyToken, uploadSingle('image'), addAboutStat);
 dashboardRouter.delete('/dashboard/aboutStat/:id',verifyToken, deleteAboutStat);
+
+
+dashboardRouter.get('/dashboard/category',verifyToken,category);
+dashboardRouter.post('/dashboard/category', verifyToken,addCategory)
+dashboardRouter.delete('/dashboard/category/:id', verifyToken,deleteCategory)
+
+
 
 export default dashboardRouter;

@@ -770,6 +770,245 @@
         flex: 0 0 100%;
       }
     }
+
+     .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 12px 15px;
+      text-align: right;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table th {
+      font-weight: 600;
+      color: var(--dark);
+      background-color: #f9f9f9;
+    }
+
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: all 0.15s;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .btn-outline-primary {
+      color: var(--primary);
+      background-color: transparent;
+      border-color: var(--primary);
+    }
+
+    .btn-outline-primary:hover {
+      color: #fff;
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-danger {
+      color: #fff;
+      background-color: var(--danger);
+      border-color: var(--danger);
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+      border-color: #bd2130;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      background-color: white;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .modal-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .no-data {
+      padding: 40px;
+      text-align: center;
+      color: var(--gray);
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+    }
+
+    .page-header h1 i {
+      margin-left: 10px;
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .breadcrumb-item {
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: "/";
+      padding: 0 8px;
+      color: var(--gray);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+    }
+
   </style>
 </head>
 <body class="dashboard">
@@ -843,7 +1082,7 @@
               <span>السلايدر</span>
             </a>
           </li>
-          <li class="active">
+          <li >
             <a href="/dashboard/portfolio">
               <i class="fas fa-briefcase"></i>
               <span>معرض الأعمال</span>
@@ -864,7 +1103,7 @@
           <li class="menu-section">
             <span>إدارة المتجر</span>
           </li>
-          <li>
+          <li class="active">
             <a href="/dashboard/categories">
               <i class="fas fa-tags"></i>
               <span>الأقسام</span>
@@ -883,106 +1122,82 @@
 
     <main class="dashboard-content">
       <div class="page-header">
-        <h1><i class="fas fa-briefcase"></i> إدارة معرض الأعمال</h1>
+        <h1><i class="fas fa-briefcase"></i>إدارة الفئات</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard">الرئيسية</a></li>
-            <li class="breadcrumb-item active" aria-current="page">معرض الأعمال</li>
+            <li class="breadcrumb-item active" aria-current="page">معرض الفئات</li>
           </ol>
         </nav>
       </div>
 
-      <div class="card">
-        <div class="card-header">
-          <h3>قائمة الأعمال</h3>
-          <div>
-           <button class="btn btn-primary" onclick="showAddPortfolioModal()">
-              <i class="fas fa-plus"></i> إضافة عمل جديد
-            </button>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="table-responsive">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>العنوان</th>
-                  <th>الصورة</th>
-                  <th>الوصف</th>
-                  <th>مميز</th>
-                  <th>الإجراءات</th>
-                </tr>
-              </thead>
-             
-              <tbody>
-  <% portfolios.forEach((portfolio, index) => { %>
+    <div class="card">
+      <div class="card-header">
+        <h3>قائمة الفئات</h3>
+        <button class="btn btn-primary" onclick="showAddModal()">
+          <i class="fas fa-plus"></i> إضافة فئة جديدة
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>اسم الفئة</th>
+                <th>تاريخ الإنشاء</th>
+                <th>تاريخ التحديث</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+           <tbody>
+  <% if (category && category.length > 0) { %>
+    <% category.forEach((cat, index) => { %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= cat.name %></td>
+        <td><%= new Date(cat.createdAt).toLocaleString('ar-EG') %></td>
+        <td><%= new Date(cat.updatedAt).toLocaleString('ar-EG') %></td>
+        <td>
+          <button class="btn btn-sm btn-danger" onclick="confirmDelete('<%= cat.id %>')">
+            <i class="fas fa-trash"></i> حذف
+          </button>
+        </td>
+      </tr>
+    <% }); %>
+  <% } else { %>
     <tr>
-      <td><%= index + 1 %></td>
-      <td><%= portfolio.title %></td>
-      <td>
-        <% if (portfolio.imageUrl) { %>
-          <img src="<%= portfolio.imageUrl.replace('..', '') %>" alt="الصورة" style="width: 100px;">
-        <% } else { %>
-          لا توجد صورة
-        <% } %>
-      </td>
-      <td><%= portfolio.description || '—' %></td>
-      <td><%= portfolio.isFeatured ? 'نعم' : 'لا' %></td>
-      <td>
-        <button class="btn btn-sm btn-danger" onclick="deletePortfolio('<%= portfolio.id %>')">حذف</button>
-      </td>
+      <td colspan="5" class="text-center no-data">لا توجد فئات مسجلة</td>
     </tr>
-  <% }); %>
+  <% } %>
 </tbody>
-
-            </table>
-          </div>
+          </table>
         </div>
       </div>
-    </main>
+    </div>
   </div>
 
-  <!-- Modal for Add/Edit Portfolio -->
-  <div class="modal" id="portfolioModal">
+  <!-- Modal for Add/Edit Category -->
+  <div class="modal" id="categoryModal">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3 class="modal-title" id="portfolioModalTitle">إضافة عمل جديد</h3>
-        <button class="close" onclick="hideModal('portfolioModal')">&times;</button>
-      </div>
-      <div class="modal-body">
-<form action="/dashboard/portfolio" method="post" id="portfolioForm" enctype="multipart/form-data">
-          <input type="hidden" id="portfolioId" name="id">
-          <div class="form-group">
-            <label for="portfolioTitle" class="form-label">العنوان</label>
-            <input type="text" id="portfolioTitle" name="title" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="portfolioSlug" class="form-label">العنوان الفرعي</label>
-            <input type="text" id="portfolioSlug" name="slug" class="form-control" required>
-          </div>
-          <div class="form-group">
-            <label for="portfolioDescription" class="form-label">الوصف</label>
-            <textarea id="portfolioDescription" name="description" class="form-control" rows="4"></textarea>
-          </div>
-          <div class="form-group">
-           <div class="form-group">
-  <label for="portfolioImageFile" class="form-label">اختر صورة</label>
-  <input type="file" id="portfolioImageFile" name="image" class="form-control" accept="image/*" required>
-  <img id="portfolioImagePreview" class="img-preview" style="display: none; max-width: 150px; margin-top: 10px;">
-</div>
+        <h3 class="modal-title" id="modalTitle">إضافة فئة جديدة</h3>
+        <button class="close" onclick="hideModal('categoryModal')">&times;</button>
 
-          </div>
-          <div class="form-check">
-            <input type="checkbox" id="portfolioIsFeatured" name="isFeatured" class="form-check-input">
-            <label for="portfolioIsFeatured" class="form-check-label">عمل مميز</label>
-          </div>
-        </form>
       </div>
-      <div class="modal-footer">
-        <button class="btn btn-outline" onclick="hideModal('portfolioModal')">إلغاء</button>
-        <button class="btn btn-primary" id="savePortfolioBtn">حفظ</button>
-      </div>
+      <form id="categoryForm">
+        <div class="modal-body">
+          <input type="hidden" id="categoryId" name="id">
+          <div class="form-group">
+            <label for="categoryName" class="form-label">اسم الفئة</label>
+            <input type="text" id="categoryName" name="name" class="form-control" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-primary"onclick="hideModal('categoryModal')">إلغاء</button>
+          <button type="submit" class="btn btn-primary" id="saveBtn">حفظ</button>
+        </div>
+      </form>
     </div>
   </div>
 
@@ -991,224 +1206,147 @@
     <div class="modal-dialog">
       <div class="modal-header">
         <h3 class="modal-title">تأكيد الحذف</h3>
-        <button class="close" onclick="hideModal('deleteModal')">&times;</button>
+       <button class="close" onclick="hideModal('deleteModal')">&times;</button>
       </div>
       <div class="modal-body">
-        <p>هل أنت متأكد من رغبتك في حذف هذا العنصر؟</p>
+        <p>هل أنت متأكد من رغبتك في حذف هذه الفئة؟</p>
         <input type="hidden" id="deleteId">
-        <input type="hidden" id="deleteType">
       </div>
       <div class="modal-footer">
-        <button class="btn btn-outline" onclick="hideModal('deleteModal')">إلغاء</button>
-        <button class="btn btn-danger" id="confirmDeleteBtn">حذف</button>
+        <button type="button" class="btn btn-outline-primary" onclick="hideModal('deleteModal')">إلغاء</button>
+        <button type="button" class="btn btn-danger" onclick="deleteCategory()">حذف</button>
       </div>
     </div>
   </div>
 
-  <footer class="dashboard-footer">
-    <div class="footer-left">
-      <p>جميع الحقوق محفوظة &copy; <%= new Date().getFullYear() %></p>
-    </div>
-    <div class="footer-right">
-      <p>إصدار النظام: 1.0.0</p>
-    </div>
-  </footer>
+ <script>
+  function showAddModal() {
+  document.getElementById('modalTitle').textContent = 'إضافة فئة جديدة';
+  document.getElementById('categoryId').value = '';
+  document.getElementById('categoryForm').reset();
+  showModal('categoryModal'); // استخدام الدالة المعدلة
+}
 
-  <script>
-    // تفعيل/تعطيل القائمة الجانبية على الجوال
-    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
-      document.querySelector('.dashboard-sidebar').classList.toggle('show');
-    });
-
-    // إغلاق القوائم المنسدلة عند النقر خارجها
-    document.addEventListener('click', function(e) {
-      if (!e.target.closest('.notifications')) {
-        document.querySelector('.notification-dropdown').style.display = 'none';
-      }
-      if (!e.target.closest('.user-profile')) {
-        document.querySelector('.profile-menu').style.display = 'none';
-      }
-    });
-
-    // عرض صورة عند إدخال رابط
-    document.getElementById('portfolioImageFile').addEventListener('change', function () {
-  const preview = document.getElementById('portfolioImagePreview');
-  const file = this.files[0];
-
-  if (file) {
-    preview.src = URL.createObjectURL(file);
-    preview.style.display = 'block';
-  } else {
-    preview.style.display = 'none';
-  }
-});
-
-
-    // إنشاء slug من العنوان
-    document.getElementById('portfolioTitle').addEventListener('input', function() {
-      const slugInput = document.getElementById('portfolioSlug');
-      if (!slugInput.value) {
-        const slug = this.value.toLowerCase()
-          .replace(/\s+/g, '-')       // استبدال المسافات بشرطات
-          .replace(/[^\w\-]+/g, '')   // إزالة الرموز غير المرغوبة
-          .replace(/\-\-+/g, '-')     // استبدال الشرطات المتعددة بواحدة
-          .replace(/^-+/, '')         // إزالة الشرطات من البداية
-          .replace(/-+$/, '');        // إزالة الشرطات من النهاية
-        slugInput.value = slug;
-      }
-    });
-
-    // تصفية الأعمال حسب المميز
-    function filterPortfolio(type) {
-      const rows = document.querySelectorAll('#portfolioTableBody tr');
-      rows.forEach(row => {
-        if (type === 'all') {
-          row.style.display = '';
-        } else if (type === 'featured') {
-          if (row.getAttribute('data-featured') === 'true') {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
-          }
-        }
+  // معالجة إرسال النموذج
+  document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const saveBtn = document.getElementById('saveBtn');
+    saveBtn.disabled = true;
+    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+    
+    try {
+      const formData = new FormData(e.target);
+      const response = await fetch('/dashboard/category', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: document.getElementById('categoryName').value
+        })
       });
-    }
 
-    // البحث في الأعمال
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#portfolioTableBody tr');
-      
-      rows.forEach(row => {
-        const title = row.querySelector('td:nth-child(2) strong').textContent.toLowerCase();
-        const description = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-        
-        if (title.includes(searchTerm) || description.includes(searchTerm)) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    });
-
-    // عرض نموذج إضافة عمل جديد
-    function showAddPortfolioModal() {
-      document.getElementById('portfolioModalTitle').textContent = 'إضافة عمل جديد';
-      document.getElementById('portfolioId').value = '';
-      document.getElementById('portfolioForm').reset();
-      document.getElementById('portfolioImagePreview').style.display = 'none';
-      showModal('portfolioModal');
-    }
-
-    // عرض نموذج تعديل عمل
-    function showEditPortfolioModal(id, title, slug, description, imageUrl, isFeatured) {
-      document.getElementById('portfolioModalTitle').textContent = 'تعديل العمل';
-      document.getElementById('portfolioId').value = id;
-      document.getElementById('portfolioTitle').value = title;
-      document.getElementById('portfolioSlug').value = slug;
-      document.getElementById('portfolioDescription').value = description || '';
-      document.getElementById('portfolioImageUrl').value = imageUrl;
-      document.getElementById('portfolioIsFeatured').checked = isFeatured;
-      
-      const preview = document.getElementById('portfolioImagePreview');
-      if (imageUrl) {
-        preview.src = imageUrl;
-        preview.style.display = 'block';
-      } else {
-        preview.style.display = 'none';
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        throw new Error('استجابة غير صالحة من الخادم');
       }
+
+      const result = await response.json();
       
-      showModal('portfolioModal');
-    }
+      if (!response.ok) {
+        throw new Error(result.message || 'حدث خطأ أثناء الإضافة');
+      }
 
-
-
-
-
-  document.getElementById('savePortfolioBtn').addEventListener('click', async function (e) {
-  e.preventDefault();
-
-  const form = document.getElementById('portfolioForm');
-  const formData = new FormData(form);
-
-  try {
-    const response = await fetch('/dashboard/portfolio', {
-      method: 'POST',
-      body: formData
-    });
-
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      const text = await response.text();
-      console.error("Response text:", text); // لمساعدتك في الديباغ
-      alert("الرد من السيرفر ليس بصيغة JSON، تحقق من السيرفر");
-      return;
-    }
-
-    const result = await response.json();
-
-    if (response.ok) {
-      alert(result.message || 'تم الحفظ بنجاح');
-      hideModal('portfolioModal');
+      alert(result.message);
       window.location.reload();
-    } else {
-      alert(result.message || 'حدث خطأ أثناء الحفظ');
+      
+    } catch (error) {
+      console.error('Error:', error);
+      alert(error.message || 'حدث خطأ غير متوقع');
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.innerHTML = 'حفظ';
     }
+  });
 
-  } catch (error) {
-    console.error("Unexpected error:", error);
-    alert('حدث خطأ غير متوقع');
+ function confirmDelete(id) {
+  document.getElementById('deleteId').value = id;
+  showModal('deleteModal'); // استخدام الدالة المعدلة
+}
+// عرض المودال
+function showModal(modalId) {
+  document.getElementById(modalId).classList.add('show');
+  document.body.style.overflow = 'hidden'; // منع التمرير عند فتح المودال
+}
+
+// إخفاء المودال
+function hideModal(modalId) {
+  document.getElementById(modalId).classList.remove('show');
+  document.body.style.overflow = 'auto'; // إعادة التمرير عند إغلاق المودال
+}
+
+// إخفاء جميع المودالات عند النقر خارجها
+document.addEventListener('click', function(e) {
+  if (e.target.classList.contains('modal')) {
+    hideModal(e.target.id);
+  }
+});
+
+// إخفاء المودال عند الضغط على زر Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    const openModals = document.querySelectorAll('.modal.show');
+    openModals.forEach(modal => {
+      hideModal(modal.id);
+    });
   }
 });
 
 
-
-
-
-    // تأكيد الحذف
-    function confirmDelete(id, type) {
-      document.getElementById('deleteId').value = id;
-      document.getElementById('deleteType').value = type;
-      showModal('deleteModal');
-    }
-
-    // عرض المودال
-    function showModal(modalId) {
-      document.getElementById(modalId).classList.add('show');
-    }
-
-    // إخفاء المودال
-    function hideModal(modalId) {
-      document.getElementById(modalId).classList.remove('show');
-    }
-
-   
-
-   document.getElementById('confirmDeleteBtn').addEventListener('click', async function () {
+// تنفيذ الحذف
+async function deleteCategory() {
   const id = document.getElementById('deleteId').value;
-
+  const deleteBtn = document.querySelector('#deleteModal .btn-danger');
+  
   try {
-    const response = await fetch(`/dashboard/portfolio/${id}`, {
-      method: 'DELETE'
+    deleteBtn.disabled = true;
+    deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحذف...';
+    
+    // تأكد أن المسار مطابق للراوتر
+    const response = await fetch(`/dashboard/category/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
+
+    // التحقق من نوع المحتوى أولاً
+    const contentType = response.headers.get('content-type');
+    if (!contentType || !contentType.includes('application/json')) {
+      const text = await response.text();
+      throw new Error(text || 'استجابة غير متوقعة من الخادم');
+    }
 
     const result = await response.json();
 
-    if (response.ok) {
-      alert(result.message || 'تم الحذف بنجاح');
-      hideModal('deleteModal');
-      window.location.reload(); // أو إزالة الصف من الجدول مباشرة
-    } else {
-      alert(result.message || 'حدث خطأ أثناء الحذف');
+    if (!response.ok) {
+      throw new Error(result.message || 'حدث خطأ أثناء الحذف');
     }
 
+    alert(result.message);
+    window.location.reload();
+
   } catch (error) {
-    console.error(error);
-    alert('فشل الحذف: حدث خطأ غير متوقع');
+    console.error('Error:', error);
+    alert(error.message || 'حدث خطأ غير متوقع أثناء الحذف');
+  } finally {
+    deleteBtn.disabled = false;
+    deleteBtn.innerHTML = 'حذف';
+    hideModal();
   }
-});
-
+}
 </script>
-
 </body>
 </html>
