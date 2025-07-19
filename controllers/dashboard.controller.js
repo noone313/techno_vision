@@ -34,12 +34,9 @@ export const addimgforslider = async (req, res) => {
     // إنشاء مسار ويب للملف المرفوع
     const imageUrl = `../uploads/${req.file.filename}`;
 
-    const newPortfolio = await Portfolio.create({
-      title: req.body.title,
-      slug: req.body.slug,
-      description: req.body.description,
+    const newSlider = await Slider.create({
+    
       imageUrl,
-      isFeatured: req.body.isFeatured === 'on' || req.body.isFeatured === 'true'
     });
 
     res.status(201).json({ message: "تم الحفظ بنجاح" });
