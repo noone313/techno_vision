@@ -31,7 +31,7 @@ export const getProductById = async (req, res) => {
 export const createProduct = async (req, res) => {
   try {
     const { name, description, price } = req.body;
-    const images = req.files.map(file => file.path); // Assuming multiple images are uploaded
+    const images = req.files.map(file => file.path);
 
     const newProduct = await Product.create({
       name,
@@ -120,3 +120,8 @@ export const sol = async (req,res)=>{
 res.render('slou');
 
 }
+
+
+
+
+

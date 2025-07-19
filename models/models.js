@@ -2,18 +2,23 @@ import { Sequelize, DataTypes } from "sequelize";
 import dotenv from "dotenv";
 dotenv.config();
 
-const sequelize = new Sequelize(process.env.DB_URI, {
-  dialect: "postgres",
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST || 'localhost',
+  port: process.env.DB_PORT || 5432,
+  dialect: process.env.DB_DIALECT || 'postgres',
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false, 
+    }
+  },
+  logging: true,
 });
 
 const Slider = sequelize.define('Slider', {
   imageUrl: {
     type: DataTypes.STRING,
     allowNull: false
-  },
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true
   }
 }, {
   timestamps: true,
@@ -47,6 +52,9 @@ const Portfolio = sequelize.define('Portfolio', {
   paranoid: true
 });
 
+
+
+
 const System = sequelize.define('System', {
   mainTitle: {
     type: DataTypes.STRING,
@@ -64,8 +72,8 @@ const System = sequelize.define('System', {
     type: DataTypes.STRING,
     allowNull: true
   },
-  feature:{
-    type: DataTypes.ARRAY(DataTypes.STRING),
+  features:{
+    type: DataTypes.STRING,
     allowNull: true
   }
   
@@ -81,26 +89,58 @@ const AboutStat = sequelize.define('AboutStat', {
     type: DataTypes.STRING,
     allowNull: false
   },
-  statValue: {
-    type: DataTypes.INTEGER,
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true
+  },
+  projects: {
+    type: DataTypes.STRING,
     allowNull: false
   },
-  icon: {
+  employee: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  years: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  imageUrl: {
     type: DataTypes.STRING,
     allowNull: true
   },
-  suffix: {
-    type: DataTypes.STRING,
-    allowNull: true
-  },
-  displayOrder: {
-    type: DataTypes.INTEGER,
-    defaultValue: 0
-  }
 }, {
   timestamps: true,
   paranoid: true
 });
+
+
+
+
+
+
+const Translation = sequelize.define('Translation', {
+  key: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  locale: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  value: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  }
+}, {
+  indexes: [
+    {
+      unique: true,
+      fields: ['key', 'locale']
+    }
+  ]
+});
+
 
 
 
@@ -185,11 +225,11 @@ async function startServer(app) {
     await sequelize.authenticate();
     await sequelize.sync({ alter: true }); // استخدام alter بدلاً من sync للبيئة التنموية
     console.log("Database connected ✅");
-
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
       console.log(`✅ Server is running on port ${PORT}`);
     });
+   
   } catch (err) {
     console.error("❌ Failed to connect to database:", err);
     process.exit(1);

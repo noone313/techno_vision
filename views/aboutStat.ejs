@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>لوحة التحكم - إدارة المحتوى</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #36c9b4;
+      --primary-light: #5bd5c3;
+      --primary-dark: #2aa897;
+      --secondary: #6c757d;
+      --success: #28a745;
+      --info: #17a2b8;
+      --warning: #ffc107;
+      --danger: #dc3545;
+      --light: #f8f9fa;
+      --dark: #343a40;
+      --white: #fff;
+      --gray: #6c757d;
+      --gray-dark: #343a40;
+      --body-bg: #f5f7fa;
+      --sidebar-bg: #fff;
+      --sidebar-width: 250px;
+      --header-height: 60px;
+      --footer-height: 50px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--body-bg);
+      color: #333;
+      direction: rtl;
+    }
+
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    .dashboard-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: var(--header-height);
+      background-color: var(--white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1000;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .sidebar-toggle {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--dark);
+      cursor: pointer;
+      margin-left: 15px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .brand-logo img {
+      height: 30px;
+      margin-left: 10px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .search-box {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .search-box input {
+      padding: 8px 15px;
+      padding-right: 35px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      width: 250px;
+      font-size: 0.9rem;
+    }
+
+    .search-box button {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      color: var(--gray);
+    }
+
+    .notifications {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .notification-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      color: var(--dark);
+      position: relative;
+      cursor: pointer;
+    }
+
+    .notification-btn .badge {
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      background-color: var(--danger);
+      color: white;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      font-size: 0.7rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .notification-dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 300px;
+      background-color: var(--white);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px 0;
+      display: none;
+      z-index: 1000;
+    }
+
+    .notifications:hover .notification-dropdown {
+      display: block;
+    }
+
+    .notification-item {
+      padding: 10px 15px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+    }
+
+    .notification-item i {
+      margin-left: 10px;
+      font-size: 1.2rem;
+    }
+
+    .notification-item p {
+      flex: 1;
+      margin-bottom: 0;
+      font-size: 0.9rem;
+    }
+
+    .notification-item small {
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+
+    .view-all {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9rem;
+      color: var(--primary);
+      text-decoration: none;
+    }
+
+    .user-profile {
+      position: relative;
+      margin-left: 20px;
+    }
+
+    .profile-dropdown {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .profile-dropdown img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-left: 10px;
+    }
+
+    .profile-dropdown span {
+      font-size: 0.9rem;
+    }
+
+    .profile-dropdown i {
+      font-size: 0.8rem;
+      margin-right: 5px;
+    }
+
+    .profile-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 200px;
+      background-color: var(--white);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 5px;
+      padding: 10px 0;
+      display: none;
+      z-index: 1000;
+    }
+
+    .user-profile:hover .profile-menu {
+      display: block;
+    }
+
+    .profile-menu a {
+      display: block;
+      padding: 8px 15px;
+      color: var(--dark);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .profile-menu a:hover {
+      background-color: #f5f5f5;
+      color: var(--primary);
+    }
+
+    .profile-menu a i {
+      margin-left: 8px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+      margin-top: var(--header-height);
+    }
+
+    .dashboard-sidebar {
+      width: var(--sidebar-width);
+      background-color: var(--sidebar-bg);
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s;
+      overflow-y: auto;
+    }
+
+    .sidebar-menu {
+      padding: 20px 0;
+    }
+
+    .sidebar-menu ul {
+      list-style: none;
+    }
+
+    .sidebar-menu li {
+      position: relative;
+    }
+
+    .sidebar-menu li a {
+      display: flex;
+      align-items: center;
+      padding: 12px 20px;
+      color: var(--dark);
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .sidebar-menu li a:hover {
+      background-color: rgba(54, 201, 180, 0.1);
+      color: var(--primary);
+    }
+
+    .sidebar-menu li.active a {
+      background-color: rgba(54, 201, 180, 0.1);
+      color: var(--primary);
+      border-right: 3px solid var(--primary);
+    }
+
+    .sidebar-menu li a i {
+      margin-left: 10px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .menu-section {
+      padding: 15px 20px 5px;
+      font-size: 0.8rem;
+      color: var(--gray);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .dashboard-content {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      background-color: var(--body-bg);
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .page-header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      display: flex;
+      align-items: center;
+    }
+
+    .page-header h1 i {
+      margin-left: 10px;
+      color: var(--primary);
+    }
+
+    .breadcrumb {
+      display: flex;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .breadcrumb-item {
+      font-size: 0.9rem;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+      content: "/";
+      padding: 0 8px;
+      color: var(--gray);
+    }
+
+    .breadcrumb-item.active {
+      color: var(--primary);
+    }
+
+    .stats-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+    }
+
+    .stat-icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: var(--white);
+      margin-left: 15px;
+    }
+
+    .stat-icon.bg-primary {
+      background-color: var(--primary);
+    }
+
+    .stat-icon.bg-success {
+      background-color: var(--success);
+    }
+
+    .stat-icon.bg-warning {
+      background-color: var(--warning);
+    }
+
+    .stat-icon.bg-danger {
+      background-color: var(--danger);
+    }
+
+    .stat-info h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .stat-info p {
+      color: var(--gray);
+      font-size: 0.9rem;
+      margin-bottom: 0;
+    }
+
+    .dashboard-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+    }
+
+    .dashboard-col {
+      flex: 1;
+      min-width: 300px;
+      padding: 0 10px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: var(--white);
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 20px;
+    }
+
+    .card-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .card-body {
+      padding: 20px;
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .table th, .table td {
+      padding: 12px 15px;
+      text-align: right;
+      border-bottom: 1px solid #eee;
+    }
+
+    .table th {
+      font-weight: 600;
+      color: var(--dark);
+      background-color: #f9f9f9;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 5px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: baseline;
+      border-radius: 10px;
+    }
+
+    .bg-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .bg-success {
+      background-color: var(--success);
+      color: white;
+    }
+
+    .bg-warning {
+      background-color: var(--warning);
+      color: white;
+    }
+
+    .bg-danger {
+      background-color: var(--danger);
+      color: white;
+    }
+
+    .btn {
+      display: inline-block;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 0.375rem 0.75rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      border-radius: 0.25rem;
+      transition: all 0.15s;
+    }
+
+    .btn-sm {
+      padding: 0.25rem 0.5rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      border-color: var(--primary-dark);
+    }
+
+    .btn-outline {
+      color: var(--primary);
+      background-color: transparent;
+      border-color: var(--primary);
+    }
+
+    .btn-outline:hover {
+      color: #fff;
+      background-color: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .activity-feed {
+      list-style: none;
+      padding: 0;
+    }
+
+    .activity-item {
+      display: flex;
+      padding: 15px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .activity-item:last-child {
+      border-bottom: none;
+    }
+
+    .activity-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      margin-left: 15px;
+    }
+
+    .activity-content {
+      flex: 1;
+    }
+
+    .activity-content p {
+      margin-bottom: 5px;
+    }
+
+    .activity-content small {
+      color: var(--gray);
+      font-size: 0.8rem;
+    }
+
+    .dashboard-footer {
+      height: var(--footer-height);
+      background-color: var(--white);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 10px 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      background-color: white;
+    }
+
+    .form-check {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .form-check-input {
+      margin-left: 10px;
+    }
+
+    .modal {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s;
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-dialog {
+      background-color: white;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-header {
+      padding: 15px 20px;
+      border-bottom: 1px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 0;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .img-preview {
+      max-width: 100%;
+      height: auto;
+      max-height: 200px;
+      margin-top: 10px;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 992px) {
+      .dashboard-sidebar {
+        position: fixed;
+        top: var(--header-height);
+        right: -100%;
+        bottom: 0;
+        z-index: 900;
+      }
+
+      .dashboard-sidebar.show {
+        right: 0;
+      }
+
+      .dashboard-content {
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-box {
+        display: none;
+      }
+
+      .stats-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .stats-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-col {
+        flex: 0 0 100%;
+      }
+    }
+
+
+     /* إضافة أنماط جديدة للإحصائيات */
+    .stat-card {
+      background-color: var(--white);
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 10px 0;
+    }
+
+    .stat-title {
+      font-size: 1rem;
+      color: var(--gray);
+    }
+
+    .about-img {
+      max-width: 100%;
+      height: auto;
+      max-height: 200px;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .features-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .features-list li {
+      padding: 5px 0;
+      position: relative;
+      padding-right: 20px;
+    }
+
+    .features-list li:before {
+      content: "•";
+      position: absolute;
+      right: 0;
+      color: var(--primary);
+    }
+  </style>
+</head>
+<body class="dashboard">
+  <header class="dashboard-header">
+    <div class="header-left">
+      <button class="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+      <a href="/" class="brand-logo">
+        <span>نظام الإدارة</span>
+      </a>
+    </div>
+
+    
+
+      <div class="user-profile">
+        <div class="profile-dropdown">
+          <span>مدير النظام</span>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="profile-menu">
+          <!-- <a href="/profile"><i class="fas fa-user"></i> الملف الشخصي</a> -->
+          <!-- <a href="/settings"><i class="fas fa-cog"></i> الإعدادات</a> -->
+          <a href="/logout"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-container">
+    <aside class="dashboard-sidebar">
+      <div class="sidebar-menu">
+        <ul>
+          
+          <li class="menu-section">
+            <span>إدارة المحتوى</span>
+          </li>
+          <li class="active">
+            <a href="/">
+              <i class="fas fa-images"></i>
+              <span>السلايدر</span>
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/portfolio">
+              <i class="fas fa-briefcase"></i>
+              <span>معرض الأعمال</span>
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/systems">
+              <i class="fas fa-cogs"></i>
+              <span>الأنظمة</span>
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/aboutStats">
+              <i class="fas fa-chart-line"></i>
+              <span>إحصائيات من نحن</span>
+            </a>
+          </li>
+          <li class="menu-section">
+            <span>إدارة المتجر</span>
+          </li>
+          <li>
+            <a href="/dashboard/categories">
+              <i class="fas fa-tags"></i>
+              <span>الأقسام</span>
+            </a>
+          </li>
+          <li>
+            <a href="/dashboard/products">
+              <i class="fas fa-box-open"></i>
+              <span>المنتجات</span>
+            </a>
+          </li>
+          <!-- <li class="menu-section">
+            <span>الإعدادات</span>
+          </li> -->
+          <!-- <li>
+            <a href="/settings">
+              <i class="fas fa-cog"></i>
+              <span>إعدادات النظام</span>
+            </a>
+          </li> -->
+        </ul>
+      </div>
+    </aside>
+
+      <main class="dashboard-content">
+    <div class="page-header">
+      <h1><i class="fas fa-chart-line"></i> إدارة إحصائيات "من نحن"</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="/dashboard">الرئيسية</a></li>
+          <li class="breadcrumb-item active" aria-current="page">إحصائيات من نحن</li>
+        </ol>
+      </nav>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3>الإحصائيات الحالية</h3>
+        <button class="btn btn-primary" onclick="showEditAboutStatsModal()">
+          <i class="fas fa-edit"></i> تعديل الإحصائيات
+        </button>
+      </div>
+      <div class="card-body">
+       
+        <div class="row">
+          <div class="col-md-6">
+            <div class="stat-card">
+              <i class="fas fa-project-diagram fa-2x text-primary"></i>
+              <div class="stat-number" id="projectsCount"><%= projects %></div>
+              <div class="stat-title">مشروع مكتمل</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stat-card">
+              <i class="fas fa-users fa-2x text-primary"></i>
+              <div class="stat-number" id="employeeCount"><%= employee %></div>
+              <div class="stat-title">موظف</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="stat-card">
+              <i class="fas fa-calendar-alt fa-2x text-primary"></i>
+              <div class="stat-number" id="yearsCount"><%= years %></div>
+              <div class="stat-title">سنوات من الخبرة</div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <img src="<%= imageUrl %>" alt="About Us" class="about-img" id="aboutImage">
+          </div>
+        </div>
+        
+        <div class="mt-4">
+          <h4 id="aboutTitle"><%= statTitle %></h4>
+          <p id="aboutDescription"><%= description %></p>
+        </div>
+        <button class="btn btn-sm btn-outline" onclick="confirmDelete('<%= id %>', 'aboutstat')">
+          <i class="fas fa-trash"></i> حذف
+        </button>
+        
+      </div>
+      
+    </div>
+  </main>
+
+  <!-- Modal for Edit About Stats -->
+  <div class="modal" id="aboutStatsModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">تعديل إحصائيات "من نحن"</h3>
+        <button class="close" onclick="hideModal('aboutStatsModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="aboutStatsForm" enctype="multipart/form-data">
+          <div class="form-group">
+            <label for="statTitle" class="form-label">عنوان الإحصائية</label>
+            <input type="text" id="statTitle" name="statTitle" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="aboutDescription" class="form-label">وصف الشركة</label>
+            <textarea id="aboutDescription" name="description" class="form-control" rows="4" required></textarea>
+          </div>
+          <div class="form-group">
+            <label for="projects" class="form-label">عدد المشاريع</label>
+            <input type="text" id="projects" name="projects" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="employee" class="form-label">عدد الموظفين</label>
+            <input type="text" id="employee" name="employee" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="years" class="form-label">عدد السنوات</label>
+            <input type="text" id="years" name="years" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="image" class="form-label">صورة الشركة</label>
+            <input type="file" id="image" name="image" class="form-control" accept="image/*">
+            <img id="imagePreview" class="img-preview" style="display: none;">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="hideModal('aboutStatsModal')">إلغاء</button>
+        <button class="btn btn-primary" id="saveAboutStatsBtn">حفظ التغييرات</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Delete Confirmation Modal -->
+  <div class="modal" id="deleteModal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title">تأكيد الحذف</h3>
+        <button class="close" onclick="hideModal('deleteModal')">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>هل أنت متأكد من رغبتك في حذف هذا العنصر؟</p>
+        <input type="hidden" id="deleteId">
+        <input type="hidden" id="deleteType">
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="hideModal('deleteModal')">إلغاء</button>
+        <button class="btn btn-danger" id="confirmDeleteBtn">حذف</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <footer class="dashboard-footer">
+    <div class="footer-left">
+      <p>جميع الحقوق محفوظة &copy; 2023</p>
+    </div>
+    <div class="footer-right">
+      <p>إصدار النظام: 1.0.0</p>
+    </div>
+  </footer> -->
+
+   <script>
+    // تفعيل/تعطيل القائمة الجانبية على الجوال
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+      document.querySelector('.dashboard-sidebar').classList.toggle('show');
+    });
+
+    // إغلاق القوائم المنسدلة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.notifications')) {
+        document.querySelector('.notification-dropdown').style.display = 'none';
+      }
+      if (!e.target.closest('.user-profile')) {
+        document.querySelector('.profile-menu').style.display = 'none';
+      }
+    });
+
+    // عرض نموذج تعديل إحصائيات "من نحن"
+    function showEditAboutStatsModal() {
+      // جلب البيانات الحالية من الصفحة
+      document.getElementById('statTitle').value = document.getElementById('aboutTitle').textContent;
+      document.getElementById('aboutDescription').value = document.getElementById('aboutDescription').textContent;
+      document.getElementById('projects').value = document.getElementById('projectsCount').textContent;
+      document.getElementById('employee').value = document.getElementById('employeeCount').textContent;
+      document.getElementById('years').value = document.getElementById('yearsCount').textContent;
+      
+      showModal('aboutStatsModal');
+    }
+
+    // معاينة الصورة قبل الرفع
+    document.getElementById('image').addEventListener('change', function(e) {
+      const file = e.target.files[0];
+      const preview = document.getElementById('imagePreview');
+      
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+      } else {
+        preview.style.display = 'none';
+      }
+    });
+
+    // حفظ التغييرات
+    document.getElementById('saveAboutStatsBtn').addEventListener('click', async function() {
+      const btn = this;
+      const form = document.getElementById('aboutStatsForm');
+      const formData = new FormData(form);
+
+      btn.disabled = true;
+      btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+
+      try {
+        const response = await fetch('/dashboard/aboutStat', {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+        
+        if (!response.ok || !result.success) {
+          throw new Error(result.message || 'فشل في حفظ التغييرات');
+        }
+
+        alert(result.message || 'تم تحديث إحصائيات "من نحن" بنجاح');
+        hideModal('aboutStatsModal');
+         // إعادة تحميل الصفحة لتحديث البيانات
+    window.location.reload();
+    
+        // تحديث الواجهة بالبيانات الجديدة
+        if (result.data) {
+          document.getElementById('aboutTitle').textContent = result.data.statTitle;
+          document.getElementById('aboutDescription').textContent = result.data.description;
+          document.getElementById('projectsCount').textContent = result.data.projects;
+          document.getElementById('employeeCount').textContent = result.data.employee;
+          document.getElementById('yearsCount').textContent = result.data.years;
+          
+          if (result.data.imageUrl) {
+            document.getElementById('aboutImage').src = result.data.imageUrl;
+          }
+        }
+        
+      } catch (err) {
+        console.error('تفاصيل الخطأ:', err);
+        alert(`حدث خطأ أثناء الحفظ: ${err.message}`);
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = 'حفظ التغييرات';
+      }
+    });
+
+    // تأكيد الحذف
+    function confirmDelete(id, type) {
+      document.getElementById('deleteId').value = id;
+      document.getElementById('deleteType').value = type;
+      showModal('deleteModal');
+    }
+
+    // عرض المودال
+    function showModal(modalId) {
+      document.getElementById(modalId).classList.add('show');
+      document.body.style.overflow = 'hidden';
+    }
+
+    // إخفاء المودال
+    function hideModal(modalId) {
+      document.getElementById(modalId).classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+    // جلب البيانات عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', async function() {
+      try {
+        const response = await fetch('/dashboard/aboutStat');
+        const result = await response.json();
+        
+        if (response.ok && result.data) {
+          const data = result.data;
+          document.getElementById('aboutTitle').textContent = data.statTitle;
+          document.getElementById('aboutDescription').textContent = data.description;
+          document.getElementById('projectsCount').textContent = data.projects;
+          document.getElementById('employeeCount').textContent = data.employee;
+          document.getElementById('yearsCount').textContent = data.years;
+          
+          if (data.imageUrl) {
+            document.getElementById('aboutImage').src = data.imageUrl;
+          }
+        }
+      } catch (error) {
+        console.error('Failed to load about stats:', error);
+      }
+    });
+
+
+
+
+
+     document.getElementById('confirmDeleteBtn').addEventListener('click', async function () {
+  const id = document.getElementById('deleteId').value;
+
+  try {
+    const response = await fetch(`/dashboard/aboutstat/${id}`, {
+      method: 'DELETE'
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      alert(result.message || 'تم الحذف بنجاح');
+      hideModal('deleteModal');
+      window.location.reload(); // أو إزالة الصف من الجدول مباشرة
+    } else {
+      alert(result.message || 'حدث خطأ أثناء الحذف');
+    }
+
+  } catch (error) {
+    console.error(error);
+    alert('فشل الحذف: حدث خطأ غير متوقع');
+  }
+});
+  </script>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول - NOOR AL-SAFANA</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #36c9b4;
+            --primary-dark: #2aa897;
+            --dark: #1a3c38;
+            --light: #f8fafc;
+            --error: #ff6b6b;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, rgba(54, 201, 180, 0.1), rgba(255, 255, 255, 0.9));
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 450px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .login-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .login-header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .login-header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        .login-form {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding-right: 45px;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 40px;
+            color: #999;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-left: 8px;
+        }
+
+        .forgot-password {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .forgot-password:hover {
+            color: var(--primary-dark);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(54, 201, 180, 0.4);
+        }
+
+        .login-footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+        }
+
+        .login-footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .error-message {
+            color: var(--error);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* تأثيرات للجوال */
+        @media (max-width: 480px) {
+            .login-container {
+                max-width: 100%;
+            }
+
+            .login-header {
+                padding: 25px;
+            }
+
+            .login-form {
+                padding: 25px 20px;
+            }
+
+            .input-field {
+                padding: 12px 15px;
+                padding-right: 40px;
+            }
+        }
+
+        /* تأثيرات عند وجود خطأ */
+        .has-error .input-field {
+            border-color: var(--error);
+        }
+
+        .has-error .error-message {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>مرحباً بعودتك</h1>
+            <p>سجل الدخول للوصول إلى حسابك</p>
+        </div>
+
+        <form class="login-form" action="/login" method="POST">
+          
+
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <i class="fas fa-envelope input-icon"></i>
+                <input type="email" id="email" name="email" class="input-field" placeholder="ادخل بريدك الإلكتروني" required>
+                <div class="error-message">البريد الإلكتروني مطلوب</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <i class="fas fa-lock input-icon"></i>
+                <input type="password" id="password" name="password" class="input-field" placeholder="ادخل كلمة المرور" required>
+                <div class="error-message">كلمة المرور مطلوبة</div>
+            </div>
+
+            <!-- <div class="remember-forgot">
+                <div class="remember-me">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">تذكرني</label>
+                </div>
+                <a href="/forgot-password" class="forgot-password">نسيت كلمة المرور؟</a>
+            </div> -->
+
+            <button type="submit" class="submit-btn">تسجيل الدخول</button>
+        </form>
+
+        
+    </div>
+
+    <script>
+        // التحقق من الصحة الأساسية للنموذج
+        document.querySelector('.login-form').addEventListener('submit', function(e) {
+            let isValid = true;
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            
+            // إعادة تعيين أخطاء
+            document.querySelectorAll('.form-group').forEach(group => {
+                group.classList.remove('has-error');
+            });
+            
+            // التحقق من البريد الإلكتروني
+            if (!email.value) {
+                email.parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            // التحقق من كلمة المرور
+            if (!password.value) {
+                password.parentElement.classList.add('has-error');
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        // تأثيرات عند التركيز على الحقول
+        document.querySelectorAll('.input-field').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.querySelector('.input-icon').style.color = 'var(--primary)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.querySelector('.input-icon').style.color = '#999';
+            });
+        });
+    </script>
+</body>
+</html>

@@ -3,31 +3,50 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 
+// الحصول على المسار الرئيسي للمشروع
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// التأكد من وجود مجلد uploads
-const uploadPath = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadPath)) {
-  fs.mkdirSync(uploadPath);
-}
+// المسار الرئيسي للمشروع (بجوار package.json)
+const projectRoot = path.join(__dirname, '..'); // الانتقال لمستوى أعلى
 
-// إعداد التخزين
+// مسار مجلد التحميلات
+const uploadsDir = path.join(projectRoot, 'uploads');
+
+// إنشاء المجلد إذا لم يكن موجوداً
+const createUploadsDir = () => {
+  if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+    console.log(`تم إنشاء مجلد التحميلات في: ${uploadsDir}`);
+  }
+};
+
+// إعدادات multer
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, uploadPath); // استخدم المسار الذي تأكدنا من وجوده
+    createUploadsDir(); // التأكد من وجود المجلد
+    cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     const ext = path.extname(file.originalname);
-    cb(null, file.fieldname + '-' + uniqueSuffix + ext);
+    const filename = `${file.fieldname}-${uniqueSuffix}${ext}`;
+    cb(null, filename);
   }
 });
 
-// إنشاء middleware
-const upload = multer({ storage });
-
-// تصدير middleware
+// تصدير middleware مخصص
 export const uploadSingle = (fieldName) => {
-  return upload.single(fieldName);
+  return multer({ 
+    storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB حد أقصى
+    fileFilter: (req, file, cb) => {
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+      if (allowedTypes.includes(file.mimetype)) {
+        cb(null, true);
+      } else {
+        cb(new Error('نوع الملف غير مدعوم'), false);
+      }
+    }
+  }).single(fieldName);
 };

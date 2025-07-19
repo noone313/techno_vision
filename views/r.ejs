@@ -1865,10 +1865,10 @@ background: white;
     <button class="slider-arrow next-arrow">&#10094;</button>
     
     <div class="slider2">
-      <img id="slide-3" src="../uploads/Banner.jpg" alt="3D rendering of an imaginary blue planet in space" />
-      <img id="slide-1" src="../uploads/Banner(1).jpg" alt="3D rendering of an imaginary orange planet in space" />
-      <img id="slide-2" src="../uploads/A_VIVA_header3.jpg" alt="3D rendering of an imaginary green planet in space" />
-    </div>
+        <% sliders.forEach(slider => { %>
+    <img src="<%= slider.imageUrl %>" alt="سلايدر">
+  <% }); %>
+       </div>
     
     <div class="slider-nav">
       <a href="#slide-1"></a>
@@ -1890,7 +1890,7 @@ background: white;
         <p>اكتشف أفضل أجهزة المنزل الذكي التي تجعل حياتك أسهل وأكثر راحة. حلول مبتكرة وتصميمات أنيقة بأسعار تنافسية.</p>
         <div class="hero-buttons">
           <a href="/products" class="btn btn-primary">تصفح المنتجات</a>
-          <a href="#features" class="btn btn-outline">اكتشف الميزات</a>
+          <a href="#features" class="btn btn-outline">تواصل معنا</a>
         </div>
       </div>
     </div>
@@ -1910,81 +1910,18 @@ background: white;
     
     
     <div class="portfolio-grid">
-      <!-- المشروع 1 -->
-      <div class="portfolio-item scroll-animation" data-category="residential">
+      <% portfolios.forEach(portfolio => { %>
+        <div class="portfolio-item scroll-animation" data-category="residential">
         <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t51.75761-15/465622082_17892172041099234_5573126400974761310_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sKYD3odwyJ4Q7kNvwEdC5sd&_nc_oc=AdmdmVS2W1Q0oDpC2f9DMjdyK-sx2XjaaYmYQm-Odcd5s7qcrwLFgHny8goIxPhAkfA&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=rpMMYiY8r36odBpy-AVEYA&oh=00_AfRv9bx6qiQbJBrv3QrILV7FU5nH_oJFns0EGzQkJ6Cd3Q&oe=68755746" alt="مشروع منزل ذكي">
+          <img src="<%= portfolio.imageUrl %>" alt="مشروع منزل ذكي">
           <div class="portfolio-overlay">
-            <h3>فيلا الجادرية الذكية</h3>
-            <p>تركيب نظام متكامل للإضاءة الذكية والتحكم بالمناخ</p>
+            <h3><%= portfolio.title %></h3>
+            <p><%= portfolio.slug %></p>
             <a href="#" class="btn btn-outline">عرض التفاصيل</a>
           </div>
         </div>
       </div>
-      
-      <!-- المشروع 2 -->
-      <div class="portfolio-item scroll-animation" data-category="commercial">
-        <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-1.fna.fbcdn.net/v/t39.30808-6/467723603_17893444233099234_2946418254138882121_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_ohc=OT7l5U4uUxwQ7kNvwFmo0D-&_nc_oc=AdkL-S3652zmIapj9R-4d0Q8X2XYg9l5KYxb0XEqDNIByFkRSRkadCYgqDqANk8uYKw&_nc_zt=23&_nc_ht=scontent.fbgw41-1.fna&_nc_gid=UdbxmXayBFojYrVSs_SoYg&oh=00_AfRSwGydtTf0gdnE-b0kq7xPLQULOZYBT4hy_ZO39cbpDw&oe=68755305" alt="مشروع فندق ذكي">
-          <div class="portfolio-overlay">
-            <h3>فندق بغداد الدولي</h3>
-            <p>نظام صوت ذكي متكامل لغرف الفندق والمناطق العامة</p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- المشروع 3 -->
-      <div class="portfolio-item scroll-animation" data-category="security">
-        <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467693295_17893440132099234_3512899173936999098_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_ohc=DVTcFy_t4A4Q7kNvwEm8ddh&_nc_oc=AdmsttCWMF7v7zQD1qY3lopmDVOMjuoxeAc-yuZG84j_9N4d4Xw7woUw0dFnauTnJX4&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=Ml4THQtJHYJtkdfreFrsQA&oh=00_AfRcymEi0InLU22NXduhQO69G5KYekUIP6483lkfK1lihA&oe=68756023" alt="نظام أمان ذكي">
-          <div class="portfolio-overlay">
-            <h3>مجمع المنصور السكني</h3>
-            <p>تركيب نظام أمان متكامل مع كاميرات مراقبة وحساسات حركة</p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- المشروع 4 -->
-      <div class="portfolio-item scroll-animation" data-category="residential">
-        <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467657330_17893441284099234_6821839176229402678_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=htjMXTx1YxYQ7kNvwHrvQ4z&_nc_oc=AdkKiwPCMAgP0ukV6_L_Ce7gzGqrof7I53Dg1NIvLQDcLeMXGxWGuVUQz4xxs1Oluao&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=qT4Bk4LI-a_6njx3Mukn6w&oh=00_AfTbs4QzwnzBO5kMQ-GC4wpOmEVicz5EqFPOgovf3hLsUg&oe=68730958" alt="مشروع منزل ذكي">
-          <div class="portfolio-overlay">
-            <h3>قصر الرشيد الذكي</h3>
-            <p>تحويل قصر تقليدي إلى منزل ذكي متكامل بجميع الأنظمة</p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- المشروع 5 -->
-      <div class="portfolio-item scroll-animation" data-category="commercial">
-        <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="مشروع مكتب ذكي">
-          <div class="portfolio-overlay">
-            <h3>مقر شركة التقنية الحديثة</h3>
-            <p>نظام إدارة ذكية متكامل لمقر الشركة الرئيسي</p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
-          </div>
-        </div>
-      </div>
-      
-      <!-- المشروع 6 -->
-      <div class="portfolio-item scroll-animation" data-category="security">
-        <div class="portfolio-image">
-          <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t51.75761-15/500619654_17916244257099234_6564288603959990210_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=kt7MFT0uzTEQ7kNvwFZDN7e&_nc_oc=AdmfqG7W2IzDTSvQxBmbUCFBpGZUvUpB2KcTySRrkfscfPha1x2rYCHmFs6vVnwQ_WU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=5C8WgigPXRF00T-1NUS71A&oh=00_AfRL5ahl48Ilkpthktj29ULLT3t2LaRagodE9tzVzU45-A&oe=6871BAF1" alt="نظام أمان ذكي">
-          <div class="portfolio-overlay">
-            <h3>مجمع الزوراء التجاري</h3>
-            <p>نظام أمان متطور مع كاميرات ذكية وكشف دخان</p>
-            <a href="#" class="btn btn-outline">عرض التفاصيل</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <div class="text-center scroll-animation" style="margin-top: 40px;">
-      <a href="#" class="btn btn-primary">عرض جميع الأعمال</a>
+      <% }) %> 
     </div>
   </div>
 </section>
@@ -2037,7 +1974,7 @@ background: white;
       <h2>الشركاء</h2>
       <p>نحن نعمل مع أفضل الشركات لتقديم حلول مبتكرة</p>
     </div>
-  <div class="slider" style="
+  <!-- <div class="slider" style="
             --width: 100px;
             --height: 80px;
             --quantity: 10;
@@ -2056,7 +1993,7 @@ background: white;
                 <div class="item" style="--position: 9"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
                 <div class="item" style="--position: 10"><img src="https://www.bedienungsanleitu.ng/thumbs/brands/l/3588-abb_logo.jpg" alt=""></div>
             </div>
-        </div>
+        </div> -->
 
         <div class="slider" reverse="true" style="
             --width: 200px;
@@ -2090,157 +2027,47 @@ background: white;
     
     <div class="solutions-tabs scroll-animation">
       <div class="tabs-header">
-        <button class="tab-btn active" data-tab="home">المنزل الذكي</button>
-        <button class="tab-btn" data-tab="office">المكتب الذكي</button>
-        <button class="tab-btn" data-tab="villa">الفيلا الفاخرة</button>
-        <button class="tab-btn" data-tab="security">نظام الأمان المتكامل</button>
+          <% systems.forEach((system, index) => { %>
+          <button 
+            class="tab-btn <%= index === 0 ? 'active' : '' %>" 
+            data-tab="<%= system.id %>">
+            <%= system.mainTitle %>
+          </button>
+        <% }); %>
       </div>
       
       <div class="tabs-content">
-        <!-- نظام المنزل الذكي -->
-        <div class="tab-pane active" id="home">
+  <% systems.forEach((system, index) => { %>
+            <!-- نظام المنزل الذكي -->
+         <div class="tab-pane <%= index === 0 ? 'active' : '' %>" id="<%= system.id %>">
           <div class="solution-content">
             <div class="solution-image">
-              <img src="https://scontent.fbgw41-3.fna.fbcdn.net/v/t51.75761-15/465622082_17892172041099234_5573126400974761310_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_ohc=sKYD3odwyJ4Q7kNvwEdC5sd&_nc_oc=AdmdmVS2W1Q0oDpC2f9DMjdyK-sx2XjaaYmYQm-Odcd5s7qcrwLFgHny8goIxPhAkfA&_nc_zt=23&_nc_ht=scontent.fbgw41-3.fna&_nc_gid=rpMMYiY8r36odBpy-AVEYA&oh=00_AfRv9bx6qiQbJBrv3QrILV7FU5nH_oJFns0EGzQkJ6Cd3Q&oe=68755746" alt="المنزل الذكي">
+              
+              <img src="<%= system.imageUrl %>" alt="<%= system.mainTitle %>">
             </div>
             <div class="solution-details">
-              <h3>حزمة المنزل الذكي الأساسية</h3>
-              <p class="solution-description">الحل الأمثل للتحول إلى منزل ذكي متكامل يشمل جميع الأساسيات بأسعار تنافسية</p>
-              
+                <h3><%= system.subTitle %></h3>
+ <p class="solution-description"><%= system.description %></p>              
               <div class="solution-features">
                 <h4>مميزات النظام:</h4>
                 <ul>
-                  <li><i class="fas fa-check-circle"></i> نظام إضاءة ذكي لجميع أنحاء المنزل</li>
-                  <li><i class="fas fa-check-circle"></i> تحكم ذكي بمكيفات الهواء والتدفئة</li>
-                  <li><i class="fas fa-check-circle"></i> نظام صوت ذكي متكامل</li>
-                  <li><i class="fas fa-check-circle"></i> تحكم عن بعد عبر التطبيق الذكي</li>
-                  <li><i class="fas fa-check-circle"></i> دعم للأوامر الصوتية</li>
-                </ul>
+                   
+                      <li><i class="fas fa-check-circle"></i> <%= system.features %></li>
+                    
+                  </ul>
               </div>
               
-              <div class="solution-meta">
-               
-                <div class="duration">
-                  <i class="far fa-clock"></i>
-                  <span>مدة التنفيذ: 3-5 أيام</span>
-                </div>
-              </div>
+              
               
               <div class="solution-actions">
-                <a href="#" class="btn btn-primary">راسلنا الآن</a>
-                <a href="#" class="btn btn-outline">تفاصيل الحزمة</a>
+                <a href="https://wa.me/07806089246?text=مرحبا،%20أرغب%20بمعرفة%20المزيد%20من%20التفاصيل" class="btn btn-primary" target="_blank">راسلنا على واتساب</a>
+                <a href="/contact-us" class="btn btn-outline">راسلنا من موقعنا</a>
               </div>
             </div>
           </div>
         </div>
         
-        <!-- نظام المكتب الذكي -->
-        <div class="tab-pane" id="office">
-          <div class="solution-content">
-            <div class="solution-image">
-              <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="المكتب الذكي">
-            </div>
-            <div class="solution-details">
-              <h3>حزمة المكتب الذكي المتكامل</h3>
-              <p class="solution-description">نظام متكامل لإدارة المكاتب والمؤسسات الصغيرة بكفاءة عالية</p>
-              
-              <div class="solution-features">
-                <h4>مميزات النظام:</h4>
-                <ul>
-                  <li><i class="fas fa-check-circle"></i> نظام إدارة اجتماعات ذكي</li>
-                  <li><i class="fas fa-check-circle"></i> تحكم مركزي بالإضاءة والمناخ</li>
-                  <li><i class="fas fa-check-circle"></i> نظام صوتي متكامل للمؤتمرات</li>
-                  <li><i class="fas fa-check-circle"></i> شاشات عرض ذكية</li>
-                  <li><i class="fas fa-check-circle"></i> نظام حجز غرف الاجتماعات</li>
-                </ul>
-              </div>
-              
-              <div class="solution-meta">
-               
-                <div class="duration">
-                  <i class="far fa-clock"></i>
-                  <span>مدة التنفيذ: 5-7 أيام</span>
-                </div>
-              </div>
-              
-              <div class="solution-actions">
-                <a href="#" class="btn btn-primary">راسلنا الآن</a>
-                <a href="#" class="btn btn-outline">تفاصيل الحزمة</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- نظام الفيلا الفاخرة -->
-        <div class="tab-pane" id="villa">
-          <div class="solution-content">
-            <div class="solution-image">
-              <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/467657330_17893441284099234_6821839176229402678_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=htjMXTx1YxYQ7kNvwHrvQ4z&_nc_oc=AdkKiwPCMAgP0ukV6_L_Ce7gzGqrof7I53Dg1NIvLQDcLeMXGxWGuVUQz4xxs1Oluao&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=qT4Bk4LI-a_6njx3Mukn6w&oh=00_AfTbs4QzwnzBO5kMQ-GC4wpOmEVicz5EqFPOgovf3hLsUg&oe=68730958" alt="الفيلا الفاخرة">
-            </div>
-            <div class="solution-details">
-              <h3>حزمة الفيلا الفاخرة</h3>
-              <p class="solution-description">نظام متكامل للفلل والقصور يوفر الفخامة والرفاهية مع أعلى معايير الأمان</p>
-              
-              <div class="solution-features">
-                <h4>مميزات النظام:</h4>
-                <ul>
-                  <li><i class="fas fa-check-circle"></i> نظام إضاءة ذكي متكامل مع مشهدات مخصصة</li>
-                  <li><i class="fas fa-check-circle"></i> تحكم ذكي بجميع أنظمة الترفيه</li>
-                  <li><i class="fas fa-check-circle"></i> نظام ري ذكي للحدائق</li>
-                  <li><i class="fas fa-check-circle"></i> أتمتة متكاملة للستائر والنوافذ</li>
-                  <li><i class="fas fa-check-circle"></i> نظام أمان متطور مع كاميرات مراقبة</li>
-                </ul>
-              </div>
-              
-              <div class="solution-meta">
-                
-                <div class="duration">
-                  <i class="far fa-clock"></i>
-                  <span>مدة التنفيذ: 7-10 أيام</span>
-                </div>
-              </div>
-              
-              <div class="solution-actions">
-                <a href="#" class="btn btn-primary">راسلنا الآن</a>
-                <a href="#" class="btn btn-outline">تفاصيل الحزمة</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <!-- نظام الأمان المتكامل -->
-        <div class="tab-pane" id="security">
-          <div class="solution-content">
-            <div class="solution-image">
-              <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t51.75761-15/500619654_17916244257099234_6564288603959990210_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_ohc=kt7MFT0uzTEQ7kNvwFZDN7e&_nc_oc=AdmfqG7W2IzDTSvQxBmbUCFBpGZUvUpB2KcTySRrkfscfPha1x2rYCHmFs6vVnwQ_WU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=5C8WgigPXRF00T-1NUS71A&oh=00_AfRL5ahl48Ilkpthktj29ULLT3t2LaRagodE9tzVzU45-A&oe=6871BAF1" alt="نظام الأمان المتكامل">
-            </div>
-            <div class="solution-details">
-              <h3>حزمة الأمان الذكي المتكامل</h3>
-              <p class="solution-description">حلول أمنية متطورة توفر الحماية الشاملة لممتلكاتك وأسرتك على مدار الساعة</p>
-              
-              <div class="solution-features">
-                <h4>مميزات النظام:</h4>
-                <ul>
-                  <li><i class="fas fa-check-circle"></i> كاميرات مراقبة ذكية بدقة 4K</li>
-                  <li><i class="fas fa-check-circle"></i> نظام إنذار ضد السرقة والاقتحام</li>
-                  <li><i class="fas fa-check-circle"></i> كاشف دخان وحرائق متصل بالإنذار</li>
-                  <li><i class="fas fa-check-circle"></i> نظام تحكم ذكي بأبواب الدخول</li>
-                  <li><i class="fas fa-check-circle"></i> مراقبة عن بعد عبر الهاتف الذكي</li>
-                </ul>
-              </div>
-              
-              <div class="solution-meta">
-                
-                <!-- <div class="duration">
-                  <i class="far fa-clock"></i>
-                  <span>مدة التنفيذ: 2-3 أيام</span>
-                </div> -->
-              </div>
-              
-              <div class="solution-actions">
-                <a href="#" class="btn btn-primary">راسلنا الآن</a>
-                <a href="#" class="btn btn-outline">تفاصيل الحزمة</a>
-              </div>
+        <% }); %>
             </div>
           </div>
         </div>
@@ -2310,29 +2137,27 @@ background: white;
     <!-- تاريخ الشركة -->
     <div class="company-history scroll-animation">
       <div class="history-image">
-        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="Company History">
+        <img src="<%= imageUrl %>" alt="Company History">
       </div>
       <div class="history-text">
-        <h3><span class="lang-ar">تاريخنا</span></h3>
+        <h3><span class="lang-ar"><%= statTitle %></span></h3>
         <p>
           <span class="lang-ar">
-            تأسست شركة تكنوفيجن في عام 2015 بفريق صغير من المتحمسين للتكنولوجيا.
-            على مر السنين، كبرنا لنصبح أحد أبرز مزودي حلول المنازل الذكية في العراق،
-            حيث قمنا بتنفيذ أكثر من 500 مشروع ناجح.
+           <%= description %>
           </span>
          
         </p>
         <div class="milestones">
           <div class="milestone">
-            <div class="number" data-count="500">200+</div>
+            <div class="number" data-count="<%= projects %>">200+</div>
             <span class="lang-ar">مشروع مكتمل</span>
           </div>
           <div class="milestone">
-            <div class="number" data-count="50">50+</div>
+            <div class="number" data-count="<%= employee %>">50+</div>
             <span class="lang-ar">موظف محترف</span>
           </div>
           <div class="milestone">
-            <div class="number" data-count="8">10+</div>
+            <div class="number" data-count="<%= years %>">10+</div>
             <span class="lang-ar">سنوات من الخبرة</span>
           </div>
         </div>
