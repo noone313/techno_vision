@@ -1,18 +1,46 @@
-import { Product } from "../models/models.js";
+import { Product,Category } from "../models/models.js";
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import { Op } from 'sequelize';
+
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 
 export const getAllProducts = async (req, res) => {
   try {
-    // const products = await Product.findAll({
-    //   where: { isActive: true },
-    //   order: [['createdAt', 'DESC']]
-    // });
-    res.render('products');
+    const categoryId = req.query.category;
+
+    const whereClause = categoryId ? { categoryId } : {};
+
+    const products = await Product.findAll({
+      where: whereClause,
+      include: {
+        model: Category,
+        as: 'category',
+        attributes: ['name']
+      },
+      order: [['createdAt', 'DESC']]
+    });
+
+    const categories = await Category.findAll({
+      order: [['name', 'ASC']]
+    });
+
+    res.render('products', {
+      products,
+      categories,
+      selectedCategory: categoryId || null
+    });
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Internal Server Error");
   }
 }
+
 
 export const getProductById = async (req, res) => {
   const { id } = req.params;
@@ -28,25 +56,98 @@ export const getProductById = async (req, res) => {
   }
 }
 
-export const createProduct = async (req, res) => {
-  try {
-    const { name, description, price } = req.body;
-    const images = req.files.map(file => file.path);
 
-    const newProduct = await Product.create({
-      name,
-      description,
-      price,
-      images
+
+export const showAddProduct = async (req,res) =>{
+
+ try {
+    const allProducts = await Product.findAll({
+      order: [['createdAt', 'DESC']],
+      attributes: [
+        'id',
+        'name',
+        'description',
+        'categoryId',
+        'productTitle',
+        'productFeature',
+        'technicalProductDetails',
+        'imageUrl',
+        'createdAt',
+        'updatedAt'
+      ]
     });
 
-    res.status(201).json(newProduct);
+
+      const allCategories = await Category.findAll({
+      order: [['name', 'ASC']]
+    });
+
+    res.render('addProduct', {
+      allProducts,
+       categories: allCategories,
+    });
+    
   } catch (error) {
-    console.error("Error creating product:", error);
-    res.status(500).send("Internal Server Error");
+    console.error("Error fetching products:", error);
+    res.status(500).send('error', {
+      message: 'حدث خطأ أثناء جلب بيانات المنتجات',
+      error: process.env.NODE_ENV === 'development' ? error : {}
+    });
   }
 }
 
+
+
+
+
+export const createProduct = async (req, res) => {
+  try {
+const { name, description, productCategory, productTitle, productFeature, technicalProductDetails, categoryId } = req.body;
+    
+
+
+    // إنشاء المسار النسبي للصورة
+        let imageUrl = null;
+        if (req.file) {
+          // إنشاء مجلد uploads إذا لم يكن موجوداً
+          const uploadDir = path.join(__dirname, '../uploads');
+          if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, { recursive: true });
+          }
+    
+          // إنشاء مسار URL للصورة
+          const relativePath = path.relative(
+            path.join(__dirname, '../public'), 
+            req.file.path
+          );
+          imageUrl = '/' + relativePath.replace(/\\/g, '/');
+        }
+
+   const newProduct = await Product.create({
+  name,
+  description,
+  productCategory,
+  productTitle,
+  productFeature,
+  technicalProductDetails,
+  imageUrl,
+  categoryId
+});
+
+
+   res.status(201).json({
+      success: true,
+      message: 'تم إضافة المنتج بنجاح',
+      product: newProduct
+    });
+  } catch (error) {
+     console.error("Error creating product:", error);
+    res.status(500).json({
+      success: false,
+      message: error.message || 'حدث خطأ أثناء إضافة المنتج'
+    });
+}
+}
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   try {
@@ -81,7 +182,10 @@ export const deleteProduct = async (req, res) => {
     }
 
     await product.destroy();
-    res.status(204).send();
+      res.status(200).json({ 
+            success: true,
+            message: "تم حذف المنتج بنجاح" 
+        });
   } catch (error) {
     console.error("Error deleting product:", error);
     res.status(500).send("Internal Server Error");
@@ -104,9 +208,42 @@ export const getProductsByCategory = async (req, res) => {
 }
 
 export const getSingleProduct = async (req, res) => {
+  const { id } = req.params;
 
-  res.render('singleProduct'); // Render a single product details page
-}
+  try {
+    const product = await Product.findByPk(id, {
+      include: {
+        model: Category,
+        as: 'category',
+        attributes: ['name']
+      }
+    });
+
+    if (!product) {
+      return res.status(404).send('المنتج غير موجود');
+    }
+
+     // جلب المنتجات ذات الصلة من نفس الفئة، مع استثناء المنتج الحالي
+  const relatedProducts = await Product.findAll({
+    where: {
+      categoryId: product.categoryId,
+      id: { [Op.ne]: id }
+    },
+    limit: 4 // عدد المنتجات المقترحة
+    , include: {
+        model: Category,
+        as: 'category',
+        attributes: ['name']
+      }
+  });
+
+    res.render('singleProduct', { product,relatedProducts });
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).send('حدث خطأ أثناء جلب المنتج');
+  }
+};
+
 
 export const aboutUs = async (req, res) => {
   res.render('aboutUs'); // Render the about us page

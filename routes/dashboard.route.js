@@ -2,6 +2,7 @@ import express from 'express';
 import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory } from '../controllers/dashboard.controller.js';
 import { uploadSingle } from '../middlewares/multer.js';
 import { verifyToken } from '../middlewares/auth.js';
+import { showAddProduct } from '../controllers/product.controller.js';
 const dashboardRouter = express.Router();
 
 
@@ -29,9 +30,10 @@ dashboardRouter.delete('/dashboard/aboutStat/:id',verifyToken, deleteAboutStat);
 
 
 dashboardRouter.get('/dashboard/category',verifyToken,category);
-dashboardRouter.post('/dashboard/category', verifyToken,addCategory)
-dashboardRouter.delete('/dashboard/category/:id', verifyToken,deleteCategory)
+dashboardRouter.post('/dashboard/category', verifyToken,addCategory);
+dashboardRouter.delete('/dashboard/category/:id', verifyToken,deleteCategory);
 
 
+dashboardRouter.get('/dashboard/products',verifyToken,showAddProduct);
 
 export default dashboardRouter;

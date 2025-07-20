@@ -153,14 +153,15 @@ const Category = sequelize.define('Category', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
-    unique: true
+    unique: true,
+    validate: {
+      notEmpty: true
+    }
   }
 }, {
   timestamps: true,
-  paranoid: true 
+  paranoid: true
 });
-
-
 
 const Product = sequelize.define('Product', {
   id: {
@@ -170,41 +171,58 @@ const Product = sequelize.define('Product', {
   },
   name: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
   },
   description: {
     type: DataTypes.TEXT,
-    allowNull: true
-  },
-  price: {
-    type: DataTypes.DECIMAL(10, 2),
     allowNull: false
   },
-  images: {
-    type: DataTypes.ARRAY(DataTypes.STRING), // لحفظ عدة صور للمنتج
-    allowNull: true
+  // هذا الحقل سيحتفظ بعلاقة بالفئة (سيتم إضافته تلقائياً عبر العلاقة)
+  categoryId: {
+    type: DataTypes.INTEGER,
+    allowNull: false, // كل منتج يجب أن ينتمي لفئة
+    references: {
+      model: 'Categories', // اسم الجدول في قاعدة البيانات
+      key: 'id'
+    }
   },
-  isActive: {
-    type: DataTypes.BOOLEAN,
-    defaultValue: true
+  productTitle: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    defaultValue:'لا يوجد'
+  },
+  productFeature: {
+    type: DataTypes.STRING(500), // زيادة السعة للنصوص الطويلة
+    allowNull: false
+  },
+  technicalProductDetails: {
+    type: DataTypes.TEXT, // استخدام TEXT بدلاً من STRING للتفاصيل الطويلة
+    allowNull: false
+  },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    
   }
 }, {
   timestamps: true,
-  paranoid: true // للحذف اللين
+  paranoid: true
 });
 
-
-
-
+// إعداد العلاقات
 Category.hasMany(Product, {
   foreignKey: 'categoryId',
-  as: 'products'
+  as: 'products',
+  onDelete: 'RESTRICT' // منع حذف الفئة إذا كانت تحتوي على منتجات
 });
-
 
 Product.belongsTo(Category, {
   foreignKey: 'categoryId',
-  as: 'category'
+  as: 'category',
+  onUpdate: 'CASCADE' // عند تحديث id الفئة، يتم التحديث تلقائياً في المنتجات
 });
 
 

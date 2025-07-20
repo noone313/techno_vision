@@ -964,42 +964,21 @@
           <div class="filter-group">
             <h4>الفئات</h4>
             <ul class="filter-options">
-              <li>
-                <label>
-                  <input type="checkbox" checked>
-                  جميع الفئات
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  الإضاءة الذكية
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  أنظمة الأمان
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  التحكم بالمناخ
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  المقابس الذكية
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  المساعدات الذكية
-                </label>
-              </li>
+             <li>
+  <label>
+    <input type="checkbox" name="category" value="" <%= !selectedCategory ? 'checked' : '' %>>
+    جميع الفئات
+  </label>
+</li>
+
+               <% categories.forEach(category => { %>
+    <li>
+      <label>
+        <input type="checkbox" name="category" value="<%= category.id %>" <%= selectedCategory == category.id ? 'checked' : '' %> >
+        <%= category.name %>
+      </label>
+    </li>
+  <% }); %>
             </ul>
           </div>
           
@@ -1049,111 +1028,28 @@
           </div>
         </aside>
         
-        <!-- شبكة المنتجات -->
-        <div class="products-grid">
-          <!-- بطاقة منتج 1 -->
-          <div class="product-card">
-            <span class="product-badge">الأكثر مبيعاً</span>
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1556740738-b6a63e27c4df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="لمبة ذكية">
-            </div>
-            <div class="product-info">
-              <span class="product-category">الإضاءة الذكية</span>
-              <h3 class="product-title">لمبة ذكية متعددة الألوان</h3>
-              <p class="product-description">لمبة ذكية تعمل بتقنية WiFi مع تطبيق للتحكم عن بعد وتغيير الألوان</p>
-              
-             
-              
-              
-                
-                <button class="add-to-cart">إستفسار على واتساب</button>
-              
-            </div>
-          </div>
+       <!-- شبكة المنتجات -->
+<div class="products-grid">
+  <% products.forEach(product => { %>
+    <div class="product-card">
+      
+      <div class="product-image">
+        <a href="/products/<%= product.id %>"><img src="<%= product.imageUrl %>" alt="<%= product.name %>"></a>
+      </div>
+      <div class="product-info">
+        <span class="product-category">
+          <%= product.category ? product.category.name : 'غير مصنّف' %>
+        </span>
+        <h3 class="product-title"><%= product.productTitle %></h3>
+        <p class="product-description"><%= product.description %></p>
+        <a class="add-to-cart" href="https://wa.me/07806089246?text=مرحباً، أود الاستفسار عن المنتج: <%= product.productTitle %>">إستفسار على واتساب</a>
+      </div>
+    </div>
+  <% }); %>
+</div>
+
           
-          <!-- بطاقة منتج 2 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1562976540-1502c2145186?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="كاميرة مراقبة">
-            </div>
-            <div class="product-info">
-              <span class="product-category">أنظمة الأمان</span>
-              <h3 class="product-title">كاميرا مراقبة ذكية 360°</h3>
-              <p class="product-description">كاميرا مراقبة بدقة 1080p مع رؤية ليلية وتتبع حركة تلقائي</p>
-              
-              
-              
-              
-               
-                <button class="add-to-cart">إستفسار على واتساب</button>
-              
-            </div>
-          </div>
-          
-          <!-- بطاقة منتج 3 -->
-          <div class="product-card">
-            <span class="product-badge">جديد</span>
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1540932239986-30128078f3c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="منظم حرارة">
-            </div>
-            <div class="product-info">
-              <span class="product-category">التحكم بالمناخ</span>
-              <h3 class="product-title">منظم حرارة ذكي</h3>
-              <p class="product-description">منظم حرارة ذكي يعمل بتقنية WiFi مع جدولة ذكية وتوفير للطاقة</p>
-              
-             
-                <button class="add-to-cart">إستفسار على واتساب</button>
-              
-            </div>
-          </div>
-          
-          <!-- بطاقة منتج 4 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1598128558393-70ff21433be0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="مقبس ذكي">
-            </div>
-            <div class="product-info">
-              <span class="product-category">المقابس الذكية</span>
-              <h3 class="product-title">مقبس ذكي مع USB</h3>
-              <p class="product-description">مقبس ذكي يعمل بتقنية WiFi مع منفذي USB للشحن السريع</p>
-              
-             
-                <button class="add-to-cart">إستفسار على واتساب</button>
-             
-            </div>
-          </div>
-          
-          <!-- بطاقة منتج 5 -->
-          <div class="product-card">
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1579113800032-c38bd7635818?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="مساعد ذكي">
-            </div>
-            <div class="product-info">
-              <span class="product-category">المساعدات الذكية</span>
-              <h3 class="product-title">مساعد ذكي باللغة العربية</h3>
-              <p class="product-description">مساعد ذكي يدعم اللغة العربية للتحكم بالمنزل الذكي عن طريق الأوامر الصوتية</p>
-              
-             
-                <button class="add-to-cart">إستفسار على واتساب</button>
-             
-            </div>
-          </div>
-          
-          <!-- بطاقة منتج 6 -->
-          <div class="product-card">
-            <span class="product-badge">خصم 20%</span>
-            <div class="product-image">
-              <img src="https://images.unsplash.com/photo-1593784991095-a205069470b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="حساس باب">
-            </div>
-            <div class="product-info">
-              <span class="product-category">أنظمة الأمان</span>
-              <h3 class="product-title">حساس باب ونافذة ذكي</h3>
-              <p class="product-description">حساس لاسلكي للكشف عن فتح الأبواب والنوافذ مع تنبيه فوري</p>
-              
-             
-                <button class="add-to-cart">إستفسار على واتساب</button>
-              
-            </div>
+         
           </div>
         </div>
       </div>
@@ -1298,6 +1194,26 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </script>
 
+<script>
+  document.querySelectorAll('input[name="category"]').forEach(input => {
+    input.addEventListener('change', () => {
+      // إزالة التحديد من جميع checkboxes
+      document.querySelectorAll('input[name="category"]').forEach(el => el.checked = false);
+
+      // تفعيل فقط العنصر الذي ضغط عليه
+      input.checked = true;
+
+      const value = input.value;
+
+      // إذا كانت الفئة "all"، نرجع للكل
+      if (value === 'all') {
+        window.location.href = '/products';
+      } else {
+        window.location.href = `/products?category=${value}`;
+      }
+    });
+  });
+</script>
 
 </body>
 </html>
