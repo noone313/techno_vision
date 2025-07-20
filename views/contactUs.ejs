@@ -758,6 +758,8 @@
     grid-template-columns: repeat(2, 1fr);
   }
 }
+
+
     </style>
 </head>
 <body>
@@ -813,6 +815,7 @@
 
     
   </header>
+
 
 
 
@@ -880,10 +883,10 @@
                 
                 <div class="contact-form-box">
                     <h3>أرسل لنا رسالة</h3>
-                    <form action="#" method="POST">
+                    <form action="/dashboard/contactMessage" method="POST">
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
+                            <input type="text" id="name" name="fullName" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="email">البريد الإلكتروني</label>
@@ -891,7 +894,7 @@
                         </div>
                         <div class="form-group">
                             <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone" name="phone" class="form-control">
+                            <input type="tel" id="phone" name="phoneNumber" class="form-control">
                         </div>
                         <div class="form-group">
                             <label for="subject">الموضوع</label>

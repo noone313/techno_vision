@@ -1,8 +1,8 @@
 import express from 'express';
-import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory } from '../controllers/dashboard.controller.js';
+import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory, addContactMessage, contactMessage } from '../controllers/dashboard.controller.js';
 import { uploadSingle } from '../middlewares/multer.js';
 import { verifyToken } from '../middlewares/auth.js';
-import { showAddProduct } from '../controllers/product.controller.js';
+import {  showAddProduct } from '../controllers/product.controller.js';
 const dashboardRouter = express.Router();
 
 
@@ -35,5 +35,10 @@ dashboardRouter.delete('/dashboard/category/:id', verifyToken,deleteCategory);
 
 
 dashboardRouter.get('/dashboard/products',verifyToken,showAddProduct);
+
+
+dashboardRouter.post('/dashboard/contactMessage', addContactMessage);
+dashboardRouter.get('/dashboard/contactMessage', contactMessage);
+
 
 export default dashboardRouter;
