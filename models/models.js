@@ -202,7 +202,15 @@ const Product = sequelize.define('Product', {
     type: DataTypes.TEXT, // استخدام TEXT بدلاً من STRING للتفاصيل الطويلة
     allowNull: false
   },
-  imageUrl: {
+  companyId: {
+  type: DataTypes.INTEGER,
+  allowNull: false,
+  references: {
+    model: 'Companies', // تأكد أن اسم الجدول في DB هو "Companies"
+    key: 'id'
+  }
+},
+imageUrl: {
     type: DataTypes.STRING,
     allowNull: false,
     
@@ -257,6 +265,36 @@ const ContactMessage = sequelize.define('ContactMessage', {
   timestamps: true,
   paranoid: true
 });
+
+
+
+const company = sequelize.define('Company',{
+
+  name: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+}, {
+  timestamps: true,
+  paranoid: true
+});
+
+// شركة واحدة لديها العديد من المنتجات
+company.hasMany(Product, {
+  foreignKey: 'companyId',
+  as: 'products',
+  onDelete: 'RESTRICT'
+});
+
+// المنتج ينتمي إلى شركة واحدة
+Product.belongsTo(company, {
+  foreignKey: 'companyId',
+  as: 'company',
+  onUpdate: 'CASCADE'
+});
+
+
+
 
 
 async function startServer(app) {
