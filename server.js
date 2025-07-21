@@ -43,7 +43,7 @@ app.get('/', async (req, res) => { // أضيف async هنا
     });
 
     const systems = await System.findAll({
-      order: [['createdAt', 'DESC']]
+      order: [['mainTitle', 'ASC']]
     });
 
     const aboutstat = await AboutStat.findAll({

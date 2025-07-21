@@ -1055,52 +1055,9 @@
 });
 
 
-    // إنشاء slug من العنوان
-    document.getElementById('portfolioTitle').addEventListener('input', function() {
-      const slugInput = document.getElementById('portfolioSlug');
-      if (!slugInput.value) {
-        const slug = this.value.toLowerCase()
-          .replace(/\s+/g, '-')       // استبدال المسافات بشرطات
-          .replace(/[^\w\-]+/g, '')   // إزالة الرموز غير المرغوبة
-          .replace(/\-\-+/g, '-')     // استبدال الشرطات المتعددة بواحدة
-          .replace(/^-+/, '')         // إزالة الشرطات من البداية
-          .replace(/-+$/, '');        // إزالة الشرطات من النهاية
-        slugInput.value = slug;
-      }
-    });
+    
 
-    // تصفية الأعمال حسب المميز
-    function filterPortfolio(type) {
-      const rows = document.querySelectorAll('#portfolioTableBody tr');
-      rows.forEach(row => {
-        if (type === 'all') {
-          row.style.display = '';
-        } else if (type === 'featured') {
-          if (row.getAttribute('data-featured') === 'true') {
-            row.style.display = '';
-          } else {
-            row.style.display = 'none';
-          }
-        }
-      });
-    }
-
-    // البحث في الأعمال
-    document.getElementById('searchInput').addEventListener('input', function() {
-      const searchTerm = this.value.toLowerCase();
-      const rows = document.querySelectorAll('#portfolioTableBody tr');
-      
-      rows.forEach(row => {
-        const title = row.querySelector('td:nth-child(2) strong').textContent.toLowerCase();
-        const description = row.querySelector('td:nth-child(4)').textContent.toLowerCase();
-        
-        if (title.includes(searchTerm) || description.includes(searchTerm)) {
-          row.style.display = '';
-        } else {
-          row.style.display = 'none';
-        }
-      });
-    });
+    
 
     // عرض نموذج إضافة عمل جديد
     function showAddPortfolioModal() {
