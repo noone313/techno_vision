@@ -357,8 +357,22 @@
       color: #555;
       line-height: 1.8;
       margin-bottom: 25px;
+       max-width: 100%; 
+  box-sizing: border-box;
     }
-    
+    .product-description,
+.features-list li {
+  overflow-wrap: break-word; /* تسمح بتقسيم الكلمات الطويلة داخل العنصر */
+  word-wrap: break-word; /* دعم قديم */
+}
+.specifications-table {
+  width: 100%; /* ملء العرض المتاح */
+  border-collapse: collapse; /* إزالة فراغات بين الخلايا */
+  table-layout: fixed; /* توزيع أعمدة ثابت */
+  word-break: break-word; /* كسر الكلمات الطويلة */
+}
+
+
     .product-features {
       margin: 25px 0;
     }

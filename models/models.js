@@ -189,11 +189,6 @@ const Product = sequelize.define('Product', {
       key: 'id'
     }
   },
-  productTitle: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    defaultValue:'لا يوجد'
-  },
   productFeature: {
     type: DataTypes.STRING(500), // زيادة السعة للنصوص الطويلة
     allowNull: false
@@ -268,7 +263,7 @@ const ContactMessage = sequelize.define('ContactMessage', {
 
 
 
-const company = sequelize.define('Company',{
+const Company = sequelize.define('Company',{
 
   name: {
     type: DataTypes.STRING,
@@ -280,14 +275,14 @@ const company = sequelize.define('Company',{
 });
 
 // شركة واحدة لديها العديد من المنتجات
-company.hasMany(Product, {
+Company.hasMany(Product, {
   foreignKey: 'companyId',
   as: 'products',
   onDelete: 'RESTRICT'
 });
 
 // المنتج ينتمي إلى شركة واحدة
-Product.belongsTo(company, {
+Product.belongsTo(Company, {
   foreignKey: 'companyId',
   as: 'company',
   onUpdate: 'CASCADE'
@@ -322,5 +317,6 @@ export {
   AboutStat ,
   Category, 
   Product,
-  ContactMessage
+  ContactMessage,
+  Company
 };

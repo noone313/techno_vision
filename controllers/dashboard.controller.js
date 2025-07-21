@@ -1,7 +1,5 @@
-import { Slider,Portfolio,System,AboutStat, Category,ContactMessage } from "../models/models.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
+import { Slider,Portfolio,System,AboutStat, Category,ContactMessage, Company } from "../models/models.js";
+
 
 
 
@@ -26,22 +24,17 @@ export const dashboard = async (req, res) => {
 
 export const addimgforslider = async (req, res) => {
    try {
-    if (!req.file) {
-      return res.status(400).json({ message: "لم يتم تحميل أي صورة" });
-    }
+const imageUrl = req.imageLinks?.[0] || null;
 
-    // إنشاء مسار ويب للملف المرفوع
-    const imageUrl = `../uploads/${req.file.filename}`;
-
-    const newSlider = await Slider.create({
+    // مثال لحفظها في قاعدة بيانات
+  
+      await Slider.create({ imageUrl});
     
-      imageUrl,
-    });
 
-    res.redirect('/dashboard')
+    res.redirect('/dashboard');
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "حدث خطأ أثناء الحفظ" });
+    console.error("Error adding image to slider:", error);
+    res.status(500).json({ message: "فشل في إضافة الصور", error });
   }
 };
 
@@ -57,21 +50,6 @@ export const deleteSlider = async (req, res) => {
         message: "السلايدر غير موجود" 
       });
     }
-
-   
-  
-
-// حل بديل لـ __dirname:
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
-const imagePath = path.join(__dirname, '..', 'uploads', slider.imageUrl);
-
-    
-    if (fs.existsSync(imagePath)) {
-      fs.unlinkSync(imagePath);
-    }
-
     // حذف السلايدر من قاعدة البيانات
     await slider.destroy();
 
@@ -81,8 +59,6 @@ const imagePath = path.join(__dirname, '..', 'uploads', slider.imageUrl);
     });
   } catch (error) {
     console.error("Error deleting slider:", error);
-    console.error("Error deleting slider:", error);
-
     res.status(500).json({ 
       success: false,
       message: "حدث خطأ أثناء حذف السلايدر",
@@ -112,20 +88,16 @@ export const portfolio = async (req, res) => {
 
 export const addPortfolio = async (req, res) => {
   try {
-    if (!req.file) {
+const imageUrl = req.imageLinks?.[0] || null;
+
+    if (!imageUrl) {
       return res.status(400).json({ message: "لم يتم تحميل أي صورة" });
     }
 
-    const __filename = fileURLToPath(import.meta.url);
-    const __dirname = path.dirname(__filename);
-    const projectRoot = path.join(__dirname, '..');
-    const relativePath = path.relative(projectRoot, req.file.path);
-    const webPath = `../${relativePath.replace(/\\/g, '/')}`;
-
     const newPortfolio = await Portfolio.create({
-      imageUrl: webPath,
+      imageUrl, // الرابط المباشر من S3
       title: req.body.title,
-      slug: req.body.slug, 
+      slug: req.body.slug,
       description: req.body.description,
       isFeatured: req.body.isFeatured === 'on'
     });
@@ -134,9 +106,10 @@ export const addPortfolio = async (req, res) => {
 
   } catch (error) {
     console.error("Error uploading portfolio image:", error);
-    res.status(500).json({ message: "حدث خطأ في السيرفر" }); 
+    res.status(500).json({ message: "حدث خطأ في السيرفر" });
   }
 };
+
 
 
 export const deletePortfolio = async (req, res) => {
@@ -149,16 +122,6 @@ export const deletePortfolio = async (req, res) => {
                 success: false,
                 message: "Portfolio not found" 
             });
-        }
-
-        // حل بديل لـ __dirname:
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
-        const imagePath = path.join(__dirname, '..', 'uploads', portfolio.imageUrl);
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
         }
 
         // حذف Portfolio من قاعدة البيانات
@@ -197,37 +160,20 @@ export const system = async (req, res) => {
 
 
 
-// الحصول على __dirname في ES Modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+
 
 export const addSystem = async (req, res) => {
   try {
     // التحقق من وجود البيانات المطلوبة
     if (!req.body.mainTitle) {
-      if (req.file) fs.unlinkSync(req.file.path);
       return res.status(400).json({ 
         success: false,
         message: "العنوان الرئيسي مطلوب" 
       });
     }
 
-    // إنشاء المسار النسبي للصورة
-    let imageUrl = null;
-    if (req.file) {
-      // إنشاء مجلد uploads إذا لم يكن موجوداً
-      const uploadDir = path.join(__dirname, '../uploads');
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
-
-      // إنشاء مسار URL للصورة
-      const relativePath = path.relative(
-        path.join(__dirname, '../public'), 
-        req.file.path
-      );
-      imageUrl = '/' + relativePath.replace(/\\/g, '/');
-    }
+    // استخدام الرابط من S3
+const imageUrl = req.imageLinks?.[0] || null;
 
     // إنشاء النظام في قاعدة البيانات
     const newSystem = await System.create({
@@ -246,9 +192,6 @@ export const addSystem = async (req, res) => {
     });
 
   } catch (error) {
-    // حذف الصورة إذا تم تحميلها وحدث خطأ
-    if (req.file) fs.unlinkSync(req.file.path);
-    
     console.error("Error adding system:", error);
     res.status(500).json({ 
       success: false,
@@ -266,7 +209,6 @@ export const addSystem = async (req, res) => {
 
 
 
-
 export const deleteSystem = async (req, res) => {
     const { id } = req.params;
 
@@ -277,16 +219,6 @@ export const deleteSystem = async (req, res) => {
                 success: false,
                 message: "System not found" 
             });
-        }
-
-        // حل بديل لـ __dirname:
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
-        const imagePath = path.join(__dirname, '..', 'uploads', system.imageUrl);
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
         }
 
         // حذف System من قاعدة البيانات
@@ -361,62 +293,47 @@ export const aboutStat = async (req, res) => {
 
 
 export const addAboutStat = async (req, res) => {
-    try {
-
-         // التحقق من وجود البيانات المطلوبة
+  try {
+    // التحقق من وجود البيانات المطلوبة
     if (!req.body.description || !req.body.statTitle) {
-      if (req.file) fs.unlinkSync(req.file.path);
       return res.status(400).json({ 
         success: false,
-        message: "العنوان الرئيسي مطلوب" 
+        message: "العنوان والوصف مطلوبان" 
       });
     }
 
-     // إنشاء المسار النسبي للصورة
-    let imageUrl = null;
-    if (req.file) {
-      // إنشاء مجلد uploads إذا لم يكن موجوداً
-      const uploadDir = path.join(__dirname, '../uploads');
-      if (!fs.existsSync(uploadDir)) {
-        fs.mkdirSync(uploadDir, { recursive: true });
-      }
+    // استخدام رابط الصورة من S3
+   const imageUrl = req.imageLinks?.[0] || null;
 
-      // إنشاء مسار URL للصورة
-      const relativePath = path.relative(
-        path.join(__dirname, '../public'), 
-        req.file.path
-      );
-      imageUrl = '/' + relativePath.replace(/\\/g, '/');
-    }
 
-    
-        const newAboutStat = await AboutStat.create({
-        statTitle: req.body.statTitle,
-        description: req.body.description || null,
-        projects: req.body.projects,
-        employee: req.body.employee,
-        years: req.body.years,
-        imageUrl
-        });
-    
-        res.status(201).json({ 
-        success: true,
-        message: 'تم إضافة الإحصائية بنجاح',
-        aboutStat: newAboutStat
-        });
-    
-    } catch (error) {
-        console.error("Error adding About Stat:", error);
-        res.status(500).json({ 
-        success: false,
-        message: "حدث خطأ في إضافة الإحصائية",
-        error: process.env.NODE_ENV === 'development' ? {
-            message: error.message,
-            stack: error.stack
-        } : undefined
-        }); 
-    }
-    }
+    const newAboutStat = await AboutStat.create({
+      statTitle: req.body.statTitle,
+      description: req.body.description || null,
+      projects: req.body.projects,
+      employee: req.body.employee,
+      years: req.body.years,
+      imageUrl
+    });
+
+    res.status(201).json({ 
+      success: true,
+      message: 'تم إضافة الإحصائية بنجاح',
+      aboutStat: newAboutStat
+    });
+
+  } catch (error) {
+    console.error("Error adding About Stat:", error);
+    res.status(500).json({ 
+      success: false,
+      message: "حدث خطأ في إضافة الإحصائية",
+      error: process.env.NODE_ENV === 'development' ? {
+        message: error.message,
+        stack: error.stack
+      } : undefined
+    }); 
+  }
+};
+
 
 
 export const deleteAboutStat = async (req, res) => {
@@ -429,16 +346,6 @@ export const deleteAboutStat = async (req, res) => {
                 success: false,
                 message: "لم يتم العثور على العناصر المطلوبة" 
             });
-        }
-
-        // حل بديل لـ __dirname:
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
-
-        const imagePath = path.join(__dirname, '..', 'uploads', aboutStat.imageUrl);
-
-        if (fs.existsSync(imagePath)) {
-            fs.unlinkSync(imagePath);
         }
 
         // حذف About Stat من قاعدة البيانات
@@ -650,3 +557,85 @@ export const contactMessage = async(req,res)=>{
 }
 
 
+export const productCompany = async(req,res) =>{
+try {
+  const productCompanies = await Company.findAll({
+order: [['name', 'ASC']]
+  });
+  res.render('productCompany',{
+    productCompanies
+  });
+} catch (error) {
+   console.error("Error sending product company:", error);
+    res.status(500).json({
+      message: "حدث خطأ أثناء تحميل شركة المنتج، حاول مرة أخرى.",
+      error: process.env.NODE_ENV === 'development' ? error : null
+    });
+}
+
+}
+
+
+
+export const addProductCompany = async (req, res) => {
+  try {
+    const newCompany = await Company.create({
+      name: req.body.name
+    });
+
+    res.status(201).json({
+      success: true,
+      message: 'تم إضافة شركة المنتج بنجاح',
+      company: newCompany
+    });
+  } catch (error) {
+    console.error("Error sending product company:", error);
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ أثناء ارسال شركة المنتج، حاول مرة أخرى.",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};
+
+
+export const deleteCompany = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // البحث عن الشركة
+    const company = await Company.findByPk(id);
+
+    if (!company) {
+      return res.status(404).json({
+        success: false,
+        message: "شركة المنتج غير موجودة"
+      });
+    }
+
+    // حاول حذف الشركة
+    await company.destroy();
+
+    res.status(200).json({
+      success: true,
+      message: "تم حذف شركة المنتج بنجاح"
+    });
+
+  } catch (error) {
+    console.error("Error deleting product company:", error);
+
+    // ممكن الخطأ بسبب قيد foreign key (ارتباط منتجات بالشركة)
+    if (error.name === 'SequelizeForeignKeyConstraintError') {
+      return res.status(400).json({
+        success: false,
+        message: "لا يمكن حذف الشركة لأنها مرتبطة بمنتجات"
+      });
+    }
+
+    res.status(500).json({
+      success: false,
+      message: "حدث خطأ أثناء حذف شركة المنتج، حاول مرة أخرى.",
+      error: process.env.NODE_ENV === 'development' ? error.message : undefined
+    });
+  }
+};

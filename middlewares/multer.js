@@ -1,49 +1,47 @@
-import multer from 'multer';
-import path from 'path';
-import fs from 'fs';
-import { fileURLToPath } from 'url';
+import multer from "multer";
+import { Upload } from "@aws-sdk/lib-storage";
+import s3Client from "../utils/s3Client.js";
 
-// الحصول على المسار الرئيسي للمشروع
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
 
-// المسار الرئيسي للمشروع (بجوار package.json)
-const projectRoot = path.join(__dirname, '..'); // الانتقال لمستوى أعلى
+// دالة رفع ملف واحد
+const uploadToS3 = async (file) => {
+  const upload = new Upload({
+    client: s3Client,
+    params: {
+      Bucket: process.env.S3_BUCKET,
+      Key: `orders/${Date.now()}-${file.originalname}`,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+       ACL: "public-read", 
+    },
+  });
 
-// مسار مجلد التحميلات
-const uploadsDir = path.join(projectRoot, 'uploads');
-
-// إنشاء المجلد إذا لم يكن موجوداً
-const createUploadsDir = () => {
-  if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir, { recursive: true });
-    console.log(`تم إنشاء مجلد التحميلات في: ${uploadsDir}`);
-  }
+  const result = await upload.done();
+  return result.Location; // رابط الصورة
 };
 
-// إعدادات multer
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    createUploadsDir(); // التأكد من وجود المجلد
-    cb(null, uploadsDir);
-  },
-   filename: (req, file, cb) => {
-    cb(null, file.originalname); // حفظ الصورة باسمها الأصلي
-  }
-});
-
-// تصدير middleware مخصص
-export const uploadSingle = (fieldName) => {
-  return multer({ 
-    storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB حد أقصى
-    fileFilter: (req, file, cb) => {
-      const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
-      if (allowedTypes.includes(file.mimetype)) {
-        cb(null, true);
-      } else {
-        cb(new Error('نوع الملف غير مدعوم'), false);
+// ميدلوير مخصص لرفع عدة صور وحقن روابطها في req.imageLinks
+const uploadImagesMiddleware = [
+  upload.array("image"), // قراءة الملفات فقط
+  async (req, res, next) => {
+    try {
+      if (!req.files || req.files.length === 0) {
+        req.imageLinks = [];
+        return next();
       }
+
+      const uploadPromises = req.files.map(uploadToS3);
+      const imageLinks = await Promise.all(uploadPromises);
+
+      req.imageLinks = imageLinks;
+      next();
+    } catch (err) {
+      console.error("S3 upload error:", err);
+      res.status(500).json({ message: "Image upload failed", error: err });
     }
-  }).single(fieldName);
-};
+  },
+];
+
+export { uploadImagesMiddleware };

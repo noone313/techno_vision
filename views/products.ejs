@@ -985,40 +985,25 @@
          
           
           <div class="filter-group">
-            <h4>العلامة التجارية</h4>
-            <ul class="filter-options">
-              <li>
-                <label>
-                  <input type="checkbox" checked>
-                  جميع الماركات
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  تكنوفيجن
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  سامسونج
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  هواوي
-                </label>
-              </li>
-              <li>
-                <label>
-                  <input type="checkbox">
-                  شاومي
-                </label>
-              </li>
-            </ul>
-          </div>
+  <h4>العلامة التجارية</h4>
+  <ul class="filter-options">
+    <li>
+      <label>
+        <input type="checkbox" name="company" value="" <%= !selectedCompany ? 'checked' : '' %> >
+        جميع الماركات
+      </label>
+    </li>
+    <% Companies.forEach(company => { %>
+      <li>
+        <label>
+          <input type="checkbox" name="company" value="<%= company.id %>" <%= selectedCompany == company.id ? 'checked' : '' %> >
+          <%= company.name %>
+        </label>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
           
          
           
@@ -1040,8 +1025,7 @@
         <span class="product-category">
           <%= product.category ? product.category.name : 'غير مصنّف' %>
         </span>
-        <h3 class="product-title"><%= product.productTitle %></h3>
-        <p class="product-description"><%= product.description %></p>
+        <h3 class="product-title"><%= product.name %></h3>
         <a class="add-to-cart" href="https://wa.me/07806089246?text=مرحباً، أود الاستفسار عن المنتج: <%= product.productTitle %>">إستفسار على واتساب</a>
       </div>
     </div>
@@ -1195,22 +1179,29 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <script>
+  function applyFilter(type, value) {
+    const params = new URLSearchParams(window.location.search);
+    if (value === '') {
+      params.delete(type);
+    } else {
+      params.set(type, value);
+    }
+    window.location.search = params.toString();
+  }
+
   document.querySelectorAll('input[name="category"]').forEach(input => {
     input.addEventListener('change', () => {
-      // إزالة التحديد من جميع checkboxes
       document.querySelectorAll('input[name="category"]').forEach(el => el.checked = false);
-
-      // تفعيل فقط العنصر الذي ضغط عليه
       input.checked = true;
+      applyFilter('category', input.value);
+    });
+  });
 
-      const value = input.value;
-
-      // إذا كانت الفئة "all"، نرجع للكل
-      if (value === 'all') {
-        window.location.href = '/products';
-      } else {
-        window.location.href = `/products?category=${value}`;
-      }
+  document.querySelectorAll('input[name="company"]').forEach(input => {
+    input.addEventListener('change', () => {
+      document.querySelectorAll('input[name="company"]').forEach(el => el.checked = false);
+      input.checked = true;
+      applyFilter('company', input.value);
     });
   });
 </script>

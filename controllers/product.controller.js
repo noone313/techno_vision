@@ -1,28 +1,32 @@
-import { Product,Category } from "../models/models.js";
-import path from 'path';
-import { fileURLToPath } from 'url';
-import fs from 'fs';
+import { Product,Category,Company } from "../models/models.js";
 import { Op } from 'sequelize';
 
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 
 export const getAllProducts = async (req, res) => {
   try {
-    const categoryId = req.query.category;
+    const { category: categoryId, company: companyId } = req.query;
 
-    const whereClause = categoryId ? { categoryId } : {};
+    const whereClause = {};
+    if (categoryId) whereClause.categoryId = categoryId;
+    if (companyId) whereClause.companyId = companyId;
 
     const products = await Product.findAll({
       where: whereClause,
-      include: {
-        model: Category,
-        as: 'category',
-        attributes: ['name']
-      },
+      include: [
+        {
+          model: Category,
+          as: 'category',
+          attributes: ['name']
+        },
+        {
+          model: Company,
+          as: 'company',
+          attributes: ['name']
+        }
+      ],
       order: [['createdAt', 'DESC']]
     });
 
@@ -30,16 +34,24 @@ export const getAllProducts = async (req, res) => {
       order: [['name', 'ASC']]
     });
 
+    const Companies = await Company.findAll({
+      order: [['name', 'ASC']]
+    });
+
     res.render('products', {
       products,
       categories,
-      selectedCategory: categoryId || null
+      selectedCategory: categoryId || null,
+      Companies,
+      selectedCompany: companyId || null
     });
+
   } catch (error) {
     console.error("Error fetching products:", error);
     res.status(500).send("Internal Server Error");
   }
 }
+
 
 
 export const getProductById = async (req, res) => {
@@ -61,30 +73,48 @@ export const getProductById = async (req, res) => {
 export const showAddProduct = async (req,res) =>{
 
  try {
-    const allProducts = await Product.findAll({
-      order: [['createdAt', 'DESC']],
-      attributes: [
-        'id',
-        'name',
-        'description',
-        'categoryId',
-        'productTitle',
-        'productFeature',
-        'technicalProductDetails',
-        'imageUrl',
-        'createdAt',
-        'updatedAt'
-      ]
-    });
+   const allProducts = await Product.findAll({
+  order: [['createdAt', 'DESC']],
+  attributes: [
+    'id',
+    'name',
+    'description',
+    'categoryId',
+    'productFeature',
+    'technicalProductDetails',
+    'companyId',
+    'imageUrl',
+    'createdAt',
+    'updatedAt'
+  ],
+  include: [
+    {
+      model: Category,
+      as: 'category',
+      attributes: ['id', 'name'] // أو أي أعمدة تريدها من جدول الفئات
+    },
+    {
+      model: Company,
+      as: 'company',
+      attributes: ['id', 'name'] // أو أي أعمدة تريدها من جدول الشركات
+    }
+  ]
+});
+
 
 
       const allCategories = await Category.findAll({
       order: [['name', 'ASC']]
     });
 
+    const allCompany = await Company.findAll({
+      order: [['name', 'ASC']]
+    });
+
     res.render('addProduct', {
       allProducts,
        categories: allCategories,
+       allCompany
     });
     
   } catch (error) {
@@ -102,52 +132,45 @@ export const showAddProduct = async (req,res) =>{
 
 export const createProduct = async (req, res) => {
   try {
-const { name, description, productCategory, productTitle, productFeature, technicalProductDetails, categoryId } = req.body;
-    
+    const { name, description, productCategory, productTitle, productFeature, technicalProductDetails,companyId, categoryId } = req.body;
 
+    // استخراج رابط الصورة من imageLinks بدلاً من req.file
+    let imageUrl = null;
+    if (Array.isArray(req.imageLinks)) {
+      imageUrl = typeof req.imageLinks[0] === 'string' ? req.imageLinks[0] : null;
+    } else if (typeof req.imageLinks === 'string') {
+      imageUrl = req.imageLinks;
+    }
 
-    // إنشاء المسار النسبي للصورة
-        let imageUrl = null;
-        if (req.file) {
-          // إنشاء مجلد uploads إذا لم يكن موجوداً
-          const uploadDir = path.join(__dirname, '../uploads');
-          if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-          }
-    
-          // إنشاء مسار URL للصورة
-          const relativePath = path.relative(
-            path.join(__dirname, '../public'), 
-            req.file.path
-          );
-          imageUrl = '/' + relativePath.replace(/\\/g, '/');
-        }
+    const newProduct = await Product.create({
+      name,
+      description,
+      productCategory,
+      productFeature,
+      technicalProductDetails,
+      companyId,
+      imageUrl,
+      categoryId
+    });
 
-   const newProduct = await Product.create({
-  name,
-  description,
-  productCategory,
-  productTitle,
-  productFeature,
-  technicalProductDetails,
-  imageUrl,
-  categoryId
-});
-
-
-   res.status(201).json({
+    res.status(201).json({
       success: true,
       message: 'تم إضافة المنتج بنجاح',
       product: newProduct
     });
   } catch (error) {
-     console.error("Error creating product:", error);
+    console.error("Error creating product:", error);
     res.status(500).json({
       success: false,
       message: error.message || 'حدث خطأ أثناء إضافة المنتج'
     });
-}
-}
+  }
+};
+
+
+
+
+
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   try {

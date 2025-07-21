@@ -837,6 +837,12 @@
             </a>
           </li>
           <li>
+            <a href="/dashboard/products">
+              <i class="fas fa-box-open"></i>
+              <span>الشركات</span>
+            </a>
+          </li>
+          <li>
             <a href="/dashboard/contactMessage">
               <i class="fas fa-box-open"></i>
               <span>رسائل  اتصل بنا</span>
@@ -889,7 +895,7 @@
     <tr>
       <td><%= index + 1 %></td>
       <td>
-        <img src="/<%= slider.imageUrl %>" style="max-width: 100px; max-height: 50px;">
+        <img src="<%= slider.imageUrl %>" style="max-width: 100px; max-height: 50px;">
       </td>
       <td><%= slider.createdAt.toISOString().split('T')[0] %></td>
       <td>

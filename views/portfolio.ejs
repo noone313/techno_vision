@@ -876,6 +876,12 @@
               <span>المنتجات</span>
             </a>
           </li>
+          <li>
+            <a href="/dashboard/products">
+              <i class="fas fa-box-open"></i>
+              <span>الشركات</span>
+            </a>
+          </li>
          <li>
             <a href="/dashboard/contactMessage">
               <i class="fas fa-box-open"></i>
@@ -927,7 +933,7 @@
       <td><%= portfolio.title %></td>
       <td>
         <% if (portfolio.imageUrl) { %>
-          <img src="<%= portfolio.imageUrl.replace('..', '') %>" alt="الصورة" style="width: 100px;">
+          <img src="<%= portfolio.imageUrl %>" alt="الصورة" style="width: 100px;">
         <% } else { %>
           لا توجد صورة
         <% } %>

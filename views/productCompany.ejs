@@ -1109,20 +1109,19 @@
               <span>الأقسام</span>
             </a>
           </li>
-          <li  class="active">
-            <a href="/dashbord/products">
+          <li>
+            <a href="/dashboard/products">
               <i class="fas fa-box-open"></i>
               <span>المنتجات</span>
             </a>
           </li>
-
-           <li>
-            <a href="/dashboard/productCompany">
+          <li>
+            <li class="active">
+            <a href="/dashboard/products">
               <i class="fas fa-box-open"></i>
               <span>الشركات</span>
             </a>
           </li>
-
           <li>
             <a href="/dashboard/contactMessage">
               <i class="fas fa-box-open"></i>
@@ -1136,87 +1135,56 @@
 
     <main class="dashboard-content">
       <div class="page-header">
-        <h1><i class="fas fa-briefcase"></i>إدارة المنتجات</h1>
+        <h1><i class="fas fa-briefcase"></i>إدارة الشركات</h1>
         <nav aria-label="breadcrumb">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/dashboard">الرئيسية</a></li>
-            <li class="breadcrumb-item active" aria-current="page">معرض المنتجات</li>
+            <li class="breadcrumb-item active" aria-current="page">معرض الشركات</li>
           </ol>
         </nav>
       </div>
 
     <div class="card">
       <div class="card-header">
-        <h3>قائمة المنتجات</h3>
+        <h3>قائمة الشركات</h3>
         <button class="btn btn-primary" onclick="showAddModal()">
-          <i class="fas fa-plus"></i> إضافة منتج جديد
+          <i class="fas fa-plus"></i> إضافة شركة جديدة
         </button>
       </div>
       <div class="card-body">
         <div class="table-responsive">
-         <table class="table">
-  <thead>
-    <tr>
-      <th>#</th>
-      <th>اسم المنتج</th>
-      <th>شركة المنتج</th>
-      <th>الوصف</th>
-      <th>الفئة</th>
-      <th>المميزات</th>
-      <th>التفاصيل الفنية</th>
-      <th>الصورة</th>
-      <th>الإجراءات</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% if (allProducts && allProducts.length > 0) { %>
-    <% allProducts.forEach((product, index) => { %>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>اسم الشركة</th>
+                <th>تاريخ الإنشاء</th>
+                <th>تاريخ التحديث</th>
+                <th>الإجراءات</th>
+              </tr>
+            </thead>
+           <tbody>
+  <% if (productCompanies && productCompanies.length > 0) { %>
+    <% productCompanies.forEach((productCompany, index) => { %>
       <tr>
         <td><%= index + 1 %></td>
-        <td><%= product.name %></td>
-
-        <!-- اسم الشركة -->
-        <td><%= product.company ? product.company.name : 'غير محددة' %></td>
-
-        <td><%= product.description %></td>
-
-        <!-- اسم الفئة -->
-        <td><%= product.category ? product.category.name : 'غير محددة' %></td>
-
-        <td><%= product.productFeature %></td>
-        <td><%= product.technicalProductDetails %></td>
-
+        <td><%= productCompany.name %></td>
+        <td><%= new Date(productCompany.createdAt).toLocaleString('ar-EG') %></td>
+        <td><%= new Date(productCompany.updatedAt).toLocaleString('ar-EG') %></td>
         <td>
-          <% if (product.imageUrl) { %>
-            <img src="<%= product.imageUrl %>" alt="صورة المنتج" style="width: 100px; height: auto;">
-          <% } else { %>
-            <span class="text-muted">لا توجد صورة</span>
-          <% } %>
-        </td>
-
-        <td>
-          <button class="btn btn-sm btn-danger" onclick="confirmDelete('<%= product.id %>')">
-            <i class="fas fa-trash"></i>
+          <button class="btn btn-sm btn-danger" onclick="confirmDelete('<%= productCompany.id %>')">
+            <i class="fas fa-trash"></i> حذف
           </button>
         </td>
       </tr>
     <% }); %>
   <% } else { %>
     <tr>
-      <td colspan="10" class="text-center py-4">
-        <div class="no-data">
-          <i class="fas fa-box-open fa-2x text-muted mb-2"></i>
-          <p class="text-muted">لا توجد منتجات مسجلة</p>
-          <button class="btn btn-primary mt-2" onclick="showAddModal()">
-            <i class="fas fa-plus"></i> إضافة منتج جديد
-          </button>
-        </div>
-      </td>
+      <td colspan="5" class="text-center no-data">لا توجد شركات مسجلة</td>
     </tr>
   <% } %>
 </tbody>
-
-</table>
+          </table>
         </div>
       </div>
     </div>
@@ -1226,58 +1194,17 @@
   <div class="modal" id="categoryModal">
     <div class="modal-dialog">
       <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">إضافة منتج جديد</h3>
+        <h3 class="modal-title" id="modalTitle">إضافة شركة جديدة</h3>
         <button class="close" onclick="hideModal('categoryModal')">&times;</button>
 
       </div>
       <form id="categoryForm">
         <div class="modal-body">
           <input type="hidden" id="categoryId" name="id">
-         <div class="form-group">
-  <label for="productName" class="form-label">اسم المنتج</label>
-  <input type="text" id="productName" name="name" class="form-control" required>
-</div>
-<div class="form-group">
-  <label for="productCategory" class="form-label">فئة المنتج</label>
-  <select id="productCategory" name="categoryId" class="form-control" required>
-    <option value="">اختر فئة...</option>
-    <% if (categories && categories.length > 0) { %>
-      <% categories.forEach(category => { %>
-        <option value="<%= category.id %>"><%= category.name %></option>
-      <% }); %>
-    <% } %>
-  </select>
-</div>
-
-<div class="form-group">
-  <label for="productCategory" class="form-label">شركة المنتج</label>
-  <select id="productCategory" name="companyId" class="form-control" required>
-    <option value="">اختر شركة...</option>
-    <% if (allCompany && allCompany.length > 0) { %>
-      <% allCompany.forEach(allCompany => { %>
-        <option value="<%= allCompany.id %>"><%= allCompany.name %></option>
-      <% }); %>
-    <% } %>
-  </select>
-</div>
-<div class="form-group">
-  <label for="productCategory" class="form-label">وصف المنتج</label>
-  <input type="text" id="productCategory" name="description" class="form-control" required>
-</div>
-
-<div class="form-group">
-  <label for="productFeatures" class="form-label">مميزات المنتج</label>
-  <input type="text" id="productFeatures" name="productFeature" class="form-control" required>
-</div>
-<div class="form-group">
-  <label for="technicalDetails" class="form-label">التفاصيل الفنية للمنتج</label>
-  <input type="text" id="technicalDetails" name="technicalProductDetails" class="form-control" required>
-</div>
-<div class="form-group">
-  <label for="productImage" class="form-label">اختر صورة</label>
-  <input type="file" id="productImage" name="image" class="form-control" accept="image/*" required>
-  <img id="imagePreview" class="img-preview" style="display: none; max-width: 150px; margin-top: 10px;">
-</div>
+          <div class="form-group">
+            <label for="categoryName" class="form-label">اسم الشركة</label>
+            <input type="text" id="categoryName" name="name" class="form-control" required>
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-outline-primary"onclick="hideModal('categoryModal')">إلغاء</button>
@@ -1295,7 +1222,7 @@
        <button class="close" onclick="hideModal('deleteModal')">&times;</button>
       </div>
       <div class="modal-body">
-        <p>هل أنت متأكد من رغبتك في حذف هذا المنتج؟</p>
+        <p>هل أنت متأكد من رغبتك في حذف هذه الشركة؟</p>
         <input type="hidden" id="deleteId">
       </div>
       <div class="modal-footer">
@@ -1307,7 +1234,7 @@
 
  <script>
   function showAddModal() {
-  document.getElementById('modalTitle').textContent = 'إضافة منتج جديد';
+  document.getElementById('modalTitle').textContent = 'إضافة شركة جديدة';
   document.getElementById('categoryId').value = '';
   document.getElementById('categoryForm').reset();
   showModal('categoryModal'); // استخدام الدالة المعدلة
@@ -1323,9 +1250,15 @@
     
     try {
       const formData = new FormData(e.target);
-      const response = await fetch('/products', {
+      const response = await fetch('/dashboard/productCompany', {
         method: 'POST',
-        body: formData
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: document.getElementById('categoryName').value
+        })
       });
 
       const contentType = response.headers.get('content-type');
@@ -1334,8 +1267,7 @@
       }
 
       const result = await response.json();
-      console.log('Response:', response);
-console.log('Result:', result);
+      
       if (!response.ok) {
         throw new Error(result.message || 'حدث خطأ أثناء الإضافة');
       }
@@ -1396,9 +1328,11 @@ async function deleteCategory() {
     deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحذف...';
     
     // تأكد أن المسار مطابق للراوتر
-    const response = await fetch(`/products/${id}`, {
+    const response = await fetch(`/dashboard/productCompany/${id}`, {
       method: 'DELETE',
-      
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
 
     // التحقق من نوع المحتوى أولاً
@@ -1426,21 +1360,6 @@ async function deleteCategory() {
     hideModal();
   }
 }
-
-// Image preview functionality
-  document.getElementById('productImage').addEventListener('change', function(e) {
-    const preview = document.getElementById('imagePreview');
-    if (this.files && this.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      }
-      reader.readAsDataURL(this.files[0]);
-    }
-  });
-
- 
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 import express from 'express';
-import { uploadSingle } from '../middlewares/multer.js';
+import { uploadImagesMiddleware } from '../middlewares/multer.js';
 import { getAllProducts,getProductById,getProductsByCategory,createProduct,getSingleProduct,aboutUs,contactUs,sol, deleteProduct } from '../controllers/product.controller.js';
 
 const productRouter = express.Router();
@@ -19,7 +19,7 @@ productRouter.get('/products', getAllProducts);
 // Get product by ID
 productRouter.get('/products/:id', getProductById);
 // Create a new product
-productRouter.post('/products', uploadSingle('image'), createProduct);
+productRouter.post('/products', uploadImagesMiddleware, createProduct);
 // Get products by category
 productRouter.get('/categories/:categoryId/products', getProductsByCategory);
 
