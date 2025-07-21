@@ -1,4 +1,4 @@
-import { Slider,Portfolio,System,AboutStat, Category } from "../models/models.js";
+import { Slider,Portfolio,System,AboutStat, Category,ContactMessage } from "../models/models.js";
 import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
@@ -352,7 +352,7 @@ export const aboutStat = async (req, res) => {
     
   } catch (error) {
     console.error("Error rendering About Stat page:", error);
-    res.status(500).render('error', {
+    res.status(500).send('error', {
       message: "حدث خطأ في تحميل الصفحة",
       error: process.env.NODE_ENV === 'development' ? error : null
     });
@@ -593,6 +593,58 @@ export const deleteCategory = async (req, res) => {
         message: error.message,
         stack: error.stack
       } : undefined
+    });
+  }
+}
+
+
+
+export const addContactMessage = async (req, res) => {
+  try {
+    
+    const { fullName, phoneNumber, email, subject, message } = req.body;
+
+    // التحقق البسيط من وجود الحقول
+    if (!fullName || !phoneNumber || !email || !subject || !message) {
+      return res.status(400).json({
+        message: "جميع الحقول مطلوبة",
+        error: null
+      });
+    }
+
+    // إنشاء الرسالة في قاعدة البيانات
+    await ContactMessage.create({
+      fullName,
+      phoneNumber,
+      email,
+      subject,
+      message
+    });
+
+    // إعادة التوجيه أو عرض رسالة نجاح
+    res.redirect('/contact-us')
+
+  } catch (error) {
+    console.error("Error sending contact message:", error);
+    res.status(500).json({
+      message: "حدث خطأ أثناء إرسال الرسالة، حاول مرة أخرى.",
+      error: process.env.NODE_ENV === 'development' ? error : null
+    });
+  }
+};
+
+
+export const contactMessage = async(req,res)=>{
+
+  try {
+
+     const messages = await ContactMessage.findAll({ order: [['createdAt', 'DESC']] });
+     res.render('contactMessage', { messages });
+  } catch (error) {
+    console.error("Error sending contact message:", error);
+    res.status(500).json({
+      message: "حدث خطأ أثناء إرسال الرسالة، حاول مرة أخرى.",
+      error: process.env.NODE_ENV === 'development' ? error : null
     });
   }
 }

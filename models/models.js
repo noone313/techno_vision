@@ -226,6 +226,39 @@ Product.belongsTo(Category, {
 });
 
 
+
+
+
+const ContactMessage = sequelize.define('ContactMessage', {
+  fullName: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  phoneNumber: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  email: {
+    type: DataTypes.STRING,
+    allowNull: false,
+    validate: {
+      isEmail: true
+    }
+  },
+  subject: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  message: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  }
+}, {
+  timestamps: true,
+  paranoid: true
+});
+
+
 async function startServer(app) {
   try {
     await sequelize.authenticate();
@@ -250,5 +283,6 @@ export {
   System, 
   AboutStat ,
   Category, 
-  Product
+  Product,
+  ContactMessage
 };
