@@ -197,7 +197,7 @@
     }
 
 
-    /* تصميم القائمة المنسدلة كاملة الشاشة */
+   /* تصميم القائمة المنسدلة كاملة الشاشة */
 .nav-links .dropdown-menu {
   display: none;
   position: fixed; /* تغيير من absolute إلى fixed */
@@ -205,8 +205,11 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: #fff;
-  width: 100vw; /* عرض كامل للشاشة */
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  width: 50vw; /* عرض كامل للشاشة */
   height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   z-index: 1000;
@@ -309,10 +312,7 @@
     top: 20px;
   }
 }
-
-
-
-    /* حل مشكلة الارتجاف */
+/* حل مشكلة الارتجاف */
 .submenu-container {
   position: relative;
   margin: 0;
@@ -331,7 +331,10 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #fff;
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
   min-width: 100%;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -374,12 +377,41 @@
 }
 
 
+
+
+
+     /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
+
      
      /* التذييل */
     footer {
       background: var(--dark);
       color: white;
-      padding: 70px 0 30px;
+      padding: 70px 20px 30px;
+      
     }
     
     .footer-grid {
@@ -718,23 +750,23 @@
  <ul class="nav-links">
   <li><a href="/"></i> الرئيسية</a></li>
   <li class="dropdown">
-    <a href="/products" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
+    <a href="/" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
     <ul class="dropdown-menu">
-      <li><a href="category-products.html?id=1"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
-      <li><a href="category-products.html?id=2"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
-      <li><a href="category-products.html?id=3"><i class="fas fa-lightbulb"></i> Lighting</a></li>
-      <li><a href="category-products.html?id=4"><i class="fas fa-video"></i> Video Intercom</a></li>
-      <li><a href="category-products.html?id=5"><i class="fas fa-volume-up"></i> Sound System</a></li>
-      <li><a href="category-products.html?id=6"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
      <li class="submenu-container">
         <a href="javascript:void(0)" class="submenu-trigger">
           <i class="fas fa-shield-alt"></i> Security System 
           <i class="fas fa-chevron-down mobile-arrow"></i>
         </a>
         <ul class="submenu-list">
-          <li><a href="subcategory-products.html?id=71"><i class="fas fa-lock"></i> Smart Lock</a></li>
-          <li><a href="subcategory-products.html?id=72"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
-          <li><a href="subcategory-products.html?id=73"><i class="fas fa-video"></i> CCTV</a></li>
+          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
         </ul>
       </li>
     </ul>
@@ -816,29 +848,27 @@
     <!-- تاريخ الشركة -->
     <div class="company-history scroll-animation">
       <div class="history-image">
-        <img src="https://scontent.fbgw41-4.fna.fbcdn.net/v/t39.30808-6/468013059_17893440270099234_8099917530093081760_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=127cfc&_nc_ohc=I64VaYNRKiYQ7kNvwFZxy1f&_nc_oc=Admee69g6hj8-J7AbBr6BiLD-MmV5vavJXuH47cJ0Ll5-JEgQvuCQAMId9DPgDn8NmU&_nc_zt=23&_nc_ht=scontent.fbgw41-4.fna&_nc_gid=JJR5c6_QSMeApaOE1RiZJA&oh=00_AfQ8FE4Z2P_pgw-nmKpCSvWLyhWSHRdrhc41pqGMWT-dLA&oe=687326EB" alt="Company History">
+        <img src="<%= imageUrl %>" alt="Company History">
       </div>
       <div class="history-text">
-        <h3><span class="lang-ar">تاريخنا</span></h3>
+        <h3><span class="lang-ar"><%= statTitle %></span></h3>
         <p>
           <span class="lang-ar">
-            تأسست شركة تكنوفيجن في عام 2015 بفريق صغير من المتحمسين للتكنولوجيا.
-            على مر السنين، كبرنا لنصبح أحد أبرز مزودي حلول المنازل الذكية في العراق،
-            حيث قمنا بتنفيذ أكثر من 500 مشروع ناجح.
+           <%= description %>
           </span>
          
         </p>
         <div class="milestones">
           <div class="milestone">
-            <div class="number" data-count="500">200+</div>
+            <div class="number" data-count="<%= projects %>"><%= projects %></div>
             <span class="lang-ar">مشروع مكتمل</span>
           </div>
           <div class="milestone">
-            <div class="number" data-count="50">50+</div>
+            <div class="number" data-count="<%= employee %>"><%= employee %></div>
             <span class="lang-ar">موظف محترف</span>
           </div>
           <div class="milestone">
-            <div class="number" data-count="8">10+</div>
+            <div class="number" data-count="<%= years %>"><%= years %></div>
             <span class="lang-ar">سنوات من الخبرة</span>
           </div>
         </div>

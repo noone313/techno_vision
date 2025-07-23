@@ -1319,9 +1319,13 @@ background: white;
 }
 
 .portfolio-image {
-  height: 250px;
+   width: 100%;
+  aspect-ratio: 4 / 3; /* أو 16/9 حسب ذوقك */
+  background-color: #f9f9f9;
   overflow: hidden;
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .portfolio-image img {
@@ -1330,6 +1334,28 @@ background: white;
   object-fit: cover;
 }
 
+@media (max-width: 768px) {
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* عمود واحد */
+    gap: 20px;
+  }
+
+  .portfolio-item {
+    width: 100%;
+  }
+
+  .portfolio-image {
+    aspect-ratio: 1 / 1; /* خيار جيد للموبايل: مربع */
+  }
+
+  .portfolio-image img {
+    object-fit: contain;
+  }
+   .portfolio-overlay {
+    display: none !important;
+  }
+}
 
 
 .portfolio-overlay {
@@ -1798,6 +1824,71 @@ background: white;
   }
 }
 
+/* نافذة التفاصيل */
+.modal {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: white;
+  max-width: 700px;
+  width: 90%;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.modal-info {
+  padding: 20px;
+}
+
+.modal-info h3 {
+  font-size: 1.5rem;
+  color: var(--dark);
+  margin-bottom: 10px;
+}
+
+.modal-info p {
+  color: #555;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.modal-info a {
+  display: inline-block;
+}
+
+.close-modal {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 1.5rem;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 
 
@@ -1810,7 +1901,6 @@ background: white;
     <div class="container nav-container">
       <div class="logo">
         <div class="logo-icon">
-          <!-- <img src="../uploads/logonooralsafana.jpg" alt="تكنوفيجن"> -->
         </div>
         <div class="logo-text">NOOR AL-SAFANA</div>
       </div>
@@ -1818,23 +1908,23 @@ background: white;
  <ul class="nav-links">
   <li><a href="/"></i> الرئيسية</a></li>
   <li class="dropdown">
-    <a href="/products" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
+    <a href="/" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
     <ul class="dropdown-menu">
-      <li><a href="/sol"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
-      <li><a href="/sol"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
-      <li><a href="/sol"><i class="fas fa-lightbulb"></i> Lighting</a></li>
-      <li><a href="/sol"><i class="fas fa-video"></i> Video Intercom</a></li>
-      <li><a href="/sol"><i class="fas fa-volume-up"></i> Sound System</a></li>
-      <li><a href="/sol"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
      <li class="submenu-container">
         <a href="javascript:void(0)" class="submenu-trigger">
           <i class="fas fa-shield-alt"></i> Security System 
           <i class="fas fa-chevron-down mobile-arrow"></i>
         </a>
         <ul class="submenu-list">
-          <li><a href="subcategory-products.html?id=71"><i class="fas fa-lock"></i> Smart Lock</a></li>
-          <li><a href="subcategory-products.html?id=72"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
-          <li><a href="subcategory-products.html?id=73"><i class="fas fa-video"></i> CCTV</a></li>
+          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
         </ul>
       </li>
     </ul>
@@ -1920,8 +2010,18 @@ background: white;
               <img src="<%= portfolio.imageUrl %>" alt="<%= portfolio.title %>">
               <div class="portfolio-overlay">
                 <h3><%= portfolio.title %></h3>
-                <p><%= portfolio.shortDescription || portfolio.slug %></p>
-                <a href="/portfolio/<%= portfolio.slug %>" class="btn btn-outline">عرض التفاصيل</a>
+                <p><%=  portfolio.slug %></p>
+<a 
+  href="#"
+  class="btn btn-outline open-modal"
+  data-title="<%= portfolio.title %>"
+  data-slug="<%= portfolio.slug %>"
+  data-desc="<%= portfolio.description %>"
+  data-image="<%= portfolio.imageUrl %>"
+  data-link="/portfolio/<%= portfolio.slug %>"
+>
+  عرض التفاصيل
+</a>
               </div>
             </div>
           </div>
@@ -1936,6 +2036,24 @@ background: white;
   </div>
 </section>
 
+
+
+
+<!-- نافذة عرض تفاصيل المشروع -->
+<div id="portfolioModal" class="modal" style="display: none;">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <div class="modal-image">
+      <img id="modalImage" src="" alt="صورة المشروع">
+    </div>
+<div class="modal-info">
+  <h3 id="modalTitle">عنوان المشروع</h3>
+  <h4 id="modalSlug">رابط المشروع أو النص التعريفي</h4>
+  <p id="modalDescription">وصف قصير أو تفاصيل المشروع</p>
+</div>
+
+  </div>
+</div>
 
 
 
@@ -2566,5 +2684,37 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<script>
+  document.querySelectorAll('.open-modal').forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+
+      // تعبئة البيانات
+      document.getElementById('modalTitle').textContent = this.dataset.title;
+      document.getElementById('modalSlug').textContent = this.dataset.slug;
+      document.getElementById('modalDescription').textContent = this.dataset.desc;
+      document.getElementById('modalImage').src = this.dataset.image;
+
+      // عرض النافذة
+      document.getElementById('portfolioModal').style.display = 'flex';
+    });
+  });
+
+  // إغلاق النافذة عند الضغط على X
+  document.querySelector('.close-modal').addEventListener('click', () => {
+    document.getElementById('portfolioModal').style.display = 'none';
+  });
+
+  // إغلاق النافذة عند الضغط خارج المحتوى
+  window.addEventListener('click', function (e) {
+    const modal = document.getElementById('portfolioModal');
+    if (e.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+</script>
+
+
 </body>
 </html>

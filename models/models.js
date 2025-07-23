@@ -290,6 +290,58 @@ Product.belongsTo(Company, {
 
 
 
+// تعريف الجدول
+const Sol = sequelize.define('Sol', {
+  mainTitle: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  subTitle: {
+    type: DataTypes.STRING,
+    allowNull: true
+  },
+  imageUrl: {
+    type: DataTypes.STRING,
+    allowNull: false
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  features: {
+    type: DataTypes.JSON,
+    allowNull: true
+  }
+}, {
+  timestamps: true,
+  paranoid: true
+});
+
+// جدول وسيط
+const SolProduct = sequelize.define('SolProduct', {}, {
+  timestamps: false
+});
+
+// العلاقات
+Sol.belongsToMany(Product, {
+  through: SolProduct,
+  foreignKey: 'solId',
+  as: 'products'
+});
+
+Product.belongsToMany(Sol, {
+  through: SolProduct,
+  foreignKey: 'productId',
+  as: 'solutions'
+});
+
+
+
+
+
+
+
+
 
 
 async function startServer(app) {
@@ -318,5 +370,6 @@ export {
   Category, 
   Product,
   ContactMessage,
-  Company
+  Company,
+  Sol
 };

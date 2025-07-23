@@ -1,5 +1,5 @@
 import express from 'express';
-import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory, addContactMessage, contactMessage, productCompany, addProductCompany, deleteCompany } from '../controllers/dashboard.controller.js';
+import { dashboard,addimgforslider,deleteSlider, portfolio, deletePortfolio, addPortfolio,system,addSystem,deleteSystem, aboutStat,addAboutStat, deleteAboutStat, category, addCategory, deleteCategory, addContactMessage, contactMessage, productCompany, addProductCompany, deleteCompany, getSolutionById, createSolution,deleteSolution, getAllSolutions } from '../controllers/dashboard.controller.js';
 import { uploadImagesMiddleware } from '../middlewares/multer.js';
 import { verifyToken } from '../middlewares/auth.js';
 import {  showAddProduct } from '../controllers/product.controller.js';
@@ -44,5 +44,8 @@ dashboardRouter.get('/dashboard/productCompany',verifyToken,productCompany);
 dashboardRouter.post('/dashboard/productCompany',verifyToken,addProductCompany);
 dashboardRouter.delete('/dashboard/productCompany/:id',verifyToken,deleteCompany);
 
-
+dashboardRouter.get('/dashboard/sol',getAllSolutions);
+dashboardRouter.get('/sol/:id',getSolutionById);
+dashboardRouter.post('/dashboard/sol',uploadImagesMiddleware, createSolution);
+dashboardRouter.delete('/dashboard/sol/:id', deleteSolution);
 export default dashboardRouter;

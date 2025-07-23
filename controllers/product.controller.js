@@ -1,4 +1,4 @@
-import { Product,Category,Company } from "../models/models.js";
+import { Product,Category,Company,AboutStat } from "../models/models.js";
 import { Op } from 'sequelize';
 
 
@@ -269,17 +269,35 @@ export const getSingleProduct = async (req, res) => {
 
 
 export const aboutUs = async (req, res) => {
-  res.render('aboutUs'); // Render the about us page
+   const aboutstat = await AboutStat.findAll({
+      order: [['createdAt', 'DESC']]
+    });
+
+    
+      const {
+        statTitle,
+        description,
+        projects,
+        employee,
+        years,
+        imageUrl
+      } = aboutstat[0].dataValues;
+   
+  res.render('aboutUs',{
+    statTitle,
+        description,
+        projects,
+        employee,
+        years,
+        imageUrl
+  }); // Render the about us page
 }
 
 export const contactUs = async (req, res) => {
   res.render('contactUs'); // Render the contact us page
 }
 
-export const sol = async (req,res)=>{
-res.render('slou');
 
-}
 
 
 

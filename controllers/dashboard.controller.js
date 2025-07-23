@@ -1,5 +1,5 @@
-import { Slider,Portfolio,System,AboutStat, Category,ContactMessage, Company } from "../models/models.js";
-
+import { Slider,Portfolio,System,AboutStat, Category,ContactMessage,Sol,Product, Company } from "../models/models.js";
+import { Op } from 'sequelize';
 
 
 
@@ -637,5 +637,130 @@ export const deleteCompany = async (req, res) => {
       message: "حدث خطأ أثناء حذف شركة المنتج، حاول مرة أخرى.",
       error: process.env.NODE_ENV === 'development' ? error.message : undefined
     });
+  }
+};
+
+
+// عرض كل الحلول
+export const getAllSolutions = async (req, res) => {
+  try {
+    const solutions = await Sol.findAll({
+      include: {
+        model: Product,
+        as: 'products',
+        through: { attributes: [] } // إخفاء جدول الربط
+      }
+    });
+
+    const products = await Product.findAll();
+
+   res.render('addSol', {
+  solutions, // قائمة الحلول مع المنتجات المرتبطة
+  products   // قائمة المنتجات كلها
+});
+
+  } catch (error) {
+    res.status(500).json({ error: 'فشل في جلب الحلول' });
+  }
+};
+
+// عرض حل واحد
+export const getSolutionById = async (req, res) => {
+  try {
+   const solution = await Sol.findByPk(req.params.id, {
+  include: {
+    model: Product,
+    as: 'products',
+    through: { attributes: [] },
+    include: {
+      model: Category, // تأكد أن هذا هو اسم الموديل الصحيح للفئة
+      as: 'category',   // تأكد أن العلاقة في موديل Product تعرف بهذا الاسم
+      attributes: ['id', 'name']
+    }
+  }
+});
+    if (!solution) return res.status(404).json({ error: 'الحل غير موجود' });
+     const relatedSolutions = await Sol.findAll({
+      where: {
+        id: { [Op.ne]: solution.id }  // استثناء الحل الحالي
+      },
+      limit: 4, // عدد الحلول المقترحة
+      attributes: ['id', 'mainTitle', 'subTitle', 'description'],
+      // ممكن تضمين علاقات أخرى حسب الحاجة
+    });
+
+    res.render('sol', { solution, relatedSolutions });
+  
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'خطأ في عرض الحل' });
+  }
+};
+
+
+
+
+
+// إنشاء حل جديد
+export const createSolution = async (req, res) => {
+  try {
+    const { mainTitle, subTitle, description, features, productIds } = req.body;
+ // استخدام رابط الصورة من S3
+   const imageUrl = req.imageLinks?.[0] || null;
+if (!req.imageLinks?.[0]) {
+  return res.status(400).json({ error: 'يجب رفع صورة للحل' });
+}
+
+    const sol = await Sol.create({
+      mainTitle,
+      subTitle,
+      imageUrl,
+      description,
+      features
+    });
+
+    // ربط المنتجات
+    if (productIds?.length) {
+      await sol.setProducts(productIds);
+    }
+
+    res.status(201).json(sol);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'فشل في إنشاء الحل' });
+  }
+};
+
+// تعديل حل
+export const updateSolution = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { mainTitle, subTitle, imageUrl, description, features, productIds } = req.body;
+
+    const sol = await Sol.findByPk(id);
+    if (!sol) return res.status(404).json({ error: 'الحل غير موجود' });
+
+    await sol.update({ mainTitle, subTitle, imageUrl, description, features });
+
+    if (productIds?.length) {
+      await sol.setProducts(productIds);
+    }
+
+    res.json(sol);
+  } catch (error) {
+    res.status(500).json({ error: 'خطأ في التعديل' });
+  }
+};
+
+// حذف حل
+export const deleteSolution = async (req, res) => {
+  try {
+    const sol = await Sol.findByPk(req.params.id);
+    if (!sol) return res.status(404).json({ error: 'الحل غير موجود' });
+
+    await sol.destroy();
+    res.json({ message: 'تم الحذف بنجاح' });
+  } catch (error) {
+    res.status(500).json({ error: 'فشل في الحذف' });
   }
 };
