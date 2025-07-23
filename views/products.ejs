@@ -1381,7 +1381,12 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
 
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
 </script>
 
 <script>
@@ -1410,12 +1415,7 @@ document.addEventListener('DOMContentLoaded', function() {
       applyFilter('company', input.value);
     });
   });
-const toggleBtn = document.querySelector('.mobile-toggle');
-  const navLinks = document.querySelector('.nav-links');
 
-  toggleBtn.addEventListener('click', () => {
-    navLinks.classList.toggle('show-mobile-menu');
-  });
 </script>
 
 </body>

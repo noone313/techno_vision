@@ -22,7 +22,7 @@
     }
     
     * {
-      margin: 0;
+      /* margin: 100px; */
       padding: 0;
       box-sizing: border-box;
     }
@@ -41,6 +41,7 @@
       margin: 0 auto;
       padding: 0 20px;
     }
+    
     .section-title {
       text-align: center;
       margin-bottom: 60px;
@@ -508,12 +509,14 @@
         
         /* قسم عنوان الصفحة */
         .solution-hero {
+          
             text-align: center;
             padding: 100px ;
             background: #fff;
             position: relative;
             overflow: hidden;
             margin-bottom: 50px;
+            margin-top: 50px;
             
       will-change: transform, opacity;
         }
@@ -524,6 +527,7 @@
             font-size: 2.8rem;
             color: var(--dark);
             margin-bottom: 20px;
+            margin-top: 50px;
         }
         
         .solution-hero p {
@@ -582,27 +586,7 @@
     overflow-wrap: break-word; /* معالجة الكلمات الطويلة */
 }
 
-/* تحسينات خاصة للهواتف */
-@media (max-width: 768px) {
-    .solution-description {
-        padding: 25px 20px;
-    }
-    
-    .solution-description p {
-        font-size: 0.95rem; /* تصغير حجم الخط قليلاً للجوال */
-        line-height: 1.7; /* زيادة تباعد الأسطر لتحسين القراءة */
-    }
-}
 
-@media (max-width: 480px) {
-    .solution-description {
-        padding: 20px 15px;
-    }
-    
-    .solution-description p {
-        font-size: 0.9rem;
-    }
-}
         
         .solution-description h2 {
             color: var(--dark);
@@ -959,16 +943,20 @@
 @media (max-width: 480px) {
     /* قسم البطل */
     .solution-hero {
-        padding: 60px 20px;
+        padding: 80px 20px 40px; /* زيادة الـ padding من الأعلى */
+        margin-top: 30px; /* إضافة margin إضافي من الأعلى */
     }
     
     .solution-hero h1 {
         font-size: 1.6rem;
         line-height: 1.3;
+        margin-top: 0; /* إزالة margin السابق */
+        padding-top: 20px; /* إضافة padding بدلاً من margin */
     }
     
     .solution-hero p {
         font-size: 0.95rem;
+        margin-top: 10px;
     }
     
     /* محتوى الحل */
@@ -1064,10 +1052,15 @@
     }
 }
 
-/* هواتف صغيرة جدًا (أقل من 360px) */
-@media (max-width: 360px) {
+/* هواتف صغيرة جدًا (أقل من 400px) */
+@media (max-width: 400px) {
+    .solution-hero {
+        padding: 70px 15px 30px; /* تعديل padding للأجهزة الصغيرة جداً */
+    }
+    
     .solution-hero h1 {
         font-size: 1.4rem;
+        padding-top: 15px;
     }
     
     .solution-description h2,
@@ -1088,18 +1081,17 @@
     .feature-card h3 {
         font-size: 1.1rem;
     }
-    
 }
-
 
 /* تعديلات للهواتف الأفقية والأجهزة اللوحية الصغيرة */
 @media (min-width: 481px) and (max-width: 767px) {
     .solution-hero {
-        padding: 80px 30px;
+        padding: 100px 30px 50px; /* زيادة المسافة من الأعلى */
     }
     
     .solution-hero h1 {
         font-size: 1.8rem;
+        padding-top: 30px;
     }
     
     .solution-description,
@@ -1118,8 +1110,13 @@
 
 /* تعديلات للهواتف الكبيرة (مثل Galaxy Fold) */
 @media (max-width: 280px) {
+    .solution-hero {
+        padding: 60px 10px 20px; /* تعديل padding للأجهزة الضيقة جداً */
+    }
+    
     .solution-hero h1 {
         font-size: 1.2rem;
+        padding-top: 10px;
     }
     
     .solution-hero p {
@@ -1136,7 +1133,31 @@
     }
 }
 
+/* إضافة مسافة أعلى إضافية للعنوان الرئيسي */
+.solution-hero h1 {
+    position: relative;
+    z-index: 2;
+    padding-top: 40px; /* قيمة افتراضية للشاشات الكبيرة */
+}
 
+@media (max-width: 480px) {
+    .solution-hero h1 {
+        padding-top: 30px; /* قيمة للهواتف */
+    }
+}
+
+/* حل بديل باستخدام pseudo-element */
+.solution-hero::before {
+    content: '';
+    display: block;
+    height: 40px; /* ارتفاع المساحة الإضافية */
+}
+
+@media (max-width: 480px) {
+    .solution-hero::before {
+        height: 60px; /* مساحة أكبر للهواتف */
+    }
+}
         /* قسم الحلول المشابهة */
 .related-solutions {
   padding: 80px 0;
@@ -1337,6 +1358,25 @@
 
 .btn-primary-custom:hover {
   background-color: #2eb39f; /* لون أغمق عند المرور */
+}
+
+
+ /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
 }
 
     </style>
@@ -1574,7 +1614,8 @@
       </div>
     </div>
   </footer>
-   <script>//  // سكربت القائمة المنسدلة
+   <script>
+    //  // سكربت القائمة المنسدلة
 document.addEventListener('DOMContentLoaded', function() {
   const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
   const dropdownParent = document.querySelector('.nav-links .dropdown');
@@ -1641,6 +1682,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
+
+const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
 
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1726,6 +1774,7 @@ document.addEventListener('DOMContentLoaded', function() {
         delay: 0.5, 
         ease: "elastic.out(1, 0.5)" 
     });
+    
 </script>
 </body>
 </html>
