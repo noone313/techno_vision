@@ -709,6 +709,7 @@
       font-size: 1.1rem;
       margin-bottom: 10px;
       color: var(--dark);
+        min-height: 4.6em; 
     }
     
     .product-description {
@@ -747,6 +748,7 @@
       cursor: pointer;
       transition: all 0.3s;
       font-weight: 600;
+      text-decoration: none;
     }
     
     .add-to-cart:hover {
@@ -758,8 +760,13 @@
       margin: 10px 0;
       font-size: 0.9rem;
     }
-   /* نسخة الهاتف */
+ /* تحسين تخطيط المنتجات للهاتف - الإصلاح الرئيسي */
 @media (max-width: 768px) {
+  .container1 {
+    margin: 20px;
+    padding: 50px 10px;
+  }
+
   .products-section {
     flex-direction: column;
     gap: 20px;
@@ -767,172 +774,106 @@
 
   .filters-sidebar {
     width: 100%;
-    order: 1;
-    box-shadow: none;
-    border: 1px solid #ddd;
+    margin-bottom: 20px;
   }
 
+  /* الإصلاح الرئيسي: منتجان بجانب بعض على الهاتف */
   .products-grid {
-    grid-template-columns: 1fr;
-    order: 2;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
   }
 
   .product-card {
     border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .product-image {
-    height: 180px;
+    height: 140px;
   }
 
   .product-info {
-    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
   }
 
   .product-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    min-height: 2.6em; /* تثبيت ارتفاع العنوان */
+    overflow: hidden;
+  }
+
+  .product-category {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
   }
 
   .add-to-cart {
+    margin-top: auto;
+    padding: 8px 10px;
+    font-size: 0.8rem;
     width: 100%;
-    padding: 10px;
-    font-size: 0.95rem;
-  }
-
-  .filter-buttons {
-    flex-direction: column;
-  }
-
-  .filter-btn {
-    width: 100%;
-  }
-
-  .page-header h1 {
-    font-size: 1.4rem;
-    text-align: center;
-  }
-
-  .page-header p {
-    font-size: 0.95rem;
-    text-align: center;
+     text-decoration: none;
   }
 }
 
- /* شاشات صغيرة جداً (أقل من 480px) - هواتف صغيرة */
-    @media (max-width: 480px) {
-      .page-header h1 {
-        font-size: 1.4rem;
-      }
-      
-      .page-header p {
-        font-size: 0.9rem;
-      }
-      
-      .products-section {
-        flex-direction: column;
-        gap: 15px;
-      }
-      
-      .filters-sidebar {
-        width: 100%;
-        order: 1;
-        box-shadow: none;
-        border: 1px solid #ddd;
-        display: none;
-      }
-      
-      .filters-sidebar.active {
-        display: block;
-      }
-      
-      .products-grid {
-        grid-template-columns: 1fr;
-        order: 2;
-        gap: 15px;
-      }
-      
-      .product-card {
-        border-radius: 10px;
-      }
-      
-      .product-image {
-        height: 180px;
-      }
-      
-      .product-info {
-        padding: 15px;
-      }
-      
-      .product-title {
-        font-size: 1rem;
-      }
-      
-      .add-to-cart {
-        width: 100%;
-        padding: 10px;
-        font-size: 0.95rem;
-      }
-      
-      .filter-buttons {
-        flex-direction: column;
-      }
-      
-      .filter-btn {
-        width: 100%;
-      }
-      
-      .mobile-filter-bar {
-        display: flex;
-      }
-    }
-    
-    /* شاشات صغيرة (481px إلى 768px) - هواتف كبيرة وأجهزة لوحية صغيرة */
-    @media (min-width: 390px) and (max-width: 768px) {
-      .page-header h1 {
-        font-size: 1.6rem;
-      }
-      
-      .page-header p {
-        font-size: 1rem;
-      }
-      
-      .products-section {
-        flex-direction: column;
-        gap: 20px;
-      }
-      
-      .filters-sidebar {
-        width: 100%;
-        order: 1;
-        box-shadow: none;
-        border: 1px solid #ddd;
-        padding: 15px;
-      }
-      
-      .products-grid {
-        grid-template-columns: repeat(2, 1fr);
-        order: 2;
-        gap: 20px;
-      }
-      
-      .product-image {
-        height: 180px;
-      }
-      
-      .product-title {
-        font-size: 1rem;
-      }
-      
-      .add-to-cart {
-        font-size: 0.9rem;
-      }
-      
-      .filter-buttons {
-        flex-direction: row;
-      }
-    }
-    
-   
+/* للهواتف الصغيرة جداً */
+@media (max-width: 480px) {
+  .container1 {
+    margin: 15px;
+    padding: 50px 5px;
+  }
+
+  .products-grid {
+    gap: 12px;
+  }
+
+  .product-image {
+    height: 120px;
+  }
+
+  .product-info {
+    padding: 10px;
+  }
+
+  .product-title {
+    font-size: 0.85rem;
+    min-height: 2.4em;
+  }
+
+  .add-to-cart {
+    font-size: 0.75rem;
+    padding: 6px 8px;
+     text-decoration: none;
+  }
+}
+
+/* للأجهزة اللوحية والهواتف الأفقية */
+@media (min-width: 481px) and (max-width: 767px) {
+  .products-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  .product-image {
+    height: 160px;
+  }
+}
+
+/* للشاشات الكبيرة - 3 منتجات أو أكثر */
+@media (min-width: 992px) {
+  .products-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  }
+}
+
     /* التذييل */
     footer {
       background: var(--dark);
@@ -1064,15 +1005,7 @@
       }
     }
     
-    @media (max-width: 576px) {
-      .products-grid {
-        grid-template-columns: 1fr;
-      }
-     
-      .page-header h1 {
-        font-size: 2rem;
-      }
-    }
+    
     /* القائمة في الجوال */
 .nav-links.show-mobile-menu {
   display: flex !important;
@@ -1232,7 +1165,8 @@
           <%= product.category ? product.category.name : 'غير مصنّف' %>
         </span>
         <h3 class="product-title"><%= product.name %></h3>
-        <a class="add-to-cart" href="https://wa.me/07806089246?text=مرحباً، أود الاستفسار عن المنتج: <%= product.productTitle %>">إستفسار على واتساب</a>
+        <h3 class="product-title" style="color: #2aa897;"><%= product.company.name %></h3>
+        <a class="add-to-cart" href="https://wa.me/+9647722762286?text=مرحباً، أود الاستفسار عن المنتج: <%= product.productTitle %>">إستفسار على واتساب</a>
       </div>
     </div>
   <% }); %>
@@ -1246,7 +1180,7 @@
     </div>
   </main>
 
-   <!-- التذييل -->
+  <!-- التذييل -->
   <footer>
     <div class="container">
       <div class="footer-grid">
@@ -1254,9 +1188,9 @@
           <h3>عن NOOR AL-SAFANA</h3>
           <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
           <div class="social-links">
-            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=61553215440908&ref=_xav_ig_profile_page_web#" class="social-link"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.instagram.com/noor.alsafana/" class="social-link"><i class="fab fa-instagram"></i></a>
             <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
@@ -1264,11 +1198,11 @@
         <div class="footer-col">
           <h3>روابط سريعة</h3>
           <ul class="footer-links">
-            <li><a href="#">الرئيسية</a></li>
-            <li><a href="#">منتجاتنا</a></li>
-            <li><a href="#">الحلول</a></li>
-            <li><a href="#">من نحن</a></li>
-            <li><a href="#">تواصل معنا</a></li>
+            <li><a href="/">الرئيسية</a></li>
+            <li><a href="/profucts">منتجاتنا</a></li>
+            <li><a href="/sol/8">الحلول</a></li>
+            <li><a href="/about-us">من نحن</a></li>
+            <li><a href="/contact-us">تواصل معنا</a></li>
             
           </ul>
         </div>
@@ -1276,11 +1210,11 @@
         <div class="footer-col">
           <h3>فئات المنتجات</h3>
           <ul class="footer-links">
-            <li><a href="#">أنظمة الأمان</a></li>
-            <li><a href="#">الإضاءة الذكية</a></li>
-            <li><a href="#">المناخ الذكي</a></li>
-            <li><a href="#">التحكم الصوتي</a></li>
-            <li><a href="#">أحدث المنتجات</a></li>
+            <li><a href="/sol/12">أنظمة الأمان</a></li>
+            <li><a href="/sol/8">الإضاءة الذكية</a></li>
+            <li><a href="/sol/11">الستائر الذكية</a></li>
+            <li><a href="/sol/10">التحكم الصوتي</a></li>
+            <li><a href="/products">أحدث المنتجات</a></li>
           </ul>
         </div>
         
@@ -1293,7 +1227,7 @@
             </li>
             <li>
               <i class="fas fa-phone"></i>
-              <span>07722762286</span>
+              <span>07806089246</span>
             </li>
             <li>
               <i class="fas fa-envelope"></i>
