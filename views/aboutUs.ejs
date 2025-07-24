@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOOR AL-SAFANA - نور السفانا</title>
+     <link rel="icon" href="https://nooralsafana.s3.eu-north-1.amazonaws.com/orders/518155891_122207785910107181_6125862413156237338_n.ico" type="image/x-icon" />
+<link rel="icon" href="https://nooralsafana.s3.eu-north-1.amazonaws.com/orders/518155891_122207785910107181_6125862413156237338_n.ico" type="image/x-icon">
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
     <style>
@@ -1016,7 +1019,14 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
-});</script>
+});
+const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
+</script>
 
 </body>
 </html>

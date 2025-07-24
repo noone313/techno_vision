@@ -239,7 +239,7 @@ export const getSingleProduct = async (req, res) => {
         model: Category,
         as: 'category',
         attributes: ['name']
-      }
+      },
     });
 
     if (!product) {
