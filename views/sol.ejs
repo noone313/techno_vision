@@ -15,13 +15,38 @@
     <style>
          @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
     
-    :root {
+     :root {
+      overflow-x: hidden;
       --primary: #36c9b4;
       --primary-light: #5bd5c3;
       --primary-dark: #2aa897;
       --accent: #ff6b6b;
       --dark: #1a3c38;
       --light: #f8fafc;
+        --item1-transform: translateX(-100%) translateY(-5%) scale(1.5);
+    --item1-filter: blur(30px);
+    --item1-zIndex: 11;
+    --item1-opacity: 0;
+
+    --item2-transform: translateX(0);
+    --item2-filter: blur(0px);
+    --item2-zIndex: 10;
+    --item2-opacity: 1;
+
+    --item3-transform: translate(50%,10%) scale(0.8);
+    --item3-filter: blur(10px);
+    --item3-zIndex: 9;
+    --item3-opacity: 1;
+
+    --item4-transform: translate(90%,20%) scale(0.5);
+    --item4-filter: blur(30px);
+    --item4-zIndex: 8;
+    --item4-opacity: 1;
+    
+    --item5-transform: translate(120%,30%) scale(0.3);
+    --item5-filter: blur(40px);
+    --item5-zIndex: 7;
+    --item5-opacity: 0;
     }
     
     * {
@@ -78,8 +103,8 @@
     }
     
     
-    /* شريط التنقل */
-   header {
+        /* شريط التنقل */
+header {
   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
   backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
   -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
@@ -204,8 +229,7 @@
       cursor: pointer;
     }
 
-
-    /* تصميم القائمة المنسدلة كاملة الشاشة */
+ /* تصميم القائمة المنسدلة كاملة الشاشة */
 .nav-links .dropdown-menu {
   display: none;
   position: fixed; /* تغيير من absolute إلى fixed */
@@ -213,7 +237,7 @@
   right: 0;
   left: 0;
   bottom: 0;
- background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
   backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
   -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
@@ -320,10 +344,7 @@
     top: 20px;
   }
 }
-
-
-
-    /* حل مشكلة الارتجاف */
+/* حل مشكلة الارتجاف */
 .submenu-container {
   position: relative;
   margin: 0;
@@ -342,7 +363,10 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #fff;
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
   min-width: 100%;
   border-radius: 0 0 8px 8px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -385,6 +409,33 @@
 }
 
 
+
+
+
+     /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
      
     /* التذييل */
     footer {
@@ -509,20 +560,73 @@
       }
       
       .nav-links .dropdown-menu {
-        position: static;
+        /* position: static; */
         box-shadow: none;
         border: none;
-        min-width: 100%;
+        /* min-width: 100%; */
       }
     }
 
-
+/* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .hero-content {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .hero-text {
+        margin-bottom: 50px;
+      }
+      
+      .hero-buttons {
+        justify-content: center;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+       
+    }
+    
+    @media (max-width: 768px) {
+      .hero-text h1 {
+        font-size: 2.8rem;
+      }
+      
+      .section-title h2 {
+        font-size: 2.2rem;
+      }
+      
+      .newsletter h2 {
+        font-size: 2rem;
+      }
+      
+      .newsletter-form {
+        flex-direction: column;
+        border-radius: 15px;
+      }
+      
+      .newsletter-form input,
+      .newsletter-form button {
+        width: 100%;
+        border-radius: 0;
+        padding: 15px;
+      }
+      
+      .search-box {
+        display: none;
+      }
+    }
         
         /* قسم عنوان الصفحة */
         .solution-hero {
           
             text-align: center;
-            padding: 100px ;
+            padding: 0px ;
             background: #fff;
             position: relative;
             overflow: hidden;
@@ -954,7 +1058,7 @@
 @media (max-width: 480px) {
     /* قسم البطل */
     .solution-hero {
-        padding: 80px 20px 40px; /* زيادة الـ padding من الأعلى */
+        padding: 0px 20px 40px; /* زيادة الـ padding من الأعلى */
         margin-top: 30px; /* إضافة margin إضافي من الأعلى */
     }
     
@@ -1066,7 +1170,7 @@
 /* هواتف صغيرة جدًا (أقل من 400px) */
 @media (max-width: 400px) {
     .solution-hero {
-        padding: 70px 15px 30px; /* تعديل padding للأجهزة الصغيرة جداً */
+        padding: 10px 15px 30px; /* تعديل padding للأجهزة الصغيرة جداً */
     }
     
     .solution-hero h1 {
@@ -1097,7 +1201,7 @@
 /* تعديلات للهواتف الأفقية والأجهزة اللوحية الصغيرة */
 @media (min-width: 481px) and (max-width: 767px) {
     .solution-hero {
-        padding: 100px 30px 50px; /* زيادة المسافة من الأعلى */
+        padding: 0px 30px 50px; /* زيادة المسافة من الأعلى */
     }
     
     .solution-hero h1 {
@@ -1122,7 +1226,7 @@
 /* تعديلات للهواتف الكبيرة (مثل Galaxy Fold) */
 @media (max-width: 280px) {
     .solution-hero {
-        padding: 60px 10px 20px; /* تعديل padding للأجهزة الضيقة جداً */
+        padding: 10px 10px 20px; /* تعديل padding للأجهزة الضيقة جداً */
     }
     
     .solution-hero h1 {
@@ -1372,24 +1476,7 @@
 }
 
 
- /* القائمة في الجوال */
-.nav-links.show-mobile-menu {
-  display: flex !important;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  width: 100%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  z-index: 999;
-}
-
-.nav-links.show-mobile-menu li {
-  margin: 10px 0;
-}
-
+ 
     </style>
 </head>
 <body>

@@ -31,7 +31,7 @@
       background: linear-gradient(135deg, #ffffff, #f0f9f8);
       color: #333;
       line-height: 1.6;
-      direction: rtl;
+      /* direction: rtl; */
     }
     
     .container {
@@ -547,7 +547,7 @@
     }
     
     .section-title::after {
-      content: '';
+      /* content: ''; */
       position: absolute;
       width: 50px;
       height: 3px;
@@ -859,6 +859,7 @@
     .section-title {
       text-align: center;
       margin-bottom: 60px;
+      margin-top: 50px;
     }
     
     .section-title h2 {
@@ -1516,9 +1517,9 @@
     <div class="container">
       <!-- مسار التنقل -->
       <div class="breadcrumb">
-        <a href="/">الرئيسية</a>
+        <a href="/products">Products</a>
         <i class="fas fa-chevron-left"></i>
-        <a href="/products">المنتجات</a>
+        <a href="/">Home</a>
         <i class="fas fa-chevron-left"></i>
         <a href="/products/<%= product.categoryId %>"><%= product.category.name %></a>
         <i class="fas fa-chevron-left"></i>
@@ -1535,7 +1536,6 @@
         
         <div class="product-info">
           <h1 class="product-title"><%= product.name %></h1>
-           <h1 class="product-title"><%= product.productTitle %></h1>
           
           
           
@@ -1545,14 +1545,14 @@
           </div>
           
            <div class="product-features">
-          <h4>المميزات الرئيسية:</h4>
+          <h4>The main features :</h4>
           <ul class="features-list">
             <% if (product.productFeature) { %>
               <% product.productFeature.split(',').forEach(feature => { %>
                 <li><%= feature.trim() %></li>
               <% }); %>
             <% } else { %>
-              <li>لا توجد ميزات مضافة</li>
+              <li>No added features</li>
             <% } %>
           </ul>
         </div>
@@ -1566,7 +1566,7 @@
   rel="noopener noreferrer"
   style="text-decoration: none;"
 >
-  <i class="fab fa-whatsapp" style="margin-inline-end: 8px;"></i> إستفسار على واتساب
+  <i class="fab fa-whatsapp" style="margin-inline-end: 8px;"></i> Inquiry On WhatsApp
 </a>
 <button class="wishlist-btn" title="إضافة إلى المفضلة">
               <i class="far fa-heart"></i>
@@ -1581,12 +1581,12 @@
       <!-- قسم التبويبات -->
       <div class="product-tabs">
         <div class="tabs-header">
-          <button class="tab-btn active" data-tab="specifications">المواصفات الفنية</button>
+          <button class="tab-btn active" data-tab="specifications">Technical specifications</button>
           
         </div>
         
         <div class="tab-content active" id="description">
-          <h3>تفاصيل المنتج</h3>
+          <!-- <h3>تفاصيل المنتج</h3> -->
           <table class="specifications-table">
           <% 
             if (product.technicalProductDetails) {
@@ -1604,13 +1604,13 @@
               });
             } else { 
           %>
-            <tr><td colspan="2">لا توجد مواصفات فنية مضافة</td></tr>
+            <tr><td colspan="2">No additional technical specifications exist.</td></tr>
           <% } %>
         </table>
       </div>
       
      <div class="related-products">
-  <h2 class="section-title">منتجات ذات صلة</h2>
+  <h2 class="section-title">Related Products</h2>
   <div class="products-grid">
     <% if (relatedProducts.length > 0) { %>
       <% relatedProducts.forEach(related => { %>
@@ -1630,15 +1630,14 @@
                 class="btn add-to-cart-card"
                 target="_blank"
               >
-                إستفسار على واتساب
-              </a>
+Inquiry On WhatsApp              </a>
             </div>
           </div>
         </div>
         </a>
       <% }); %>
     <% } else { %>
-      <p>لا توجد منتجات ذات صلة حالياً.</p>
+      <p>There are currently no related products.</p>
     <% } %>
   </div>
 </div>
