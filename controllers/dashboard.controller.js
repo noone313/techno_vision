@@ -645,18 +645,14 @@ export const deleteCompany = async (req, res) => {
 export const getAllSolutions = async (req, res) => {
   try {
     const solutions = await Sol.findAll({
-      include: {
-        model: Product,
-        as: 'products',
-        through: { attributes: [] } // إخفاء جدول الربط
-      }
+     
     });
 
     const products = await Product.findAll();
 
    res.render('addSol', {
   solutions, // قائمة الحلول مع المنتجات المرتبطة
-  products   // قائمة المنتجات كلها
+  // قائمة المنتجات كلها
 });
 
   } catch (error) {
@@ -667,29 +663,17 @@ export const getAllSolutions = async (req, res) => {
 // عرض حل واحد
 export const getSolutionById = async (req, res) => {
   try {
-   const solution = await Sol.findByPk(req.params.id, {
-  include: {
-    model: Product,
-    as: 'products',
-    through: { attributes: [] },
-    include: {
-      model: Category, // تأكد أن هذا هو اسم الموديل الصحيح للفئة
-      as: 'category',   // تأكد أن العلاقة في موديل Product تعرف بهذا الاسم
-      attributes: ['id', 'name']
-    }
-  }
-});
+   const solution = await Sol.findByPk(req.params.id);
     if (!solution) return res.status(404).json({ error: 'الحل غير موجود' });
      const relatedSolutions = await Sol.findAll({
       where: {
         id: { [Op.ne]: solution.id }  // استثناء الحل الحالي
       },
-      limit: 4, // عدد الحلول المقترحة
       attributes: ['id', 'mainTitle', 'subTitle', 'description'],
       // ممكن تضمين علاقات أخرى حسب الحاجة
     });
 
-    res.render('sol', { solution, relatedSolutions });
+    res.render('soltest', { solution, relatedSolutions });
   
   } catch (error) {
     console.log(error)

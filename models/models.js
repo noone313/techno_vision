@@ -317,31 +317,6 @@ const Sol = sequelize.define('Sol', {
   paranoid: true
 });
 
-// جدول وسيط
-const SolProduct = sequelize.define('SolProduct', {}, {
-  timestamps: false
-});
-
-// العلاقات
-Sol.belongsToMany(Product, {
-  through: SolProduct,
-  foreignKey: 'solId',
-  as: 'products'
-});
-
-Product.belongsToMany(Sol, {
-  through: SolProduct,
-  foreignKey: 'productId',
-  as: 'solutions'
-});
-
-
-
-
-
-
-
-
 
 
 async function startServer(app) {

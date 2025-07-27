@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOOR AL-SAFANA - نور السفانا</title>
+<link rel="icon" href="https://nooralsafana.s3.eu-north-1.amazonaws.com/orders/518155891_122207785910107181_6125862413156237338_n.ico" type="image/x-icon">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+   <!-- ======= Google Font =======-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet">
+    <!-- End Google Font-->
+    
+    <!-- ======= Styles =======-->
+    <link href="/assets/vendors/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendors/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="/assets/vendors/glightbox/glightbox.min.css" rel="stylesheet">
+    <link href="/assets/vendors/swiper/swiper-bundle.min.css" rel="stylesheet">
+    <link href="/assets/vendors/aos/aos.css" rel="stylesheet">
+    <!-- End Styles-->
+    
+    
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+    
+    :root {
+      overflow-x: hidden;
+      --primary: #36c9b4;
+      --primary-light: #5bd5c3;
+      --primary-dark: #2aa897;
+      --accent: #ff6b6b;
+      --dark: #1a3c38;
+      --light: #f8fafc;
+        --item1-transform: translateX(-100%) translateY(-5%) scale(1.5);
+    --item1-filter: blur(30px);
+    --item1-zIndex: 11;
+    --item1-opacity: 0;
+
+    --item2-transform: translateX(0);
+    --item2-filter: blur(0px);
+    --item2-zIndex: 10;
+    --item2-opacity: 1;
+
+    --item3-transform: translate(50%,10%) scale(0.8);
+    --item3-filter: blur(10px);
+    --item3-zIndex: 9;
+    --item3-opacity: 1;
+
+    --item4-transform: translate(90%,20%) scale(0.5);
+    --item4-filter: blur(30px);
+    --item4-zIndex: 8;
+    --item4-opacity: 1;
+    
+    --item5-transform: translate(120%,30%) scale(0.3);
+    --item5-filter: blur(40px);
+    --item5-zIndex: 7;
+    --item5-opacity: 0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #ffffff, #f0f9f8);
+      color: #333;
+      line-height: 1.6;
+      direction: rtl;
+    }
+    
+    
+    
+    /* شريط التنقل */
+header {
+  background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  padding: 7px 0;
+  transition: background 0.3s ease;
+}
+
+    
+    .nav-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+  padding: 0 20px;
+}
+
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    
+    .logo-icon {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 10px;
+    }
+    
+    .logo-icon img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .logo-icon:hover img {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    
+    
+
+.logo-text {
+  width: auto; 
+  font-size: 1.3rem; /* أصغر قليلًا */
+  font-weight: 700;
+  margin-right: 10px;
+  color:rgb(37, 29, 0);
+}
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+    }
+    
+    .nav-links li {
+      margin: 0 15px;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color:black;
+      font-weight: 500;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      padding: 5px 10px;
+      border-radius: 20px;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+      background: rgba(54, 201, 180, 0.1);
+    }
+    
+    .nav-buttons {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-box {
+      position: relative;
+      margin-left: 20px;
+    }
+    
+    .search-box input {
+      padding: 10px 15px;
+      padding-right: 40px;
+      border: 1px solid #ddd;
+      border-radius: 30px;
+      width: 250px;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background:#f8fafc;
+    }
+    
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(54, 201, 180, 0.2);
+    }
+    
+    .search-box i {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+    }
+    
+    .mobile-toggle {
+      display: none;
+      font-size: 1.5rem;
+      color: var(--dark);
+      cursor: pointer;
+    }
+    
+     /* التذييل */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 70px 0 30px;
+      margin-top: 20px;
+    }
+    
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    
+    .footer-col h3 {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background: var(--primary);
+      bottom: 0;
+      right: 0;
+      border-radius: 2px;
+    }
+    
+    .footer-links {
+      list-style: none;
+    }
+    
+    .footer-links li {
+      margin-bottom: 12px;
+    }
+    
+    .footer-links a {
+      color: #bbb;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: block;
+    }
+    
+    .footer-links a:hover {
+      color: var(--primary);
+      transform: translateX(5px);
+    }
+    
+    .contact-info {
+      list-style: none;
+    }
+    
+    .contact-info li {
+      display: flex;
+      margin-bottom: 20px;
+    }
+    
+    .contact-info i {
+      color: var(--primary);
+      font-size: 1.2rem;
+      margin-left: 15px;
+      margin-top: 5px;
+    }
+    
+    .social-links {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      background: var(--primary);
+      transform: translateY(-5px);
+    }
+    
+    .copyright {
+      text-align: center;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: #bbb;
+      font-size: 0.95rem;
+    }
+    /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      
+      
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+       
+    }
+    
+    @media (max-width: 768px) {
+    
+      .search-box {
+        display: none;
+      }
+    }
+    /* تصميم القائمة المنسدلة كاملة الشاشة */
+.nav-links .dropdown-menu {
+  display: none;
+  position: fixed; /* تغيير من absolute إلى fixed */
+  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
+  right: 0;
+  left: 0;
+  bottom: 0;
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  width: 50vw; /* عرض كامل للشاشة */
+  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 30px;
+  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
+  border-top: 1px solid #e0f4f2;
+  text-align: right;
+  animation: fadeIn 0.3s ease-out;
+  padding: 50px;
+}
+
+/* إزالة السهم العلوي */
+.nav-links .dropdown-menu::before {
+  display: none;
+}
+
+/* تصميم عناصر القائمة */
+.nav-links .dropdown-menu li {
+  margin: 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.nav-links .dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.nav-links .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: var(--dark);
+  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-links .dropdown-menu a i {
+  margin-left: 15px;
+  font-size: 1.4rem;
+  color: var(--primary);
+  width: 30px;
+  text-align: center;
+}
+
+.nav-links .dropdown-menu a:hover {
+  background: rgba(54, 201, 180, 0.1);
+  color: var(--primary);
+  transform: translateX(-10px);
+}
+
+/* تأثيرات الفتح */
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* زر الإغلاق */
+.close-dropdown {
+  padding: 0px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 1.5rem;
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-dropdown:hover {
+  color: var(--primary);
+  transform: rotate(90deg);
+}
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .nav-links .dropdown-menu {
+    padding: 20px 15px;
+    top: 70px;
+    height: calc(100vh - 70px);
+  }
+  
+  .nav-links .dropdown-menu a {
+    font-size: 1.1rem;
+    padding: 12px 15px;
+  }
+  
+  .close-dropdown {
+    left: 20px;
+    top: 20px;
+  }
+}
+/* حل مشكلة الارتجاف */
+.submenu-container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.submenu-link {
+  display: block;
+  padding: 12px 20px;
+  position: relative;
+}
+
+.submenu-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  min-width: 100%;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 1000;
+  border: 1px solid #e0f4f2;
+}
+
+.submenu-container:hover .submenu-list {
+  display: block;
+}
+
+.submenu-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.submenu-list a {
+  display: block;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+}
+
+.submenu-list a:hover {
+  background: rgba(54, 201, 180, 0.1);
+  padding-right: 25px;
+}
+
+/* إصلاح المساحات */
+.dropdown-menu > li {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 12px 20px;
+}
+
+
+
+
+
+     /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 10px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
+/* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+
+    .site-wrap {
+  position: relative;
+}
+.hero__v6 .hero-subtitle {
+  background: color-mix(in srgb, var(--primary), transparent 70%);
+  color: var(--primary);
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+/* استخدم clamp ليكون العنوان متجاوبًا بين 24px و 48px */
+.hero__v6 .hero-title {
+  font-size: clamp(24px, 5vw, 48px);
+  line-height: 1.2;
+}
+
+.hero__v6 .logos .logos-title {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: color-mix(in srgb, var(--primary), transparent 10%);
+}
+
+/* تصغير شعارات اللوجو تدريجياً مع تصغير الشاشة */
+.hero__v6 .logos img {
+  width: 140px;
+  max-width: 100%;
+}
+@media (max-width: 575.98px) {
+  .hero__v6 .logos img {
+    width: 100px;
+  }
+}
+
+.hero__v6 .hero-img {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.hero__v6 .hero-img .img-main {
+  position: relative;
+  z-index: 9;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+}
+
+.hero__v6 .hero-img .img-card {
+  z-index: 10;
+  border-radius: 20px;
+  box-shadow: 0 15px 40px 0 rgba(0, 0, 0, 0.1); /* ثابت بدل rgba(var(--bs-black-rgb)) */
+  position: absolute;
+  max-width: 280px;
+  bottom: -40px;
+  left: -60px;
+}
+
+@media (max-width: 991.98px) {
+  .hero__v6 .hero-img .img-card {
+    left: 10px;
+    max-width: 300px;
+    bottom: -20px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero__v6 .hero-img .img-card {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.section {
+  padding-top: 100px;
+  scroll-margin-top: 60px;
+}
+
+@media (max-width: 767.98px) {
+  .section {
+    padding: 40px 0;
+  }
+}
+
+.section.first-section {
+  padding-top: 100px;
+}
+
+@media (min-width: 992px) {
+  .section.first-section {
+    padding-top: 130px;
+  }
+}
+
+
+.features__v2 .icon {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  border-radius: 50%;
+  background-color: var(--primary-light);
+  color: var(--primary-dark);
+}
+
+.features__v2 .content {
+  background-color: rgba(54, 201, 180, 0.1); /* لون primary مائل للشفافية */
+}
+
+.features__v2 .btn-play i {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 50%;
+  background-color: #ffffff; /* أبيض صريح */
+  color: var(--primary); /* الأزرق المخضر */
+}
+
+.services__v3 .subtitle {
+  background-color: rgba(54, 201, 180, 0.1); /* خلفية خفيفة من primary */
+  color: var(--primary);
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 7px;
+  font-weight: 600;
+  font-size: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.services__v3 .icon {
+  display: inline-block;
+  position: relative;
+  color: var(--primary) !important;
+}
+
+.services__v3 .icon:before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 40px;
+  height: 40px;
+  right: -10px;
+  bottom: 0px;
+  border-radius: 50%;
+  background-color: var(--primary-light); /* بدل rgba مجهول */
+}
+
+.services__v3 .icon svg {
+  width: 50px;
+}
+
+.services__v3 .service-card {
+  border: 1px solid rgba(42, 168, 151, 0.2); /* primary-dark مائل للشفافية */
+}
+
+
+
+.btn {
+  padding: 12px 20px;
+  background-color: var(--primary-light);
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  font-weight: 600;
+  position: relative;
+  width: auto !important;
+  height: auto !important;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  color: white;
+  background-color: var(--primary-dark) !important;
+  border: 1px solid var(--primary-dark) !important;
+}
+
+.btn.btn-white.hover-outline {
+  background-color: white !important;
+  color: var(--primary-dark) !important;
+  border: 1px solid transparent !important;
+}
+
+.btn.btn-white.hover-outline:hover {
+  color: var(--primary-dark) !important;
+  background-color: transparent !important;
+  border: 1px solid var(--primary-dark) !important;
+}
+
+.btn.btn-white-outline {
+  border: 1px solid var(--primary-light) !important;
+  color: var(--primary-light) !important;
+  background-color: transparent;
+}
+
+.btn.btn-white-outline:hover,
+.btn.btn-white-outline:focus,
+.btn.btn-white-outline:active {
+  background-color: transparent !important;
+  border: 1px solid var(--primary-dark) !important;
+  color: var(--primary-dark) !important;
+}
+
+@media (max-width: 575.98px) {
+  .btn {
+    display: none;
+  }
+}
+
+
+#back-to-top {
+  position: fixed;
+  bottom: 0px;
+  right: 20px;
+  visibility: hidden;
+  opacity: 0;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  z-index: 1000;
+  width: 40px;
+  height: 40px;
+}
+#back-to-top i {
+  font-size: 24px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+#back-to-top.show {
+  bottom: 20px;
+  opacity: 1;
+  visibility: visible;
+}
+    </style>
+</head>
+<body>
+   <!-- شريط التنقل -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+        </div>
+        <div class="logo-text">NOOR AL-SAFANA</div>
+      </div>
+      
+ <ul class="nav-links">
+  <li><a href="/"></i> الرئيسية</a></li>
+  <li class="dropdown">
+    <a href="/" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
+    <ul class="dropdown-menu">
+      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+     <li class="submenu-container">
+        <a href="javascript:void(0)" class="submenu-trigger">
+          <i class="fas fa-shield-alt"></i> Security System 
+          <i class="fas fa-chevron-down mobile-arrow"></i>
+        </a>
+        <ul class="submenu-list">
+          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="/products"> منتجاتنا</a></li>
+  <li><a href="/about-us"> من نحن</a></li>
+  <li><a href="/contact-us"> تواصل معنا</a></li>
+</ul>
+      
+      <div class="nav-buttons">
+        <div class="search-box">
+          <input type="text" placeholder="ابحث عن منتج...">
+          <i class="fas fa-search"></i>
+        </div>
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+
+    
+  </header>
+
+
+
+<!-- ======= Site Wrap =======-->
+    <div class="site-wrap">
+      
+      
+     
+      
+      <!-- ======= Main =======-->
+      <main>
+        
+        
+        <!-- ======= Hero =======-->
+        <section class="hero__v6 section" id="home">
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-6 mb-4 mb-lg-0">
+                <div class="row">
+                  <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0"><%= solution.subTitle %></span>
+                    <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100"><%= solution.mainTitle %></h1>
+                    <div class="cta d-flex gap-2 mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="300"><a class="btn btn-white-outline" href="/contact-us">اتصل بنا
+                        <svg class="lucide lucide-arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M7 7h10v10"></path>
+                          <path d="M7 17 17 7"></path>
+                        </svg></a></div>
+                    <!-- <div class="logos mb-4" data-aos="fade-up" data-aos-delay="400"><span class="logos-title text-uppercase mb-4 d-block">Trusted by major companies worldwide</span>
+                      <div class="logos-images d-flex gap-4 align-items-center"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-air-bnb__black.svg" alt="Company 1" style="width: 110px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-ibm__black.svg" alt="Company 2" style="width: 80px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-google__black.svg" alt="Company 3" style="width: 110px;"></div>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6">
+                <div class="hero-img"><img class="img-main img-fluid rounded-4" src="<%= solution.imageUrl %>" alt="Hero Image" data-aos="fade-in" data-aos-delay="500"></div>
+              </div>
+            </div>
+          </div>
+          <!-- End Hero-->
+        </section>
+        <!-- End Hero-->
+        
+       
+        
+       <% let features = JSON.parse(solution.features); %>
+
+<!-- ======= Features =======-->
+<section class="section features__v2" id="features">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="d-lg-flex p-5 rounded-4 content" data-aos="fade-in" data-aos-delay="0">
+          <div class="row">
+            <div class="col-lg-5 mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="0">
+              <div class="row"> 
+                <div class="col-lg-11">
+                  <div class="h-100 flex-column justify-content-between d-flex">
+                    <div>
+                      <h2 class="mb-4">وصف النظام</h2>
+                      <p class="mb-5"><%= solution.description %></p>
+                    </div>
+                    <div class="align-self-start">
+                      <a class=" btn  d-inline-flex align-items-center gap-2" href="/products">
+                        <i class="bi bi-play-fill"></i> اكتشف منتجاتنا 
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- الديناميكية هنا -->
+            <div class="col-lg-7">
+              <div class="row justify-content-end">
+                <div class="col-lg-11">
+                  <div class="row">
+                    <% features.forEach((feature, index) => { %>
+                      <div class="col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+                        <div class="icon text-center mb-4">
+                          <span class="fs-4"><%= feature.emoji %></span>
+                        </div>
+                        <h3 class="fs-6 fw-bold mb-3"><%= feature.title %></h3>
+                        <p><%= feature.description %></p>
+                      </div>
+                    <% }) %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- نهاية الجزء الديناميكي -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End Features-->
+
+        
+        
+        
+        
+
+
+
+
+
+        
+       <section class="section services__v3" id="services">
+  <div class="container">
+    <div class="row mb-5">
+      <div class="col-md-8 mx-auto text-center">
+        <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">حلول أخرى</span>
+        <h2 class="mb-3" data-aos="fade-up" data-aos-delay="100">حلول قد تهمك من نفس الفئة</h2>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <% if (relatedSolutions && relatedSolutions.length > 0) { %>
+        <% relatedSolutions.forEach((sol, index) => { %>
+          <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
+            <div class="service-card p-4 rounded-4 h-100 d-flex flex-column justify-content-between gap-5">
+              <div>
+              
+                <h3 class="fs-5 mb-3"><%= sol.mainTitle %></h3>
+                <p class="mb-4"><%= sol.subTitle || sol.description %></p>
+              </div>
+              <a class="special-link d-inline-flex gap-2 align-items-center text-decoration-none" href="/sol/<%= sol.id %>">
+                <span class="icons">
+                  <i class="icon-1 bi bi-arrow-right-short"></i>
+                  <i class="icon-2 bi bi-arrow-right-short"></i>
+                </span>
+                <span>اكتشف المزيد</span>
+              </a>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <div class="col-12 text-center">
+          <p>لا توجد حلول مشابهة حالياً.</p>
+        </div>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+        
+        
+        
+      
+        
+      </main>
+    </div>
+    
+    <!-- ======= Back to Top =======-->
+    <button id="back-to-top"><i class="bi bi-arrow-up-short"></i></button>
+    <!-- End Back to top-->
+    
+
+
+
+
+
+
+
+
+
+   <!-- التذييل -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>عن NOOR AL-SAFANA</h3>
+          <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61553215440908&ref=_xav_ig_profile_page_web#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/noor.alsafana/" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-col">
+          <h3>روابط سريعة</h3>
+          <ul class="footer-links">
+            <li><a href="/">الرئيسية</a></li>
+            <li><a href="/profucts">منتجاتنا</a></li>
+            <li><a href="/sol/8">الحلول</a></li>
+            <li><a href="/about-us">من نحن</a></li>
+            <li><a href="/contact-us">تواصل معنا</a></li>
+            
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>فئات المنتجات</h3>
+          <ul class="footer-links">
+            <li><a href="/sol/12">أنظمة الأمان</a></li>
+            <li><a href="/sol/8">الإضاءة الذكية</a></li>
+            <li><a href="/sol/11">الستائر الذكية</a></li>
+            <li><a href="/sol/10">التحكم الصوتي</a></li>
+            <li><a href="/products">أحدث المنتجات</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3>تواصل معنا</h3>
+          <ul class="contact-info">
+            <li>
+              <i class="fas fa-map-marker-alt"></i>
+              <span>بغداد، الجادرية</span>
+            </li>
+            <li>
+              <i class="fas fa-phone"></i>
+              <span>07806089246</span>
+            </li>
+            <li>
+              <i class="fas fa-envelope"></i>
+              <span>info@smarthome.iq</span>
+            </li>
+            <li>
+              <i class="fas fa-clock"></i>
+              <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="copyright">
+        <p>&copy; 2025 NOOR AL-SAFANA. جميع الحقوق محفوظة.</p>
+      </div>
+    </div>
+  </footer>
+
+
+
+   <!-- ======= Javascripts =======-->
+    <script src="/assets/vendors/bootstrap/bootstrap.bundle.min.js"></script>
+    <script src="/assets/vendors/gsap/gsap.min.js"></script>
+    <script src="/assets/vendors/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="/assets/vendors/isotope/isotope.pkgd.min.js"></script>
+    <script src="/assets/vendors/glightbox/glightbox.min.js"></script>
+    <script src="/assets/vendors/swiper/swiper-bundle.min.js"></script>
+    <script src="/assets/vendors/aos/aos.js"></script>
+    <script src="/assets/vendors/purecounter/purecounter.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/send_email.js"></script>
+    <!-- End JavaScripts-->
+  <script>
+//  // سكربت القائمة المنسدلة
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdownToggle = document.querySelector('.nav-links .dropdown > a');
+  const dropdownParent = document.querySelector('.nav-links .dropdown');
+  
+  // إنشاء زر الإغلاق ديناميكياً
+  const closeButton = document.createElement('span');
+  closeButton.className = 'close-dropdown';
+  closeButton.innerHTML = '<i class="fas fa-times"></i>';
+  document.querySelector('.dropdown-menu').prepend(closeButton);
+
+  dropdownToggle.addEventListener('click', function(e) {
+    e.preventDefault();
+    dropdownParent.classList.toggle('open');
+    document.body.style.overflow = dropdownParent.classList.contains('open') ? 'hidden' : '';
+  });
+
+  // إغلاق القائمة عند النقر على زر الإغلاق
+  closeButton.addEventListener('click', function() {
+    dropdownParent.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+
+  // إغلاق القائمة عند النقر خارجها
+  document.addEventListener('click', function(e) {
+    if (!dropdownParent.contains(e.target)) {
+      dropdownParent.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  // حل مشكلة الارتجاف
+  const submenuParents = document.querySelectorAll('.submenu-parent');
+  
+  submenuParents.forEach(parent => {
+    // لحل مشكلة اختفاء القائمة
+    parent.addEventListener('mouseenter', function() {
+      this.querySelector('.submenu').style.display = 'block';
+    });
+    
+    parent.addEventListener('mouseleave', function() {
+      this.querySelector('.submenu').style.display = 'none';
+    });
+  });
+
+  // للجوال
+  if (window.innerWidth <= 768) {
+    const submenuTriggers = document.querySelectorAll('.submenu-trigger');
+    
+    submenuTriggers.forEach(trigger => {
+      trigger.addEventListener('click', function(e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle('active');
+        
+        // إغلاق القوائم الأخرى
+        submenuParents.forEach(p => {
+          if (p !== parent) {
+            p.classList.remove('active');
+          }
+        });
+      });
+    });
+  }
+});
+
+const toggleBtn = document.querySelector('.mobile-toggle');
+  const navLinks = document.querySelector('.nav-links');
+
+  toggleBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('show-mobile-menu');
+  });
+</script>
