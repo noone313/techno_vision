@@ -673,7 +673,7 @@ export const getSolutionById = async (req, res) => {
       // ممكن تضمين علاقات أخرى حسب الحاجة
     });
 
-    res.render('soltest', { solution, relatedSolutions });
+    res.render('soltest', { solution, relatedSolutions,lang: req.query.lang || 'en' });
   
   } catch (error) {
     console.log(error)

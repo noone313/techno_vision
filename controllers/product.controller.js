@@ -8,7 +8,7 @@ import { Op } from 'sequelize';
 export const getAllProducts = async (req, res) => {
   try {
     const { category: categoryId, company: companyId } = req.query;
-
+    const lang = req.query.lang || 'en'; // Default to English if no language is specified
     const whereClause = {};
     if (categoryId) whereClause.categoryId = categoryId;
     if (companyId) whereClause.companyId = companyId;
@@ -43,7 +43,8 @@ export const getAllProducts = async (req, res) => {
       categories,
       selectedCategory: categoryId || null,
       Companies,
-      selectedCompany: companyId || null
+      selectedCompany: companyId || null,
+      lang
     });
 
   } catch (error) {
@@ -260,7 +261,7 @@ export const getSingleProduct = async (req, res) => {
       }
   });
 
-    res.render('singleProduct', { product,relatedProducts });
+    res.render('singleProduct', { product,relatedProducts, lang: req.query.lang || 'en' });
   } catch (error) {
     console.error('Error fetching product:', error);
     res.status(500).send('حدث خطأ أثناء جلب المنتج');
@@ -269,6 +270,7 @@ export const getSingleProduct = async (req, res) => {
 
 
 export const aboutUs = async (req, res) => {
+  const lang = req.query.lang || 'en'; // Default to English if no language is specified
    const aboutstat = await AboutStat.findAll({
       order: [['createdAt', 'DESC']]
     });
@@ -289,12 +291,22 @@ export const aboutUs = async (req, res) => {
         projects,
         employee,
         years,
-        imageUrl
+        imageUrl,
+    lang
   }); // Render the about us page
 }
 
 export const contactUs = async (req, res) => {
-  res.render('contactUs'); // Render the contact us page
+ try {
+    const lang = req.query.lang || 'en'; // Default to English if no language is specified
+    res.render('contactUs',{
+      lang
+    }); // Render the contact us page
+
+ } catch (error) {
+    console.error("Error rendering contact us page:", error);
+    res.status(500).send("Internal Server Error");
+ }
 }
 
 

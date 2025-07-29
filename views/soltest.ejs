@@ -800,10 +800,107 @@ header {
   opacity: 1;
   visibility: visible;
 }
+/* تحسين شكل زر تغيير اللغة */
+.language-switch {
+  margin-left: 15px;
+}
+
+.language-switch .lang-btn {
+  padding: 8px 14px;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: #333;
+  background-color: #ffffffd0;
+  backdrop-filter: blur(3px);
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.language-switch .lang-btn:hover {
+  background-color: #f0f0f0;
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* مظهر أفضل في الجوال */
+@media (max-width: 768px) {
+  .nav-buttons {
+    /* flex-direction: row-reverse; */
+    gap: 10px;
+  }
+
+  .language-switch .lang-btn {
+    padding: 7px 12px;
+    font-size: 0.9rem;
+  }
+
+  .language-switch {
+    margin-left: 0;
+  }
+}
     </style>
 </head>
 <body>
-   <!-- شريط التنقل -->
+  <% if (lang === 'en') { %>
+     <!-- شريط التنقل -->
+  <header>
+    <div class="container nav-container">
+      <div class="logo">
+        <div class="logo-icon">
+        </div>
+        <div class="logo-text">NOOR AL-SAFANA</div>
+      </div>
+      
+ <ul class="nav-links">
+  <li><a href="/"></i> Home</a></li>
+  <li class="dropdown">
+    <a href="/" class="active"></i> Solution <i class="fas fa-chevron-down dropdown-icon"></i></a>
+    <ul class="dropdown-menu">
+      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+     <li class="submenu-container">
+        <a href="javascript:void(0)" class="submenu-trigger">
+          <i class="fas fa-shield-alt"></i> Security System 
+          <i class="fas fa-chevron-down mobile-arrow"></i>
+        </a>
+        <ul class="submenu-list">
+          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="/products"> Products</a></li>
+  <li><a href="/about-us">About Us</a></li>
+  <li><a href="/contact-us">Contact Us</a></li>
+</ul>
+      
+     <div class="nav-buttons">
+  <div class="language-switch">
+    <% if (lang === 'ar') { %>
+      <a href="?lang=en" class="lang-btn">EN</a>
+    <% } else { %>
+      <a href="?lang=ar" class="lang-btn">AR</a>
+    <% } %>
+  </div>
+  <div class="mobile-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+</div>
+
+    </div>
+
+    
+  </header>
+  <% } else { %>
+      <!-- شريط التنقل -->
   <header>
     <div class="container nav-container">
       <div class="logo">
@@ -842,18 +939,23 @@ header {
 </ul>
       
       <div class="nav-buttons">
-        <div class="search-box">
-          <input type="text" placeholder="ابحث عن منتج...">
-          <i class="fas fa-search"></i>
-        </div>
-        <div class="mobile-toggle">
-          <i class="fas fa-bars"></i>
-        </div>
-      </div>
+  <div class="language-switch">
+    <% if (lang === 'ar') { %>
+      <a href="?lang=en" class="lang-btn">EN</a>
+    <% } else { %>
+      <a href="?lang=ar" class="lang-btn">AR</a>
+    <% } %>
+  </div>
+  <div class="mobile-toggle">
+    <i class="fas fa-bars"></i>
+  </div>
+</div>
+
     </div>
 
     
   </header>
+  <% } %>
 
 
 
@@ -867,37 +969,47 @@ header {
       <main>
         
         
-        <!-- ======= Hero =======-->
-        <section class="hero__v6 section" id="home">
-          <div class="container">
-            <div class="row">
-              <div class="col-lg-6 mb-4 mb-lg-0">
-                <div class="row">
-                  <div class="col-lg-11"><span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0"><%= solution.subTitle %></span>
-                    <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100"><%= solution.mainTitle %></h1>
-                    <div class="cta d-flex gap-2 mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="300"><a class="btn btn-white-outline" href="/contact-us">اتصل بنا
-                        <svg class="lucide lucide-arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M7 7h10v10"></path>
-                          <path d="M7 17 17 7"></path>
-                        </svg></a></div>
-                    <!-- <div class="logos mb-4" data-aos="fade-up" data-aos-delay="400"><span class="logos-title text-uppercase mb-4 d-block">Trusted by major companies worldwide</span>
-                      <div class="logos-images d-flex gap-4 align-items-center"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-air-bnb__black.svg" alt="Company 1" style="width: 110px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-ibm__black.svg" alt="Company 2" style="width: 80px;"><img class="img-fluid js-img-to-inline-svg" src="assets/images/logo/actual-size/logo-google__black.svg" alt="Company 3" style="width: 110px;"></div>
-                    </div> -->
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-6">
-                <div class="hero-img"><img class="img-main img-fluid rounded-4" src="<%= solution.imageUrl %>" alt="Hero Image" data-aos="fade-in" data-aos-delay="500"></div>
-              </div>
+       <!-- ======= Hero =======-->
+<section class="hero__v6 section" id="home">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="row">
+          <div class="col-lg-11">
+            <span class="hero-subtitle text-uppercase" data-aos="fade-up" data-aos-delay="0">
+              <%= lang === 'en' ? solution.subTitle.split(',')[1].trim() : solution.subTitle.split(',')[0].trim() %>
+            </span>
+            <h1 class="hero-title mb-3" data-aos="fade-up" data-aos-delay="100">
+              <%= lang === 'en' ? solution.mainTitle.split(',')[1].trim() : solution.mainTitle.split(',')[0].trim() %>
+            </h1>
+            <div class="cta d-flex gap-2 mb-4 mb-lg-5" data-aos="fade-up" data-aos-delay="300">
+              <a class="btn btn-white-outline" href="/contact-us">
+                <%= lang === 'en' ? 'Contact Us' : 'اتصل بنا' %>
+                <svg class="lucide lucide-arrow-up-right" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 7h10v10"></path>
+                  <path d="M7 17 17 7"></path>
+                </svg>
+              </a>
             </div>
           </div>
-          <!-- End Hero-->
-        </section>
-        <!-- End Hero-->
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="hero-img">
+          <img class="img-main img-fluid rounded-4" src="<%= solution.imageUrl %>" alt="Hero Image" data-aos="fade-in" data-aos-delay="500">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
         
        
         
-       <% let features = JSON.parse(solution.features); %>
+       <% 
+  let features = JSON.parse(solution.features); 
+  // مثال: features = [{emoji:"🔥", title:"العنوان العربي,English Title", description:"الوصف العربي,English Description"}, ...]
+%>
 
 <!-- ======= Features =======-->
 <section class="section features__v2" id="features">
@@ -911,12 +1023,19 @@ header {
                 <div class="col-lg-11">
                   <div class="h-100 flex-column justify-content-between d-flex">
                     <div>
-                      <h2 class="mb-4">وصف النظام</h2>
-                      <p class="mb-5"><%= solution.description %></p>
+                      <h2 class="mb-4"><%= lang === 'en' ? 'System Description' : 'وصف النظام' %></h2>
+                      <p class="mb-5">
+                        <% 
+                          // تفصيل الوصف حسب اللغة
+                          const descParts = solution.description ? solution.description.split(',') : ['', '']; 
+                          const descToShow = lang === 'en' ? (descParts[1] ? descParts[1].trim() : '') : (descParts[0] ? descParts[0].trim() : '');
+                        %>
+                        <%= descToShow %>
+                      </p>
                     </div>
                     <div class="align-self-start">
-                      <a class=" btn  d-inline-flex align-items-center gap-2" href="/products">
-                        <i class="bi bi-play-fill"></i> اكتشف منتجاتنا 
+                      <a class="btn d-inline-flex align-items-center gap-2" href="/products">
+                        <i class="bi bi-play-fill"></i> <%= lang === 'en' ? 'Discover Our Products' : 'اكتشف منتجاتنا' %>
                       </a>
                     </div>
                   </div>
@@ -929,13 +1048,19 @@ header {
               <div class="row justify-content-end">
                 <div class="col-lg-11">
                   <div class="row">
-                    <% features.forEach((feature, index) => { %>
+                    <% features.forEach((feature, index) => { 
+                      // تقسيم العنوان والوصف حسب اللغة
+                      const titleParts = feature.title ? feature.title.split(',') : ['', ''];
+                      const descParts = feature.description ? feature.description.split(',') : ['', ''];
+                      const titleToShow = lang === 'en' ? (titleParts[1] ? titleParts[1].trim() : '') : (titleParts[0] ? titleParts[0].trim() : '');
+                      const descToShow = lang === 'en' ? (descParts[1] ? descParts[1].trim() : '') : (descParts[0] ? descParts[0].trim() : '');
+                    %>
                       <div class="col-sm-6" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
                         <div class="icon text-center mb-4">
                           <span class="fs-4"><%= feature.emoji %></span>
                         </div>
-                        <h3 class="fs-6 fw-bold mb-3"><%= feature.title %></h3>
-                        <p><%= feature.description %></p>
+                        <h3 class="fs-6 fw-bold mb-3"><%= titleToShow %></h3>
+                        <p><%= descToShow %></p>
                       </div>
                     <% }) %>
                   </div>
@@ -952,6 +1077,7 @@ header {
 </section>
 <!-- End Features-->
 
+
         
         
         
@@ -966,34 +1092,42 @@ header {
   <div class="container">
     <div class="row mb-5">
       <div class="col-md-8 mx-auto text-center">
-        <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">حلول أخرى</span>
-        <h2 class="mb-3" data-aos="fade-up" data-aos-delay="100">حلول قد تهمك من نفس الفئة</h2>
+        <span class="subtitle text-uppercase mb-3" data-aos="fade-up" data-aos-delay="0">
+          <%= lang === 'en' ? 'Other Solutions' : 'حلول أخرى' %>
+        </span>
+        <h2 class="mb-3" data-aos="fade-up" data-aos-delay="100">
+          <%= lang === 'en' ? 'Similar category solutions that might interest you' : 'حلول قد تهمك من نفس الفئة' %>
+        </h2>
       </div>
     </div>
 
     <div class="row g-4">
       <% if (relatedSolutions && relatedSolutions.length > 0) { %>
-        <% relatedSolutions.forEach((sol, index) => { %>
+        <% relatedSolutions.forEach((sol, index) => {
+             const mainParts = sol.mainTitle ? sol.mainTitle.split(',') : ['', ''];
+             const subParts = sol.subTitle ? sol.subTitle.split(',') : ['', ''];
+             const title = lang === 'en' ? (mainParts[1] || '').trim() : (mainParts[0] || '').trim();
+             const subtitle = lang === 'en' ? (subParts[1] || '').trim() : (subParts[0] || '').trim();
+        %>
           <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="<%= index * 100 %>">
             <div class="service-card p-4 rounded-4 h-100 d-flex flex-column justify-content-between gap-5">
               <div>
-              
-                <h3 class="fs-5 mb-3"><%= sol.mainTitle %></h3>
-                <p class="mb-4"><%= sol.subTitle || sol.description %></p>
+                <h3 class="fs-5 mb-3"><%= title %></h3>
+                <p class="mb-4"><%= subtitle || sol.description %></p>
               </div>
               <a class="special-link d-inline-flex gap-2 align-items-center text-decoration-none" href="/sol/<%= sol.id %>">
                 <span class="icons">
                   <i class="icon-1 bi bi-arrow-right-short"></i>
                   <i class="icon-2 bi bi-arrow-right-short"></i>
                 </span>
-                <span>اكتشف المزيد</span>
+                <span><%= lang === 'en' ? 'Discover more' : 'اكتشف المزيد' %></span>
               </a>
             </div>
           </div>
         <% }) %>
       <% } else { %>
         <div class="col-12 text-center">
-          <p>لا توجد حلول مشابهة حالياً.</p>
+          <p><%= lang === 'en' ? 'No similar solutions available at the moment.' : 'لا توجد حلول مشابهة حالياً.' %></p>
         </div>
       <% } %>
     </div>
@@ -1021,10 +1155,55 @@ header {
 
 
 
-   <!-- التذييل -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
+    <footer>
+  <div class="container">
+    <div class="footer-grid">
+      <% if (lang === 'en') { %>
+        <!-- النسخة الإنجليزية -->
+        <div class="footer-col">
+          <h3>About NOOR AL-SAFANA</h3>
+          <p>We provide the most advanced smart home solutions to make your life easier and more comfortable. High-quality products with excellent support and warranty.</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/profile.php?id=61553215440908&ref=_xav_ig_profile_page_web#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/noor.alsafana/" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/products">Products</a></li>
+            <li><a href="/sol/8">Solutions</a></li>
+            <li><a href="/about-us">About Us</a></li>
+            <li><a href="/contact-us">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Product Categories</h3>
+          <ul class="footer-links">
+            <li><a href="/sol/12">Security Systems</a></li>
+            <li><a href="/sol/8">Smart Lighting</a></li>
+            <li><a href="/sol/11">Smart Curtains</a></li>
+            <li><a href="/sol/10">Audio Control</a></li>
+            <li><a href="/products">Latest Products</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul class="contact-info">
+            <li><i class="fas fa-map-marker-alt"></i> <span>Baghdad, Jadriya</span></li>
+            <li><i class="fas fa-phone"></i> <span>07806089246</span></li>
+            <li><i class="fas fa-envelope"></i> <span>info@smarthome.iq</span></li>
+            <li><i class="fas fa-clock"></i> <span>Sat - Thu: 9 AM - 5 PM</span></li>
+          </ul>
+        </div>
+      <% } else { %>
+        <!-- النسخة العربية -->
         <div class="footer-col">
           <h3>عن NOOR AL-SAFANA</h3>
           <p>نقدم حلول المنزل الذكي الأكثر تطوراً لتجعل حياتك أسهل وأكثر راحة. منتجات عالية الجودة مع ضمان ودعم فني متميز.</p>
@@ -1035,19 +1214,18 @@ header {
             <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
-        
+
         <div class="footer-col">
           <h3>روابط سريعة</h3>
           <ul class="footer-links">
             <li><a href="/">الرئيسية</a></li>
-            <li><a href="/profucts">منتجاتنا</a></li>
+            <li><a href="/products">منتجاتنا</a></li>
             <li><a href="/sol/8">الحلول</a></li>
             <li><a href="/about-us">من نحن</a></li>
             <li><a href="/contact-us">تواصل معنا</a></li>
-            
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>فئات المنتجات</h3>
           <ul class="footer-links">
@@ -1058,35 +1236,28 @@ header {
             <li><a href="/products">أحدث المنتجات</a></li>
           </ul>
         </div>
-        
+
         <div class="footer-col">
           <h3>تواصل معنا</h3>
           <ul class="contact-info">
-            <li>
-              <i class="fas fa-map-marker-alt"></i>
-              <span>بغداد، الجادرية</span>
-            </li>
-            <li>
-              <i class="fas fa-phone"></i>
-              <span>07806089246</span>
-            </li>
-            <li>
-              <i class="fas fa-envelope"></i>
-              <span>info@smarthome.iq</span>
-            </li>
-            <li>
-              <i class="fas fa-clock"></i>
-              <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span>
-            </li>
+            <li><i class="fas fa-map-marker-alt"></i> <span>بغداد، الجادرية</span></li>
+            <li><i class="fas fa-phone"></i> <span>07806089246</span></li>
+            <li><i class="fas fa-envelope"></i> <span>info@smarthome.iq</span></li>
+            <li><i class="fas fa-clock"></i> <span>السبت - الخميس: 9 صباحاً - 5 مساءً</span></li>
           </ul>
         </div>
-      </div>
-      
-      <div class="copyright">
-        <p>&copy; 2025 NOOR AL-SAFANA. جميع الحقوق محفوظة.</p>
-      </div>
+      <% } %>
     </div>
-  </footer>
+
+    <div class="copyright">
+      <% if (lang === 'en') { %>
+        <p>&copy; 2025 NOOR AL-SAFANA. All rights reserved.</p>
+      <% } else { %>
+        <p>&copy; 2025 NOOR AL-SAFANA. جميع الحقوق محفوظة.</p>
+      <% } %>
+    </div>
+  </div>
+</footer>
 
 
 

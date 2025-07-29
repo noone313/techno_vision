@@ -121,6 +121,12 @@ app.post('/login', async (req, res) => {
     });
   }
 });
+
+
+app.get('/logout', (req, res) => {
+  res.clearCookie('authToken');
+  res.redirect('/');
+});
 app.use('/', categoryRouter); // استخدام مسار الفئات
 app.use('/',productRouter); // استخدام مسار المنتجات
 app.use('/', dashboardRouter); // استخدام مسار لوحة التحكم
