@@ -1367,6 +1367,10 @@ async function deleteCategory() {
     hideModal();
   }
 }
+// تفعيل/تعطيل القائمة الجانبية على الجوال
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+      document.querySelector('.dashboard-sidebar').classList.toggle('show');
+    });
 </script>
 </body>
 </html>

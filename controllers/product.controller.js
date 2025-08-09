@@ -55,19 +55,75 @@ export const getAllProducts = async (req, res) => {
 
 
 
+// دالة جلب منتج واحد مع الـ aliases الصحيحة
 export const getProductById = async (req, res) => {
+  try {
+    const product = await Product.findByPk(req.params.id, {
+      include: [
+        { model: Company, as: 'company' },
+        { model: Category, as: 'category' }
+      ]
+    });
+
+    if (!product) {
+      return res.status(404).json({ message: 'المنتج غير موجود' });
+    }
+
+    res.json({ product });
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    res.status(500).json({ message: 'حدث خطأ في السيرفر' });
+  }
+};
+
+
+// دالة تحديث المنتج 
+export const updateProduct = async (req, res) => {
   const { id } = req.params;
   try {
     const product = await Product.findByPk(id);
+
     if (!product) {
-      return res.status(404).send("Product not found");
+      return res.status(404).json({ message: "المنتج غير موجود" });
     }
-    res.render('productDetails', { product });
+
+    console.log('Current imageUrl:', product.imageUrl);
+    console.log('Uploaded file:', req.file);
+
+    let imageUrl = product.imageUrl;
+    if (req.file && req.file.path) {
+      imageUrl = req.file.path;
+    }
+
+    if (!imageUrl || imageUrl.trim() === '') {
+      // إما ارفق صورة افتراضية أو أرفض التحديث
+      return res.status(400).json({ message: "الصورة مطلوبة ولا يمكن أن تكون فارغة" });
+    }
+
+    const { name, description, categoryId, companyId, productFeature, technicalProductDetails } = req.body;
+
+    await product.update({
+      name,
+      description,
+      categoryId,
+      companyId,
+      productFeature,
+      technicalProductDetails,
+      imageUrl
+    });
+
+    res.json({
+      message: "تم تحديث المنتج بنجاح",
+      product
+    });
   } catch (error) {
-    console.error("Error fetching product:", error);
-    res.status(500).send("Internal Server Error");
+    console.error("Error updating product:", error);
+    res.status(500).json({ message: "حدث خطأ أثناء تحديث المنتج" });
   }
-}
+};
+
+
+
 
 
 
@@ -172,30 +228,7 @@ export const createProduct = async (req, res) => {
 
 
 
-export const updateProduct = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const product = await Product.findByPk(id);
-    if (!product) {
-      return res.status(404).send("Product not found");
-    }
 
-    const { name, description, price } = req.body;
-    const images = req.files ? req.files.map(file => file.path) : product.images;
-
-    await product.update({
-      name,
-      description,
-      price,
-      images
-    });
-
-    res.json(product);
-  } catch (error) {
-    console.error("Error updating product:", error);
-    res.status(500).send("Internal Server Error");
-  }
-}
 
 export const deleteProduct = async (req, res) => {
   const { id } = req.params;

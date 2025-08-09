@@ -34,7 +34,7 @@ app.use(express.static(path.join(__dirname, 'public'))); // مجلد public
 
 app.get('/', async (req, res) => { // أضيف async هنا
   try {
-    const sliders = await Slider.findAll({
+const lang = req.query.lang || 'en';    const sliders = await Slider.findAll({
       order: [['createdAt', 'DESC']]
     });
 
@@ -62,6 +62,7 @@ app.get('/', async (req, res) => { // أضيف async هنا
    
     
     res.render('r', { 
+      lang,
         sliders,
         portfolios,
         systems,

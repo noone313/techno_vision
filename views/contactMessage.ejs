@@ -68,7 +68,7 @@
       align-items: center;
     }
 
-    .sidebar-toggle {
+     .sidebar-toggle {
       background: none;
       border: none;
       font-size: 1.2rem;
@@ -219,7 +219,66 @@
       overflow-y: auto;
       background-color: var(--body-bg);
     }
+ .dashboard-row {
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 -10px;
+    }
 
+    .dashboard-col {
+      flex: 1;
+      min-width: 300px;
+      padding: 0 10px;
+      margin-bottom: 20px;
+    }
+     .dashboard-footer {
+      height: var(--footer-height);
+      background-color: var(--white);
+      box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+     @media (max-width: 992px) {
+      .dashboard-sidebar {
+        position: fixed;
+        top: var(--header-height);
+        right: -100%;
+        bottom: 0;
+        z-index: 900;
+      }
+
+      .dashboard-sidebar.show {
+        right: 0;
+      }
+
+      .dashboard-content {
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .search-box {
+        display: none;
+      }
+
+      .stats-cards {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .stats-cards {
+        grid-template-columns: 1fr;
+      }
+
+      .dashboard-col {
+        flex: 0 0 100%;
+      }
+    }
     .page-header {
       margin-bottom: 30px;
       display: flex;
@@ -413,10 +472,11 @@
 <body class="dashboard">
   <header class="dashboard-header">
     <div class="header-left">
-      <button class="sidebar-toggle" onclick="toggleSidebar()">
+      <button class="sidebar-toggle">
         <i class="fas fa-bars"></i>
       </button>
       <a href="/" class="brand-logo">
+      
         <span>نظام الإدارة</span>
       </a>
     </div>
@@ -579,6 +639,10 @@
         const menus = document.querySelectorAll('.profile-menu');
         menus.forEach(menu => (menu.style.display = 'none'));
       }
+    });
+    // تفعيل/تعطيل القائمة الجانبية على الجوال
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+      document.querySelector('.dashboard-sidebar').classList.toggle('show');
     });
   </script>
 </body>

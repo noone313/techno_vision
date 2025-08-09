@@ -1202,6 +1202,10 @@
         </td>
 
         <td>
+          <button class="btn btn-sm btn-warning" onclick="editProduct('<%= product.id %>')">
+    <i class="fas fa-edit"></i>
+  </button>
+
           <button class="btn btn-sm btn-danger" onclick="confirmDelete('<%= product.id %>')">
             <i class="fas fa-trash"></i>
           </button>
@@ -1282,7 +1286,7 @@
 </div>
 <div class="form-group">
   <label for="productImage" class="form-label">اختر صورة</label>
-  <input type="file" id="productImage" name="image" class="form-control" accept="image/*" required>
+  <input type="file" id="productImage" name="image" class="form-control" accept="image/*">
   <img id="imagePreview" class="img-preview" style="display: none; max-width: 150px; margin-top: 10px;">
 </div>
         </div>
@@ -1313,141 +1317,174 @@
   </div>
 
  <script>
-  function showAddModal() {
+// متغيرات الحالة
+let editMode = false;
+let currentEditId = null;
+
+// عرض مودال الإضافة
+function showAddModal() {
+  editMode = false;
+  currentEditId = null;
   document.getElementById('modalTitle').textContent = 'إضافة منتج جديد';
-  document.getElementById('categoryId').value = '';
   document.getElementById('categoryForm').reset();
-  showModal('categoryModal'); // استخدام الدالة المعدلة
+  document.getElementById('imagePreview').style.display = 'none';
+  showModal('categoryModal');
 }
 
-  // معالجة إرسال النموذج
-  document.getElementById('categoryForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const saveBtn = document.getElementById('saveBtn');
-    saveBtn.disabled = true;
-    saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
-    
-    try {
-      const formData = new FormData(e.target);
-      const response = await fetch('/products', {
-        method: 'POST',
-        body: formData
-      });
-
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        throw new Error('استجابة غير صالحة من الخادم');
-      }
-
-      const result = await response.json();
-      console.log('Response:', response);
-console.log('Result:', result);
-      if (!response.ok) {
-        throw new Error(result.message || 'حدث خطأ أثناء الإضافة');
-      }
-
-      alert(result.message);
-      window.location.reload();
-      
-    } catch (error) {
-      console.error('Error:', error);
-      alert(error.message || 'حدث خطأ غير متوقع');
-    } finally {
-      saveBtn.disabled = false;
-      saveBtn.innerHTML = 'حفظ';
+// عرض مودال التعديل
+async function editProduct(id) {
+  try {
+    const response = await fetch(`/products/one/${id}`);
+    if (!response.ok) {
+      throw new Error('تعذر جلب بيانات المنتج');
     }
-  });
 
- function confirmDelete(id) {
-  document.getElementById('deleteId').value = id;
-  showModal('deleteModal'); // استخدام الدالة المعدلة
-}
-// عرض المودال
-function showModal(modalId) {
-  document.getElementById(modalId).classList.add('show');
-  document.body.style.overflow = 'hidden'; // منع التمرير عند فتح المودال
-}
+    const { product } = await response.json();
+    
+    editMode = true;
+    currentEditId = id;
+    document.getElementById('modalTitle').textContent = 'تعديل المنتج';
+    
+    document.getElementById('categoryId').value = product.id;
+    document.getElementById('productName').value = product.name || '';
+    document.querySelector('select[name="categoryId"]').value = product.categoryId || '';
+    document.querySelector('select[name="companyId"]').value = product.companyId || '';
+    document.querySelector('input[name="description"]').value = product.description || '';
+    document.querySelector('input[name="productFeature"]').value = product.productFeature || '';
+    document.querySelector('input[name="technicalProductDetails"]').value = product.technicalProductDetails || '';
+    const preview = document.getElementById('imagePreview');
+    if (product.imageUrl) {
+      preview.src = product.imageUrl;
+      preview.style.display = 'block';
+    } else {
+      preview.style.display = 'none';
+    }
 
-// إخفاء المودال
-function hideModal(modalId) {
-  document.getElementById(modalId).classList.remove('show');
-  document.body.style.overflow = 'auto'; // إعادة التمرير عند إغلاق المودال
-}
-
-// إخفاء جميع المودالات عند النقر خارجها
-document.addEventListener('click', function(e) {
-  if (e.target.classList.contains('modal')) {
-    hideModal(e.target.id);
+    showModal('categoryModal');
+  } catch (err) {
+    console.error('Error fetching product:', err);
+    alert('حدث خطأ أثناء جلب بيانات المنتج: ' + err.message);
   }
-});
+}
 
-// إخفاء المودال عند الضغط على زر Escape
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    const openModals = document.querySelectorAll('.modal.show');
-    openModals.forEach(modal => {
-      hideModal(modal.id);
+// معالجة إرسال النموذج (إضافة/تعديل)
+document.getElementById('categoryForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  const saveBtn = document.getElementById('saveBtn');
+  const originalText = saveBtn.innerHTML;
+  saveBtn.disabled = true;
+  saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحفظ...';
+
+  try {
+    const formData = new FormData(e.target);
+    const url = editMode ? `/products/${currentEditId}` : '/products';
+    const method = editMode ? 'PUT' : 'POST';
+
+    const response = await fetch(url, {
+      method,
+      body: formData
     });
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'حدث خطأ أثناء الحفظ');
+    }
+
+    const result = await response.json();
+    alert(result.message || 'تم الحفظ بنجاح');
+    window.location.reload();
+    
+  } catch (error) {
+    console.error('Error saving product:', error);
+    alert(error.message || 'حدث خطأ غير متوقع أثناء الحفظ');
+  } finally {
+    saveBtn.disabled = false;
+    saveBtn.innerHTML = originalText;
   }
 });
 
+// تأكيد الحذف
+function confirmDelete(id) {
+  document.getElementById('deleteId').value = id;
+  showModal('deleteModal');
+}
 
 // تنفيذ الحذف
 async function deleteCategory() {
   const id = document.getElementById('deleteId').value;
   const deleteBtn = document.querySelector('#deleteModal .btn-danger');
+  const originalText = deleteBtn.innerHTML;
   
   try {
     deleteBtn.disabled = true;
     deleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الحذف...';
     
-    // تأكد أن المسار مطابق للراوتر
     const response = await fetch(`/products/${id}`, {
-      method: 'DELETE',
-      
+      method: 'DELETE'
     });
 
-    // التحقق من نوع المحتوى أولاً
-    const contentType = response.headers.get('content-type');
-    if (!contentType || !contentType.includes('application/json')) {
-      const text = await response.text();
-      throw new Error(text || 'استجابة غير متوقعة من الخادم');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.message || 'حدث خطأ أثناء الحذف');
     }
 
     const result = await response.json();
-
-    if (!response.ok) {
-      throw new Error(result.message || 'حدث خطأ أثناء الحذف');
-    }
-
-    alert(result.message);
+    alert(result.message || 'تم الحذف بنجاح');
     window.location.reload();
 
   } catch (error) {
-    console.error('Error:', error);
+    console.error('Error deleting product:', error);
     alert(error.message || 'حدث خطأ غير متوقع أثناء الحذف');
   } finally {
     deleteBtn.disabled = false;
-    deleteBtn.innerHTML = 'حذف';
-    hideModal();
+    deleteBtn.innerHTML = originalText;
+    hideModal('deleteModal');
   }
 }
 
-// Image preview functionality
-  document.getElementById('productImage').addEventListener('change', function(e) {
-    const preview = document.getElementById('imagePreview');
-    if (this.files && this.files[0]) {
-      const reader = new FileReader();
-      reader.onload = function(e) {
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-      }
-      reader.readAsDataURL(this.files[0]);
+// معاينة الصورة
+document.getElementById('productImage').addEventListener('change', function(e) {
+  const preview = document.getElementById('imagePreview');
+  if (this.files && this.files[0]) {
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      preview.src = e.target.result;
+      preview.style.display = 'block';
     }
-  });
+    reader.readAsDataURL(this.files[0]);
+  }
+});
 
- 
+// إدارة المودالات
+function showModal(modalId) {
+  document.getElementById(modalId).classList.add('show');
+  document.body.style.overflow = 'hidden';
+}
+
+function hideModal(modalId) {
+  document.getElementById(modalId).classList.remove('show');
+  document.body.style.overflow = 'auto';
+}
+
+// إغلاق المودال عند النقر خارجها أو بالضغط على Escape
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('modal')) {
+    hideModal(e.target.id);
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    const openModals = document.querySelectorAll('.modal.show');
+    openModals.forEach(modal => hideModal(modal.id));
+  }
+});
+// تفعيل/تعطيل القائمة الجانبية على الجوال
+    document.querySelector('.sidebar-toggle').addEventListener('click', function() {
+      document.querySelector('.dashboard-sidebar').classList.toggle('show');
+    });
 </script>
+
 </body>
 </html>

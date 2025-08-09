@@ -122,20 +122,29 @@
       position: relative;
     }
     
-    .nav-links .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 110%;
-      right: 0;
-      background: #fff;
-      min-width: 180px;
-      box-shadow: 0 8px 24px rgba(54,201,180,0.08);
-      border-radius: 12px;
-      z-index: 100;
-      padding: 10px 0;
-      border: 1px solid #e0f4f2;
-      text-align: right;
-    }
+    /* تصميم القائمة المنسدلة كاملة الشاشة */
+.nav-links .dropdown-menu {
+  display: none;
+  position: fixed; /* تغيير من absolute إلى fixed */
+  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
+  right: 0;
+  left: 0;
+  bottom: 0;
+   background: white; /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  width: 50vw; /* عرض كامل للشاشة */
+  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 30px;
+  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
+  border-top: 1px solid #e0f4f2;
+  text-align: right;
+  animation: fadeIn 0.3s ease-out;
+  padding: 50px;
+}
     
     .dropdown .dropdown-menu {
       display: none;
@@ -532,7 +541,53 @@
       width: 30%;
       color: var(--dark);
     }
-    
+    /* تحسين التوافق مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+
+  /* تبويبات المنتج */
+  .tabs-header {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .tab-btn {
+    flex: 1 1 auto;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  /* جدول المواصفات */
+  .specifications-table,
+  .specifications-table tbody,
+  .specifications-table tr,
+  .specifications-table th,
+  .specifications-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .specifications-table tr {
+    margin-bottom: 15px;
+    background: #fff; /* فصل الصفوف بصرياً */
+    border: 1px solid #eee;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .specifications-table th {
+    background: #f5f5f5;
+    padding: 10px;
+    font-weight: bold;
+    border-bottom: 1px solid #ddd;
+    width: 100%;
+  }
+
+  .specifications-table td {
+    padding: 10px;
+    border: none;
+  }
+}
+
     /* قسم المنتجات ذات الصلة */
     .related-products {
       margin-bottom: 60px;
@@ -1012,29 +1067,7 @@
     
 
 
-   /* تصميم القائمة المنسدلة كاملة الشاشة */
-.nav-links .dropdown-menu {
-  display: none;
-  position: fixed; /* تغيير من absolute إلى fixed */
-  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
-  right: 0;
-  left: 0;
-  bottom: 0;
-   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
-  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
-  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-  width: 50vw; /* عرض كامل للشاشة */
-  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 30px;
-  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
-  border-top: 1px solid #e0f4f2;
-  text-align: right;
-  animation: fadeIn 0.3s ease-out;
-  padding: 50px;
-}
+   
 
  /* التكيف مع الشاشات الصغيرة */
     @media (max-width: 992px) {
@@ -1774,7 +1807,7 @@ WhatsApp Inquiry             </a>
   <div class="container">
     <div class="footer-grid">
       <% if (lang === 'en') { %>
-        <!-- النسخة الإنجليزية -->
+        
         <div class="footer-col">
           <h3>About NOOR AL-SAFANA</h3>
           <p>We provide the most advanced smart home solutions to make your life easier and more comfortable. High-quality products with excellent support and warranty.</p>
