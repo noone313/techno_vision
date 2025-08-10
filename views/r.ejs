@@ -1914,12 +1914,17 @@ background: white;
 }
 
 /* تحسين شكل زر تغيير اللغة */
+/* تحسين شكل زر تغيير اللغة */
 .language-switch {
   margin-left: 15px;
 }
 
 .language-switch .lang-btn {
-  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px; /* نفس ارتفاع زر المينيو */
+  padding: 0 14px; /* تباعد أفقي فقط */
   border: 1px solid #ddd;
   border-radius: 20px;
   text-decoration: none;
@@ -1937,34 +1942,41 @@ background: white;
   border-color: var(--primary);
 }
 
-/* تحسين للجوال العادي */
+/* محاذاة العناصر في الهيدر */
+.nav-buttons {
+  display: flex;
+  align-items: center; /* محاذاة عمودية متساوية */
+  gap: 10px;
+}
+
+/* للجوال العادي */
 @media (max-width: 768px) {
-  .nav-buttons {
-    gap: 10px;
-  }
-
-  .language-switch .lang-btn {
-    padding: 7px 12px;
-    font-size: 0.9rem;
-  }
-
   .language-switch {
     margin-left: 0;
   }
+
+  .language-switch .lang-btn {
+    height: 36px; /* أصغر قليلاً */
+    padding: 0 12px;
+    font-size: 0.9rem;
+  }
 }
 
-/* تحسين إضافي للجوالات الصغيرة جداً مثل S24 */
+/* للجوالات الصغيرة جداً مثل S24 */
 @media (max-width: 480px) {
   .language-switch .lang-btn {
-    padding: 6px 10px;
+    height: 34px;
+    padding: 0 10px;
     font-size: 0.85rem;
     border-radius: 16px;
   }
-  
+
   .nav-buttons {
     gap: 6px;
   }
 }
+
+
 
 
 
