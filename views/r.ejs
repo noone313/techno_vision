@@ -1913,26 +1913,25 @@ background: white;
   to { opacity: 1; transform: scale(1); }
 }
 
-/* تحسين شكل زر تغيير اللغة */
-/* تحسين شكل زر تغيير اللغة */
-.language-switch {
-  margin-left: 15px;
+.logo {
+  display: flex;
+  align-items: center; /* محاذاة عمودية وسط */
+  gap: 10px; /* مسافة بين العناصر داخل الشعار */
 }
 
 .language-switch .lang-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 40px; /* نفس ارتفاع زر المينيو */
-  padding: 0 14px; /* تباعد أفقي فقط */
+  height: 36px; /* ارتفاع مناسب للشعار */
+  padding: 0 12px;
   border: 1px solid #ddd;
-  border-radius: 20px;
-  text-decoration: none;
-  font-size: 0.95rem;
-  color: #333;
+  border-radius: 18px;
   background-color: #ffffffd0;
   backdrop-filter: blur(3px);
   font-weight: 600;
+  font-size: 0.9rem;
+  color: #333;
   transition: all 0.3s ease;
 }
 
@@ -1942,37 +1941,16 @@ background: white;
   border-color: var(--primary);
 }
 
-/* محاذاة العناصر في الهيدر */
-.nav-buttons {
-  display: flex;
-  align-items: center; /* محاذاة عمودية متساوية */
-  gap: 10px;
-}
-
-/* للجوال العادي */
-@media (max-width: 768px) {
-  .language-switch {
-    margin-left: 0;
-  }
-
-  .language-switch .lang-btn {
-    height: 36px; /* أصغر قليلاً */
-    padding: 0 12px;
-    font-size: 0.9rem;
-  }
-}
-
-/* للجوالات الصغيرة جداً مثل S24 */
+/* في الشاشات الصغيرة */
 @media (max-width: 480px) {
+  .logo {
+    gap: 6px; /* تقليل المسافة */
+  }
   .language-switch .lang-btn {
-    height: 34px;
-    padding: 10 10px;
+    height: 32px;
+    padding: 0 10px;
     font-size: 0.85rem;
     border-radius: 16px;
-  }
-
-  .nav-buttons {
-    gap: 6px;
   }
 }
 
