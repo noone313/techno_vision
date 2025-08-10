@@ -1937,10 +1937,9 @@ background: white;
   border-color: var(--primary);
 }
 
-/* مظهر أفضل في الجوال */
+/* تحسين للجوال العادي */
 @media (max-width: 768px) {
   .nav-buttons {
-    /* flex-direction: row-reverse; */
     gap: 10px;
   }
 
@@ -1954,6 +1953,20 @@ background: white;
   }
 }
 
+/* تحسين إضافي للجوالات الصغيرة جداً مثل S24 */
+@media (max-width: 480px) {
+  .language-switch .lang-btn {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+    border-radius: 16px;
+  }
+  
+  .nav-buttons {
+    gap: 6px;
+  }
+}
+
+
 
   </style>
 </head>
@@ -1961,6 +1974,7 @@ background: white;
    <% if (lang === 'en') { %>
      <!-- شريط التنقل -->
   <header>
+    
     <div class="container nav-container">
       <div class="logo">
         <div class="logo-icon">
