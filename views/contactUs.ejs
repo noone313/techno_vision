@@ -130,8 +130,24 @@
   font-size: 1.3rem; /* أصغر قليلًا */
   font-weight: 700;
   margin-right: 50px;
-  color:rgb(37, 29, 0);
+  color: rgb(37, 29, 0);
 }
+
+/* للشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 1.2rem;   /* أصغر للموبايل */
+    margin-right: 50px; /* تقليل المسافة */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.2rem;  /* أصغر أكثر للهواتف الصغيرة جدًا */
+    margin-right: 50px;
+  }
+}
+
     
     .nav-links {
       display: flex;

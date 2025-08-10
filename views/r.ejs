@@ -121,8 +121,24 @@ header {
   font-size: 1.3rem; /* أصغر قليلًا */
   font-weight: 700;
   margin-right: 50px;
-  color:rgb(37, 29, 0);
+  color: rgb(37, 29, 0);
 }
+
+/* للشاشات الصغيرة (الموبايل) */
+@media (max-width: 768px) {
+  .logo-text {
+    font-size: 1.2rem;   /* أصغر للموبايل */
+    margin-right: 50px; /* تقليل المسافة */
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-text {
+    font-size: 1.2rem;  /* أصغر أكثر للهواتف الصغيرة جدًا */
+    margin-right: 50px;
+  }
+}
+
     
     .nav-links {
       display: flex;
@@ -1913,25 +1929,25 @@ background: white;
   to { opacity: 1; transform: scale(1); }
 }
 
-.logo {
-  display: flex;
-  align-items: center; /* محاذاة عمودية وسط */
-  gap: 10px; /* مسافة بين العناصر داخل الشعار */
+/* تحسين شكل زر تغيير اللغة */
+.language-switch {
+  margin-left: 15px;
 }
 
 .language-switch .lang-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 36px; /* ارتفاع مناسب للشعار */
-  padding: 0 12px;
+  height: 40px; /* نفس ارتفاع زر المينيو */
+  padding: 0 14px; /* تباعد أفقي فقط */
   border: 1px solid #ddd;
-  border-radius: 18px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.95rem;
+  color: #333;
   background-color: #ffffffd0;
   backdrop-filter: blur(3px);
   font-weight: 600;
-  font-size: 0.9rem;
-  color: #333;
   transition: all 0.3s ease;
 }
 
@@ -1941,20 +1957,39 @@ background: white;
   border-color: var(--primary);
 }
 
-/* في الشاشات الصغيرة */
-@media (max-width: 480px) {
-  .logo {
-    gap: 6px; /* تقليل المسافة */
+/* محاذاة العناصر في الهيدر */
+.nav-buttons {
+  display: flex;
+  align-items: center; /* محاذاة عمودية متساوية */
+  gap: 10px;
+}
+
+/* للجوال العادي */
+@media (max-width: 768px) {
+  .language-switch {
+    margin-left: 0;
   }
+
   .language-switch .lang-btn {
-    height: 32px;
-    padding: 0 10px;
-    font-size: 0.85rem;
-    border-radius: 16px;
+    height: 36px; /* أصغر قليلاً */
+    padding: 0 12px;
+    font-size: 0.9rem;
   }
 }
 
+/* للجوالات الصغيرة جداً مثل S24 */
+@media (max-width: 480px) {
+  .language-switch .lang-btn {
+    height: 34px;
+    padding: 10 10px;
+    font-size: 0.85rem;
+    border-radius: 16px;
+  }
 
+  .nav-buttons {
+    gap: 6px;
+  }
+}
 
 
 

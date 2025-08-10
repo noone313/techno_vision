@@ -77,7 +77,6 @@ export const getProductById = async (req, res) => {
 };
 
 
-// دالة تحديث المنتج 
 export const updateProduct = async (req, res) => {
   const { id } = req.params;
   try {
@@ -89,14 +88,20 @@ export const updateProduct = async (req, res) => {
 
     console.log('Current imageUrl:', product.imageUrl);
     console.log('Uploaded file:', req.file);
+    console.log('ImageLinks:', req.imageLinks);
 
-    let imageUrl = product.imageUrl;
+    // استخراج رابط الصورة من req.file إذا موجود، وإلا من req.imageLinks
+    let imageUrl = product.imageUrl; // افتراضيًا الصورة الحالية
+
     if (req.file && req.file.path) {
       imageUrl = req.file.path;
+    } else if (Array.isArray(req.imageLinks)) {
+      imageUrl = typeof req.imageLinks[0] === 'string' ? req.imageLinks[0] : imageUrl;
+    } else if (typeof req.imageLinks === 'string') {
+      imageUrl = req.imageLinks;
     }
 
     if (!imageUrl || imageUrl.trim() === '') {
-      // إما ارفق صورة افتراضية أو أرفض التحديث
       return res.status(400).json({ message: "الصورة مطلوبة ولا يمكن أن تكون فارغة" });
     }
 
