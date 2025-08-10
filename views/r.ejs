@@ -120,7 +120,7 @@ header {
   width: auto; 
   font-size: 1.3rem; /* أصغر قليلًا */
   font-weight: 700;
-  margin-right: 10px;
+  margin-right: 50px;
   color:rgb(37, 29, 0);
 }
     
@@ -1966,7 +1966,7 @@ background: white;
 @media (max-width: 480px) {
   .language-switch .lang-btn {
     height: 34px;
-    padding: 0 10px;
+    padding: 10 10px;
     font-size: 0.85rem;
     border-radius: 16px;
   }
@@ -1984,119 +1984,117 @@ background: white;
 </head>
 <body>
    <% if (lang === 'en') { %>
-     <!-- شريط التنقل -->
-  <header>
-    
-    <div class="container nav-container">
-      <div class="logo">
-        <div class="logo-icon">
-        </div>
-        <div class="logo-text">NOOR AL-SAFANA</div>
-      </div>
-      
- <ul class="nav-links">
-  <li><a href="/"></i> Home</a></li>
-  <li class="dropdown">
-    <a href="/" class="active"></i> Solution <i class="fas fa-chevron-down dropdown-icon"></i></a>
-    <ul class="dropdown-menu">
-      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
-      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
-      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
-      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
-      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
-      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
-     <li class="submenu-container">
-        <a href="javascript:void(0)" class="submenu-trigger">
-          <i class="fas fa-shield-alt"></i> Security System 
-          <i class="fas fa-chevron-down mobile-arrow"></i>
-        </a>
-        <ul class="submenu-list">
-          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
-          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
-          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="/products"> Products</a></li>
-  <li><a href="/about-us">About Us</a></li>
-  <li><a href="/contact-us">Contact Us</a></li>
-</ul>
-      
-     <div class="nav-buttons">
-  <div class="language-switch">
-    <% if (lang === 'ar') { %>
-      <a href="?lang=en" class="lang-btn">EN</a>
-    <% } else { %>
-      <a href="?lang=ar" class="lang-btn">AR</a>
-    <% } %>
-  </div>
-  <div class="mobile-toggle">
-    <i class="fas fa-bars"></i>
-  </div>
-</div>
+<!-- شريط التنقل -->
+<header>
+  <div class="container nav-container">
+    <div class="logo">
 
+      <!-- زر تغيير اللغة -->
+      <div class="language-switch">
+        <% if (lang === 'ar') { %>
+          <a href="?lang=en" class="lang-btn">EN</a>
+        <% } else { %>
+          <a href="?lang=ar" class="lang-btn">AR</a>
+        <% } %>
+      </div>
+
+      <div class="logo-text">NOOR AL-SAFANA</div>
     </div>
 
-    
-  </header>
-  <% } else { %>
-      <!-- شريط التنقل -->
-  <header>
-    <div class="container nav-container">
-      <div class="logo">
-        <div class="logo-icon">
-        </div>
-        <div class="logo-text">NOOR AL-SAFANA</div>
-      </div>
-      
- <ul class="nav-links">
-  <li><a href="/"></i> الرئيسية</a></li>
-  <li class="dropdown">
-    <a href="/" class="active"></i> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
-    <ul class="dropdown-menu">
-      <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
-      <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
-      <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
-      <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
-      <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
-      <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
-     <li class="submenu-container">
-        <a href="javascript:void(0)" class="submenu-trigger">
-          <i class="fas fa-shield-alt"></i> Security System 
-          <i class="fas fa-chevron-down mobile-arrow"></i>
-        </a>
-        <ul class="submenu-list">
-          <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
-          <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
-          <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
+    <ul class="nav-links">
+      <li><a href="/"> Home</a></li>
+      <li class="dropdown">
+        <a href="/" class="active"> Solution <i class="fas fa-chevron-down dropdown-icon"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+          <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+          <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+          <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+          <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+          <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+          <li class="submenu-container">
+            <a href="javascript:void(0)" class="submenu-trigger">
+              <i class="fas fa-shield-alt"></i> Security System 
+              <i class="fas fa-chevron-down mobile-arrow"></i>
+            </a>
+            <ul class="submenu-list">
+              <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+              <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+              <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
+            </ul>
+          </li>
         </ul>
       </li>
+      <li><a href="/products"> Products</a></li>
+      <li><a href="/about-us">About Us</a></li>
+      <li><a href="/contact-us">Contact Us</a></li>
     </ul>
-  </li>
-  <li><a href="/products"> منتجاتنا</a></li>
-  <li><a href="/about-us"> من نحن</a></li>
-  <li><a href="/contact-us"> تواصل معنا</a></li>
-</ul>
-      
-     <div class="nav-buttons">
-  <div class="language-switch">
-    <% if (lang === 'ar') { %>
-      <a href="?lang=en" class="lang-btn">EN</a>
-    <% } else { %>
-      <a href="?lang=ar" class="lang-btn">AR</a>
-    <% } %>
-  </div>
-  <div class="mobile-toggle">
-    <i class="fas fa-bars"></i>
-  </div>
-</div>
 
+    <div class="nav-buttons">
+      <div class="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+
+<% } else { %>
+<!-- شريط التنقل -->
+<header>
+  <div class="container nav-container">
+    <div class="logo">
+      
+
+      <!-- زر تغيير اللغة -->
+      <div class="language-switch">
+        <% if (lang === 'ar') { %>
+          <a href="?lang=en" class="lang-btn">EN</a>
+        <% } else { %>
+          <a href="?lang=ar" class="lang-btn">AR</a>
+        <% } %>
+      </div>
+
+      <div class="logo-text">NOOR AL-SAFANA</div>
     </div>
 
-    
-  </header>
-  <% } %>
+    <ul class="nav-links">
+      <li><a href="/"> الرئيسية</a></li>
+      <li class="dropdown">
+        <a href="/" class="active"> الحلول <i class="fas fa-chevron-down dropdown-icon"></i></a>
+        <ul class="dropdown-menu">
+          <li><a href="/sol/6"><i class="fas fa-network-wired"></i> Smart Home Zigbee</a></li>
+          <li><a href="/sol/7"><i class="fas fa-microchip"></i> Smart Home KNX</a></li>
+          <li><a href="/sol/8"><i class="fas fa-lightbulb"></i> Lighting</a></li>
+          <li><a href="/sol/9"><i class="fas fa-video"></i> Video Intercom</a></li>
+          <li><a href="/sol/10"><i class="fas fa-volume-up"></i> Sound System</a></li>
+          <li><a href="/sol/11"><i class="fas fa-window-maximize"></i> Curtain System</a></li>
+          <li class="submenu-container">
+            <a href="javascript:void(0)" class="submenu-trigger">
+              <i class="fas fa-shield-alt"></i> Security System 
+              <i class="fas fa-chevron-down mobile-arrow"></i>
+            </a>
+            <ul class="submenu-list">
+              <li><a href="/sol/12"><i class="fas fa-lock"></i> Smart Lock</a></li>
+              <li><a href="/sol/13"><i class="fas fa-fire-extinguisher"></i> Fire Alarm</a></li>
+              <li><a href="/sol/14"><i class="fas fa-video"></i> CCTV</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="/products"> منتجاتنا</a></li>
+      <li><a href="/about-us"> من نحن</a></li>
+      <li><a href="/contact-us"> تواصل معنا</a></li>
+    </ul>
+
+    <div class="nav-buttons">
+      <div class="mobile-toggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </div>
+  </div>
+</header>
+<% } %>
+
 
   <!-- السلايدر الرئيسي -->
   <section class="container2">
