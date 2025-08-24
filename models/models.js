@@ -73,7 +73,7 @@ const System = sequelize.define('System', {
     allowNull: true
   },
   features:{
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: true
   }
   
