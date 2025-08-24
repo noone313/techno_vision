@@ -200,7 +200,7 @@
     }
 
 
-   /* تصميم القائمة المنسدلة كاملة الشاشة */
+ /* تصميم القائمة المنسدلة كاملة الشاشة */
 .nav-links .dropdown-menu {
   display: none;
   position: fixed; /* تغيير من absolute إلى fixed */
@@ -213,7 +213,7 @@
   -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
   width: 50vw; /* عرض كامل للشاشة */
-  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
+  /* height: calc(100vh - 80px); ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   padding: 30px;
@@ -232,7 +232,7 @@
 /* تصميم عناصر القائمة */
 .nav-links .dropdown-menu li {
   margin: 0;
-  padding: 15px 0;
+  padding: 9px 0;
   border-bottom: 1px solid #f5f5f5;
 }
 
@@ -300,9 +300,9 @@
 /* التكيف مع الشاشات الصغيرة */
 @media (max-width: 768px) {
   .nav-links .dropdown-menu {
-    padding: 20px 15px;
+    /* padding: 20px 15px; */
     top: 70px;
-    height: calc(100vh - 70px);
+    /* height: calc(100vh - 70px); */
   }
   
   .nav-links .dropdown-menu a {
@@ -398,7 +398,7 @@
 }
 
 .nav-links.show-mobile-menu li {
-  margin: 10px 0;
+  margin: 0px 0;
 }
 
 @media (max-width: 992px) {
@@ -407,6 +407,83 @@
     flex-direction: column;
   }
 }
+/* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        /* position: static; */
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+
+/* تحسينات للهواتف ذات الشاشات الصغيرة */
+@media (max-width: 480px) {
+  .nav-links .dropdown-menu {
+    padding: 15px 10px;
+  }
+  
+  .nav-links .dropdown-menu a {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+  
+  .nav-links .dropdown-menu a i {
+    margin-left: 10px;
+    font-size: 1.2rem;
+  }
+  .nav-links .dropdown-menu li {
+  margin: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+  .close-dropdown {
+    left: 15px;
+    top: 15px;
+    font-size: 1.3rem;
+  }
+}
+
+/* تحسين التمرير على iOS */
+@supports (-webkit-touch-callout: none) {
+  .nav-links .dropdown-menu {
+    height: -webkit-fill-available;
+  }
+}
+
+ /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
 
      
      /* التذييل */
@@ -523,12 +600,7 @@
         display: none;
       }
       
-      .nav-links .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        min-width: 100%;
-      }
+     
     }
 
     /* قسم حول الشركة */

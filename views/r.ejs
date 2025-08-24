@@ -66,7 +66,7 @@
     
     /* شريط التنقل */
 header {
-  background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  background: white; /* تقليل الشفافية */
   backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
   -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
@@ -79,7 +79,7 @@ header {
 }
 
     
-    .nav-container {
+   .nav-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -205,7 +205,293 @@ header {
       color: var(--dark);
       cursor: pointer;
     }
-    
+
+     /* تصميم القائمة المنسدلة كاملة الشاشة */
+.nav-links .dropdown-menu {
+  display: none;
+  position: fixed; /* تغيير من absolute إلى fixed */
+  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
+  right: 0;
+  left: 0;
+  bottom: 0;
+   background: white; /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  width: 50vw; /* عرض كامل للشاشة */
+  height: 50vh; /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 30px;
+  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
+  border-top: 1px solid #e0f4f2;
+  text-align: right;
+  animation: fadeIn 0.3s ease-out;
+  padding: 50px;
+}
+
+/* إزالة السهم العلوي */
+.nav-links .dropdown-menu::before {
+  display: none;
+}
+
+/* تصميم عناصر القائمة */
+.nav-links .dropdown-menu li {
+  margin: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.nav-links .dropdown-menu li:last-child {
+  border-bottom: none;
+}
+
+.nav-links .dropdown-menu a {
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  color: var(--dark);
+  font-size: 1.2rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.nav-links .dropdown-menu a i {
+  margin-left: 15px;
+  font-size: 1.4rem;
+  color: var(--primary);
+  width: 30px;
+  text-align: center;
+}
+
+.nav-links .dropdown-menu a:hover {
+  background: rgba(54, 201, 180, 0.1);
+  color: var(--primary);
+  transform: translateX(-10px);
+}
+
+/* تأثيرات الفتح */
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* زر الإغلاق */
+.close-dropdown {
+  padding: 0px;
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  font-size: 1.5rem;
+  color: var(--dark);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-dropdown:hover {
+  color: var(--primary);
+  transform: rotate(90deg);
+}
+
+/* التكيف مع الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .nav-links .dropdown-menu {
+    /* padding: 20px 15px; */
+    top: 70px;
+    /* height: calc(100vh - 70px); */
+  }
+  
+  .nav-links .dropdown-menu a {
+    font-size: 1.1rem;
+    padding: 12px 15px;
+  }
+  
+  .close-dropdown {
+    left: 20px;
+    top: 20px;
+  }
+}
+/* حل مشكلة الارتجاف */
+.submenu-container {
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.submenu-link {
+  display: block;
+  padding: 12px 20px;
+  position: relative;
+}
+
+.submenu-list {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
+  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
+  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+  min-width: 100%;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  z-index: 1000;
+  border: 1px solid #e0f4f2;
+}
+
+.submenu-container:hover .submenu-list {
+  display: block;
+}
+
+.submenu-list li {
+  margin: 0;
+  padding: 0;
+}
+
+.submenu-list a {
+  display: block;
+  padding: 12px 20px;
+  transition: all 0.2s ease;
+}
+
+.submenu-list a:hover {
+  background: rgba(54, 201, 180, 0.1);
+  padding-right: 25px;
+}
+
+/* إصلاح المساحات */
+.dropdown-menu > li {
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-menu > li > a {
+  display: block;
+  padding: 12px 20px;
+}
+
+
+
+
+
+     /* القائمة في الجوال */
+.nav-links.show-mobile-menu {
+  display: flex !important;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  width: 100%;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  z-index: 999;
+}
+
+.nav-links.show-mobile-menu li {
+  margin: 0px 0;
+}
+
+@media (max-width: 992px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+  }
+}
+/* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        /* position: static; */
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+
+/* تحسينات للهواتف ذات الشاشات الصغيرة */
+@media (max-width: 480px) {
+  .nav-links .dropdown-menu {
+    padding: 15px 10px;
+  }
+  
+  .nav-links .dropdown-menu a {
+    font-size: 1rem;
+    padding: 10px 12px;
+  }
+  
+  .nav-links .dropdown-menu a i {
+    margin-left: 10px;
+    font-size: 1.2rem;
+  }
+  .nav-links .dropdown-menu li {
+  margin: 0;
+  padding: 9px 0;
+  border-bottom: 1px solid #f5f5f5;
+}
+  .close-dropdown {
+    left: 15px;
+    top: 15px;
+    font-size: 1.3rem;
+  }
+}
+
+/* تحسين التمرير على iOS */
+@supports (-webkit-touch-callout: none) {
+  .nav-links .dropdown-menu {
+    height: -webkit-fill-available;
+  }
+}
+
+ /* التكيف مع الشاشات الصغيرة */
+    @media (max-width: 992px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .mobile-toggle {
+        display: block;
+      }
+      
+      .search-box {
+        display: none;
+      }
+      
+      .nav-links .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        min-width: 100%;
+      }
+    }
+
+
     /* القسم الرئيسي */
    .hero {
   padding: 100px 0 60px; /* تقليل الحشو */
@@ -883,235 +1169,9 @@ background: white;
 
  
 
-/* تصميم القائمة المنسدلة كاملة الشاشة */
-.nav-links .dropdown-menu {
-  display: none;
-  position: fixed; /* تغيير من absolute إلى fixed */
-  top: 80px; /* يتناسب مع ارتفاع الشريط العلوي */
-  right: 0;
-  left: 0;
-  bottom: 0;
-   background: white; /* تقليل الشفافية */
-  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
-  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-  width: 50vw; /* عرض كامل للشاشة */
-  height: calc(100vh - 80px); /* ارتفاع كامل للشاشة مع استثناء الشريط العلوي */
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 30px;
-  overflow-y: auto; /* إمكانية التمرير إذا كانت المحتويات طويلة */
-  border-top: 1px solid #e0f4f2;
-  text-align: right;
-  animation: fadeIn 0.3s ease-out;
-  padding: 50px;
-}
-
-/* إزالة السهم العلوي */
-.nav-links .dropdown-menu::before {
-  display: none;
-}
-
-/* تصميم عناصر القائمة */
-.nav-links .dropdown-menu li {
-  margin: 0;
-  padding: 15px 0;
-  border-bottom: 1px solid #f5f5f5;
-}
-
-.nav-links .dropdown-menu li:last-child {
-  border-bottom: none;
-}
-
-.nav-links .dropdown-menu a {
-  display: flex;
-  align-items: center;
-  padding: 15px 20px;
-  color: var(--dark);
-  font-size: 1.2rem;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.nav-links .dropdown-menu a i {
-  margin-left: 15px;
-  font-size: 1.4rem;
-  color: var(--primary);
-  width: 30px;
-  text-align: center;
-}
-
-.nav-links .dropdown-menu a:hover {
-  background: rgba(54, 201, 180, 0.1);
-  color: var(--primary);
-  transform: translateX(-10px);
-}
-
-/* تأثيرات الفتح */
-.dropdown.open .dropdown-menu {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* زر الإغلاق */
-.close-dropdown {
-  padding: 0px;
-  position: absolute;
-  left: 30px;
-  top: 30px;
-  font-size: 1.5rem;
-  color: var(--dark);
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.close-dropdown:hover {
-  color: var(--primary);
-  transform: rotate(90deg);
-}
-
-/* التكيف مع الشاشات الصغيرة */
-@media (max-width: 768px) {
-  .nav-links .dropdown-menu {
-    padding: 20px 15px;
-    top: 70px;
-    height: calc(100vh - 70px);
-  }
-  
-  .nav-links .dropdown-menu a {
-    font-size: 1.1rem;
-    padding: 12px 15px;
-  }
-  
-  .close-dropdown {
-    left: 20px;
-    top: 20px;
-  }
-}
-/* حل مشكلة الارتجاف */
-.submenu-container {
-  position: relative;
-  margin: 0;
-  padding: 0;
-}
-
-.submenu-link {
-  display: block;
-  padding: 12px 20px;
-  position: relative;
-}
-
-.submenu-list {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-   background: rgba(255, 255, 255, 0.3); /* تقليل الشفافية */
-  backdrop-filter: blur(10px);          /* تأثير ضبابي خلف النص */
-  -webkit-backdrop-filter: blur(10px);  /* دعم سفاري */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-  min-width: 100%;
-  border-radius: 0 0 8px 8px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  padding: 0;
-  margin: 0;
-  list-style: none;
-  z-index: 1000;
-  border: 1px solid #e0f4f2;
-}
-
-.submenu-container:hover .submenu-list {
-  display: block;
-}
-
-.submenu-list li {
-  margin: 0;
-  padding: 0;
-}
-
-.submenu-list a {
-  display: block;
-  padding: 12px 20px;
-  transition: all 0.2s ease;
-}
-
-.submenu-list a:hover {
-  background: rgba(54, 201, 180, 0.1);
-  padding-right: 25px;
-}
-
-/* إصلاح المساحات */
-.dropdown-menu > li {
-  margin: 0;
-  padding: 0;
-}
-
-.dropdown-menu > li > a {
-  display: block;
-  padding: 12px 20px;
-}
 
 
-
-
-
-     /* القائمة في الجوال */
-.nav-links.show-mobile-menu {
-  display: flex !important;
-  flex-direction: column;
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background: white;
-  width: 100%;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  padding: 20px;
-  z-index: 999;
-}
-
-.nav-links.show-mobile-menu li {
-  margin: 10px 0;
-}
-
-@media (max-width: 992px) {
-  .nav-links {
-    display: none;
-    flex-direction: column;
-  }
-}
-/* التكيف مع الشاشات الصغيرة */
-    @media (max-width: 992px) {
-      .nav-links {
-        display: none;
-      }
-      
-      .mobile-toggle {
-        display: block;
-      }
-      
-      .search-box {
-        display: none;
-      }
-      
-      .nav-links .dropdown-menu {
-        position: static;
-        box-shadow: none;
-        border: none;
-        min-width: 100%;
-      }
-    }
-
+    
 .slider{
     width: 100%;
     height: var(--height);
@@ -2331,70 +2391,95 @@ background: white;
 
 
 
-<!-- قسم الأنظمة المتكاملة -->
+<!-- قسم الأنظمة المتكاملة / Integrated Systems Section -->
 <section id="solutions" class="solutions">
   <div class="container">
     <div class="section-title scroll-animation">
-      <h2>أنظمتنا المتكاملة</h2>
-      <p>حلول جاهزة مصممة خصيصاً لتلبية احتياجاتك الذكية</p>
+      <h2><%= lang === 'en' ? 'Our Integrated Systems' : 'أنظمتنا المتكاملة' %></h2>
+      <p><%= lang === 'en' ? 'Ready-made solutions designed for your needs' : 'حلول جاهزة مصممة لاحتياجاتك' %></p>
     </div>
     
     <div class="solutions-tabs scroll-animation">
       <div class="tabs-header">
-          <% systems.forEach((system, index) => { %>
-          <button 
-            class="tab-btn <%= index === 0 ? 'active' : '' %>" 
-            data-tab="<%= system.id %>">
-            <%= system.mainTitle %>
+        <% systems.forEach((system, index) => { 
+          // Safely extract title parts
+          const titleParts = (system.mainTitle || ',').split(',');
+          const displayTitle = lang === 'en' 
+            ? (titleParts[1] || titleParts[0] || system.mainTitle || '').trim() 
+            : (titleParts[0] || titleParts[1] || system.mainTitle || '').trim();
+        %>
+          <button class="tab-btn <%= index === 0 ? 'active' : '' %>" 
+                  data-tab="<%= system.id %>">
+            <%= displayTitle %>
           </button>
         <% }); %>
       </div>
       
       <div class="tabs-content">
-  <% systems.forEach((system, index) => { %>
-            
-         <div class="tab-pane <%= index === 0 ? 'active' : '' %>" id="<%= system.id %>">
-          <div class="solution-content">
-            <div class="solution-image">
-              
-              <img src="<%= system.imageUrl %>" alt="<%= system.mainTitle %>">
-            </div>
-            <div class="solution-details">
-                <h3><%= system.subTitle %></h3>
- <p class="solution-description"><%= system.description %></p>              
-              <div class="solution-features">
-                <h4>مميزات النظام:</h4>
+        <% systems.forEach((system, index) => { 
+          // Helper function to get localized text
+          const getLocalized = (text, fallback = '') => {
+            if (!text) return fallback;
+            const parts = text.split(',');
+            return (lang === 'en' 
+              ? (parts[1] || parts[0] || fallback).trim()
+              : (parts[0] || parts[1] || fallback).trim());
+          };
+        %>
+          <div class="tab-pane <%= index === 0 ? 'active' : '' %>" id="<%= system.id %>">
+            <div class="solution-content">
+              <div class="solution-image">
+                <img src="<%= system.imageUrl || '/images/default-system.jpg' %>" 
+                     alt="<%= getLocalized(system.mainTitle, 'System Image') %>">
+              </div>
+              <div class="solution-details">
+                <h3><%= getLocalized(system.subTitle, 'System Details') %></h3>
+                <p class="solution-description">
+                  <%= getLocalized(system.description, lang === 'en' 
+                    ? 'No description available' 
+                    : 'لا يوجد وصف متاح') %>
+                </p>
                 
-                   <ul class="features-list">
-            <% if (system.features) { %>
-              <% system.features.split(',').forEach(feature => { %>
-                <li><i class="fas fa-check-circle"></i><%= feature.trim() %></li>
-              <% }); %>
-            <% } else { %>
-              <li>لا توجد ميزات مضافة</li>
-            <% } %>
-          </ul>
-              </div>
-              
-              
-              
-              <div class="solution-actions">
-                <a href="https://wa.me/+9647722762286?text=مرحبا،%20أرغب%20بمعرفة%20المزيد%20من%20التفاصيل" class="btn btn-primary" target="_blank">راسلنا على واتساب</a>
-                <a href="/contact-us" class="btn btn-outline">راسلنا من موقعنا</a>
+                <div class="solution-features">
+                  <h4><%= lang === 'en' ? 'Key Features:' : 'المميزات الرئيسية:' %></h4>
+                  <ul class="features-list">
+                    <%
+                    const featuresText = system.features || '';
+                    if (featuresText) {
+                      const features = featuresText.split(';').filter(f => f.trim());
+                      features.forEach(feature => {
+                        const parts = feature.split('|');
+                        const localizedFeature = lang === 'en' 
+                          ? (parts[1] || parts[0] || '').trim()
+                          : (parts[0] || parts[1] || '').trim();
+                    %>
+                        <li><i class="fas fa-check-circle"></i><%= localizedFeature %></li>
+                    <% }); 
+                    } else { %>
+                      <li><%= lang === 'en' ? 'No features listed' : 'لا توجد مميزات مسجلة' %></li>
+                    <% } %>
+                  </ul>
+                </div>
+                
+                <div class="solution-actions">
+                  <a href="https://wa.me/+9647722762286?text=<%= lang === 'en' 
+                    ? 'Hello, I need info about ' + encodeURIComponent(getLocalized(system.mainTitle)) 
+                    : encodeURIComponent('مرحبا، أريد معلومات عن ' + getLocalized(system.mainTitle)) %>" 
+                     class="btn btn-primary" target="_blank">
+                    <%= lang === 'en' ? 'WhatsApp Us' : 'تواصل عبر واتساب' %>
+                  </a>
+                  <a href="/contact-us?system=<%= system.id %>" class="btn btn-outline">
+                    <%= lang === 'en' ? 'Contact Form' : 'نموذج الاتصال' %>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        
         <% }); %>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
 </section>
-
 
 
 
